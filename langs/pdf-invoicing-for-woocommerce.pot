@@ -1,0 +1,584 @@
+#: includes/class-alg-wc-pdf-invoicing-admin.php:60
+msgid "View PDFs"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-admin.php:61
+msgid "Download PDFs"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-admin.php:152
+msgid "Download"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-admin.php:153
+msgid "Print"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-admin.php:154
+msgid "Delete"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-admin.php:156
+#: includes/class-alg-wc-pdf-invoicing-admin.php:171
+msgid "Are you sure?"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-admin.php:170
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:71
+msgid "Create"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-admin.php:190
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:47
+#: includes/settings/class-alg-wc-pdf-invoicing-settings.php:25
+msgid "PDF Invoicing"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-admin.php:257
+msgid "Settings"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-admin.php:260
+msgid "Go Pro"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-core.php:200
+#: includes/class-alg-wc-pdf-invoicing-core.php:205
+#: includes/class-alg-wc-pdf-invoicing-core.php:209
+#: includes/class-alg-wc-pdf-invoicing-core.php:247
+#: includes/class-alg-wc-pdf-invoicing-core.php:251
+#: includes/class-alg-wc-pdf-invoicing-core.php:275
+#: includes/class-alg-wc-pdf-invoicing-core.php:279
+#, php-format
+msgid "Error: %s"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-core.php:200
+msgid "Order ID not set."
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-core.php:205
+#: includes/class-alg-wc-pdf-invoicing-core.php:247
+#: includes/class-alg-wc-pdf-invoicing-core.php:275
+msgid "Insufficient user capability."
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-core.php:209
+msgid "Document is already created."
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-core.php:242
+#: includes/class-alg-wc-pdf-invoicing-core.php:270
+#, php-format
+msgid "Error: %s."
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-core.php:242
+#: includes/class-alg-wc-pdf-invoicing-core.php:270
+msgid "Order ID not set"
+msgstr ""
+
+#: includes/class-alg-wc-pdf-invoicing-core.php:251
+#: includes/class-alg-wc-pdf-invoicing-core.php:279
+msgid "Document is not created yet."
+msgstr ""
+
+#: includes/classes/class-alg-wc-pdf-invoicing-doc.php:61
+#, php-format
+msgid "%s #%s created."
+msgstr ""
+
+#: includes/classes/class-alg-wc-pdf-invoicing-doc.php:80
+#, php-format
+msgid "%s #%s deleted."
+msgstr ""
+
+#: includes/functions/alg-wc-pdf-invoicing-functions-default-values.php:32
+#: includes/functions/alg-wc-pdf-invoicing-functions-default-values.php:76
+#: includes/pro/class-alg-wc-pdf-invoicing-pro.php:100
+msgid "Invoice"
+msgstr ""
+
+#: includes/pro/class-alg-wc-pdf-invoicing-pro.php:100
+#, php-format
+msgid "Doc %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:25
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:39
+msgid "Counters"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:40
+msgid "This section allows you to set current counters for each document."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:41
+msgid ""
+"Counter number will be assigned to the new document and then automatically "
+"increased."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:42
+#, php-format
+msgid "You can use counter in document settings with %s shortcode."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc-page-formats.php:37
+msgid "Custom"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:29
+#, php-format
+msgid "Doc: %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:51
+#, php-format
+msgid "%s Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:56
+msgid "Enable/Disable"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:57
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:100
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:179
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:205
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:307
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:98
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:106
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:115
+msgid "Enable"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:63
+msgid "Title"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:64
+msgid "Used in admin, and in \"My account > Orders\"."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:79
+msgid "Emails"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:80
+msgid "Email attachments."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:88
+msgid "Number format"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:89
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:186
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:212
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:242
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:251
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:314
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:373
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:413
+msgid "You can use shortcodes here."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:90
+msgid "Please note that you can't use `doc_nr` prop here."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:98
+msgid "My account"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:99
+msgid "Allow customers to view documents in \"My account > Orders\"."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:106
+msgid "Bulk actions"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:107
+msgid "Actions in \"Orders > Bulk actions\"."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:119
+msgid "Page Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:124
+msgid "Page orientation"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:130
+msgid "Portrait"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:131
+msgid "Landscape"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:135
+msgid "Page format"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:143
+msgid "Custom width"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:144
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:152
+msgid "Ignored unless \"Custom\" is selected for the \"Page format\" option."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:151
+msgid "Custom height"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:159
+msgid "Margin: Top"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:165
+msgid "Margin: Left"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:171
+msgid "Margin: Right"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:177
+msgid "RTL"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:178
+msgid "Enable Right-To-Left language mode."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:185
+msgid "Page background image"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:187
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:213
+#, php-format
+msgid "Path in %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:199
+msgid "Header Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:204
+msgid "Enable header"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:211
+msgid "Header image"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:221
+msgid "Header image width"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:222
+msgid "In mm."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:223
+msgid "If equal to zero, it is automatically calculated."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:230
+msgid "Header image alignment"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:236
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:264
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:334
+msgid "Left"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:237
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:265
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:336
+msgid "Right"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:241
+msgid "Header title"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:250
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:119
+msgid "Header text"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:258
+msgid "Header text alignment"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:269
+msgid "Header text color"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:275
+msgid "Header line color"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:281
+msgid "Header font"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:290
+msgid "Header font size"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:301
+msgid "Footer Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:306
+msgid "Enable footer"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:313
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:120
+msgid "Footer HTML content"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:315
+#, php-format
+msgid "Available placeholders: %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:322
+msgid "Footer height"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:328
+msgid "Footer text alignment"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:335
+msgid "Center"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:337
+msgid "Justify"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:341
+msgid "Footer text color"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:347
+msgid "Footer font"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:356
+msgid "Footer font size"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:367
+msgid "Content Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:372
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:118
+msgid "HTML content"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:380
+msgid "Line color"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:386
+msgid "Font"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:395
+msgid "Font size"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:406
+msgid "Styling and Filtering Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:407
+msgid "Applied in \"HTML content\" and \"Footer HTML content\" options."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:412
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:117
+msgid "HTML style"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:420
+msgid "HTML content filters"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:421
+msgid "Balance tags"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:421
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:98
+msgid "recommended"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:422
+msgid "Balances tags, i.e. prevents unmatched elements."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:423
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:434
+#, php-format
+msgid "Uses WordPress %s function."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:431
+msgid "Replace line breaks"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:432
+#, php-format
+msgid ""
+"Replaces double line breaks with paragraph elements, and all remaining line "
+"breaks with %s tag."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:25
+msgid "General"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:42
+msgid "PDF Invoicing Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:48
+msgid "Enable plugin"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:49
+msgid "Add PDF invoices to WooCommerce."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:62
+msgid "General Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:67
+msgid "Total documents"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:68
+msgid "Sets total number of documents you wish to add."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:69
+msgid "After you save changes, new settings sections will be displayed."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:83
+msgid "Advanced Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:88
+msgid "Shortcode prefix"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:89
+msgid ""
+"Prefix for all plugin shortcodes. Setting this is useful if you have "
+"compatibility issues with other shortcodes (from other plugins) with "
+"matching names."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:90
+msgid "Prefix will be automatically sanitized into a slug."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:97
+msgid "Suppress errors"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:99
+msgid "Suppress PHP errors when generating PDF."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:105
+msgid "Use Print.js"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:107
+#, php-format
+msgid "Use %s library for printing PDF documents."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:114
+msgid "Use monospace font"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:116
+#, php-format
+msgid "Use monospace font in \"%s\" and \"%s\" admin options fields."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:64
+msgid "Partially refunded order"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:79
+msgid "Manually"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:80
+msgid "On new order"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:81
+msgid "On payment complete"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:82
+msgid "On checkout order processed"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:83
+msgid "On order partially refunded"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:89
+#, php-format
+msgid "On order status %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:118
+#, php-format
+msgid ""
+"If you are having issues displaying your language specific letters, select "
+"\"%s\" font."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings.php:70
+msgid "Reset Settings"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings.php:75
+msgid "Reset section settings"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings.php:76
+msgid "Reset"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings.php:77
+msgid "Check the box and save changes to reset."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings.php:116
+msgid "Your settings have been reset."
+msgstr ""
