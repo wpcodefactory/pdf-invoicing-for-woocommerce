@@ -43,6 +43,7 @@ Add PDF invoices to WooCommerce.
 * Dev - Shortcodes - `[each_item]` - Now checking if it's a valid `$order`.
 * Dev - Developers - `alg_wc_pdf_invoicing_doc_created` and `alg_wc_pdf_invoicing_doc_removed` actions added.
 * Dev - Minor code refactoring.
+* Deploy script added.
 * WC tested up to: 7.0.
 
 = 1.6.0 - 01/08/2022 =
