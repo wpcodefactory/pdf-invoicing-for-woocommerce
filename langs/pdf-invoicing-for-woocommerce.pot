@@ -1,40 +1,3 @@
-# Copyright (C) 2022 WPFactory
-# This file is distributed under the same license as the PDF Invoicing for WooCommerce Pro plugin.
-msgid ""
-msgstr ""
-"Project-Id-Version: pdf-invoicing-for-woocommerce 1.7.0-dev\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pdf-invoicing-for-woocommerce\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-21T22:51:51+02:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.4.0\n"
-"X-Domain: pdf-invoicing-for-woocommerce\n"
-
-#. Plugin Name of the plugin
-msgid "PDF Invoicing for WooCommerce Pro"
-msgstr ""
-
-#. Plugin URI of the plugin
-msgid "https://wpfactory.com/item/pdf-invoicing-for-woocommerce/"
-msgstr ""
-
-#. Description of the plugin
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:49
-msgid "Add PDF invoices to WooCommerce."
-msgstr ""
-
-#. Author of the plugin
-msgid "WPFactory"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://wpfactory.com"
-msgstr ""
-
 #: includes/class-alg-wc-pdf-invoicing-admin.php:60
 msgid "View PDFs"
 msgstr ""
@@ -71,6 +34,10 @@ msgstr ""
 msgid "PDF Invoicing"
 msgstr ""
 
+#: includes/class-alg-wc-pdf-invoicing-admin.php:257
+msgid "Settings"
+msgstr ""
+
 #: includes/class-alg-wc-pdf-invoicing-admin.php:260
 msgid "Go Pro"
 msgstr ""
@@ -82,6 +49,7 @@ msgstr ""
 #: includes/class-alg-wc-pdf-invoicing-core.php:251
 #: includes/class-alg-wc-pdf-invoicing-core.php:275
 #: includes/class-alg-wc-pdf-invoicing-core.php:279
+#, php-format
 msgid "Error: %s"
 msgstr ""
 
@@ -101,6 +69,7 @@ msgstr ""
 
 #: includes/class-alg-wc-pdf-invoicing-core.php:242
 #: includes/class-alg-wc-pdf-invoicing-core.php:270
+#, php-format
 msgid "Error: %s."
 msgstr ""
 
@@ -115,10 +84,12 @@ msgid "Document is not created yet."
 msgstr ""
 
 #: includes/classes/class-alg-wc-pdf-invoicing-doc.php:61
+#, php-format
 msgid "%s #%s created."
 msgstr ""
 
 #: includes/classes/class-alg-wc-pdf-invoicing-doc.php:80
+#, php-format
 msgid "%s #%s deleted."
 msgstr ""
 
@@ -129,6 +100,7 @@ msgid "Invoice"
 msgstr ""
 
 #: includes/pro/class-alg-wc-pdf-invoicing-pro.php:100
+#, php-format
 msgid "Doc %s"
 msgstr ""
 
@@ -142,10 +114,13 @@ msgid "This section allows you to set current counters for each document."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:41
-msgid "Counter number will be assigned to the new document and then automatically increased."
+msgid ""
+"Counter number will be assigned to the new document and then automatically "
+"increased."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:42
+#, php-format
 msgid "You can use counter in document settings with %s shortcode."
 msgstr ""
 
@@ -154,10 +129,12 @@ msgid "Custom"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:29
+#, php-format
 msgid "Doc: %s"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:51
+#, php-format
 msgid "%s Options"
 msgstr ""
 
@@ -286,6 +263,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:187
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:213
+#, php-format
 msgid "Path in %s"
 msgstr ""
 
@@ -372,6 +350,7 @@ msgid "Footer HTML content"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:315
+#, php-format
 msgid "Available placeholders: %s."
 msgstr ""
 
@@ -456,6 +435,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:423
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:434
+#, php-format
 msgid "Uses WordPress %s function."
 msgstr ""
 
@@ -464,7 +444,10 @@ msgid "Replace line breaks"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:432
-msgid "Replaces double line breaks with paragraph elements, and all remaining line breaks with %s tag."
+#, php-format
+msgid ""
+"Replaces double line breaks with paragraph elements, and all remaining line "
+"breaks with %s tag."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:25
@@ -477,6 +460,10 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:48
 msgid "Enable plugin"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:49
+msgid "Add PDF invoices to WooCommerce."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:62
@@ -504,7 +491,10 @@ msgid "Shortcode prefix"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:89
-msgid "Prefix for all plugin shortcodes. Setting this is useful if you have compatibility issues with other shortcodes (from other plugins) with matching names."
+msgid ""
+"Prefix for all plugin shortcodes. Setting this is useful if you have "
+"compatibility issues with other shortcodes (from other plugins) with "
+"matching names."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:90
@@ -524,6 +514,7 @@ msgid "Use Print.js"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:107
+#, php-format
 msgid "Use %s library for printing PDF documents."
 msgstr ""
 
@@ -532,6 +523,7 @@ msgid "Use monospace font"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:116
+#, php-format
 msgid "Use monospace font in \"%s\" and \"%s\" admin options fields."
 msgstr ""
 
@@ -560,11 +552,15 @@ msgid "On order partially refunded"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:89
+#, php-format
 msgid "On order status %s"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:118
-msgid "If you are having issues displaying your language specific letters, select \"%s\" font."
+#, php-format
+msgid ""
+"If you are having issues displaying your language specific letters, select "
+"\"%s\" font."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings.php:70
