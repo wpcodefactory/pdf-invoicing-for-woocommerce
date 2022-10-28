@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 1.7.0
+ * @version 1.7.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -315,21 +315,33 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * return_prop.
 	 *
-	 * @version 1.5.0
+	 * @version 1.7.1
 	 * @since   1.0.0
 	 *
 	 * @todo    [now] (feature) `multiple_find`, `multiple_replace`
 	 * @todo    [dev] (maybe) `on_empty`; `lang` && `not_lang`; `order_billing_country` && `not_order_billing_country` etc. OR maybe all that can be done via `[if]`?
 	 */
 	function return_prop( $value, $atts ) {
+
+		// Math
 		if ( is_numeric( $value ) ) {
 			if ( ! empty( $atts['add'] ) ) {
 				$value += floatval( do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['add'] ) ) );
 			}
+			if ( ! empty( $atts['subtract'] ) ) {
+				$value -= floatval( do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['subtract'] ) ) );
+			}
 			if ( ! empty( $atts['multiply'] ) ) {
 				$value *= do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['multiply'] ) );
 			}
+			if ( ! empty( $atts['divide'] ) ) {
+				if ( 0 != ( $_value = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['divide'] ) ) ) ) {
+					$value /= $_value;
+				}
+			}
 		}
+
+		// Format
 		if ( isset( $atts['format'] ) ) {
 			switch ( $atts['format'] ) {
 				case 'price':
@@ -339,11 +351,18 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 					$value = sprintf( $atts['format'], $value );
 			}
 		}
+
+		// Find/replace
 		if ( isset( $atts['find'], $atts['replace'] ) ) {
 			$value = str_replace( $atts['find'], $atts['replace'], $value );
 		}
+
+		// Filter
 		$value = apply_filters( 'alg_wc_pdf_invoicing_return_prop', $value, $atts );
+
+		// Before/after & Final result
 		return ( '' !== $value ? ( ( isset( $atts['before'] ) ? $atts['before'] : '' ) . $value . ( isset( $atts['after'] ) ? $atts['after'] : '' ) ) : '' );
+
 	}
 
 	/**

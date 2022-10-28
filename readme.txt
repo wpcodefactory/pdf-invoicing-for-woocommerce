@@ -38,6 +38,9 @@ Add PDF invoices to WooCommerce.
 
 == Changelog ==
 
+= 1.7.1 - 28/10/2022 =
+* Dev - Shortcodes - `[prop]` - Optional `subtract` and `divide` attributes added.
+
 = 1.7.0 - 24/10/2022 =
 * Dev - Now checking if classes (`TCPDF` and `\setasign\Fpdi\TcpdfFpdi`) exist before including the libraries.
 * Dev - Shortcodes - `[each_item]` - Now checking if it's a valid `$order`.
