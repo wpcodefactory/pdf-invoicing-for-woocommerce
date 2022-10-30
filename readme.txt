@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, pdf, invoice, credit note, packing list, woo commerce
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,8 +38,8 @@ Add PDF invoices to WooCommerce.
 
 == Changelog ==
 
-= 1.7.1 - 28/10/2022 =
-* Dev - Shortcodes - `[prop]` - Optional `subtract` and `divide` attributes added.
+= 1.7.1 - 30/10/2022 =
+* Dev - Shortcodes - `[prop]` - `subtract` and `divide` attributes added.
 
 = 1.7.0 - 24/10/2022 =
 * Dev - Now checking if classes (`TCPDF` and `\setasign\Fpdi\TcpdfFpdi`) exist before including the libraries.
