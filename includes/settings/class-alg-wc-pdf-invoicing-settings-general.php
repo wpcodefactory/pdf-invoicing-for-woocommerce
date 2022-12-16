@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - General Section Settings
  *
- * @version 1.5.0
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.5.0
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [now] (dev) `alg_wc_pdf_invoicing_shortcode_prefix`: better default value, e.g. `alg_wc_pdf_` or `alg_wc_pi_`?
@@ -98,6 +98,33 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 				'desc'     => __( 'Enable', 'pdf-invoicing-for-woocommerce' ) . ' (' . __( 'recommended', 'pdf-invoicing-for-woocommerce' ) . ')',
 				'desc_tip' => __( 'Suppress PHP errors when generating PDF.', 'pdf-invoicing-for-woocommerce' ),
 				'id'       => 'alg_wc_pdf_invoicing_suppress_errors',
+				'default'  => 'yes',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Use custom config', 'pdf-invoicing-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'pdf-invoicing-for-woocommerce' ),
+				'desc_tip' => __( 'Use custom TCPDF config file.', 'pdf-invoicing-for-woocommerce' ),
+				'id'       => 'alg_wc_pdf_invoicing_use_custom_tcpdf_config',
+				'default'  => 'yes',
+				'type'     => 'checkbox',
+				'show_if_checked' => 'option',
+				'checkboxgroup'   => 'start',
+			),
+			array(
+				'desc'     => __( 'TCPDF methods in HTML', 'pdf-invoicing-for-woocommerce' ),
+				'desc_tip' => __( 'Allow calling TCPDF methods using HTML syntax.', 'pdf-invoicing-for-woocommerce' ),
+				'id'       => 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_calls_in_html',
+				'default'  => 'yes',
+				'type'     => 'checkbox',
+				'show_if_checked' => 'yes',
+				'checkboxgroup'   => 'end',
+			),
+			array(
+				'title'    => __( 'Set default images directory', 'pdf-invoicing-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'pdf-invoicing-for-woocommerce' ),
+				'desc_tip' => __( 'Set TCPDF default images directory to WP upload directory.', 'pdf-invoicing-for-woocommerce' ),
+				'id'       => 'alg_wc_pdf_invoicing_tcpdf_path_images',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
 			),

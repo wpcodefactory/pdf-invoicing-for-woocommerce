@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - TCPDF Class
  *
- * @version 1.6.0
+ * @version 1.8.0
  * @since   1.1.0
  *
  * @author  Algoritmika Ltd
@@ -159,12 +159,14 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 	 * @see     https://github.com/tecnickcom/TCPDF/blob/6.3.2/tcpdf.php#L3492 (Footer)
 	 * @see     https://github.com/tecnickcom/TCPDF/blob/6.3.2/tcpdf.php#L17157 (writeHTMLCell)
 	 *
-	 * @version 1.5.0
+	 * @version 1.8.0
 	 * @since   1.1.0
 	 *
 	 * @todo    [now] [!!!] (fix) "Justify" doesn't work for the `writeHTMLCell()`
 	 */
 	function Footer() {
+
+		// Footer
 		if ( 'yes' === $this->alg_wc_pdf_invoicing_doc->get_doc_option( 'enable_footer' ) ) {
 			if ( '' != ( $footer_text = $this->alg_wc_pdf_invoicing_doc->get_doc_option( 'footer_text', true ) ) ) {
 				$this->SetTextColorArray( alg_wc_pdf_invoicing_hex_to_rgb( $this->alg_wc_pdf_invoicing_doc->get_doc_option( 'footer_text_color' ) ) );
@@ -174,6 +176,17 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 				$this->writeHTMLCell( 0, 0, $this->x, $this->y, $style . $footer_text, 'T', 0, false, true, $this->alg_wc_pdf_invoicing_doc->get_doc_option( 'footer_text_align' ) );
 			}
 		}
+
+		// Foreground image
+		if ( '' !== ( $page_foreground_img = $this->alg_wc_pdf_invoicing_doc->get_doc_option( 'page_foreground_img', true ) ) ) {
+			$break_margin    = $this->getBreakMargin();
+			$auto_page_break = $this->AutoPageBreak;
+			$this->SetAutoPageBreak( false, 0 );
+			$this->Image( K_PATH_IMAGES . $page_foreground_img, 0, 0, $this->w, $this->h, '', '', '', false, 300, '', false, false, 0 );
+			$this->SetAutoPageBreak( $auto_page_break, $break_margin );
+			$this->setPageMark();
+		}
+
 	}
 
 }

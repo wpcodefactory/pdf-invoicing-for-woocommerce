@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Functions - Default Values
  *
- * @version 1.6.0
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -14,7 +14,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 	/**
 	 * alg_wc_pdf_invoicing_get_default.
 	 *
-	 * @version 1.6.0
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [now] (dev) `str_replace( "\t", '', ... )`?
@@ -59,6 +59,8 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 			case 'rtl':
 				return 'no';
 			case 'page_background_img':
+				return '';
+			case 'page_foreground_img':
 				return '';
 
 			// Header Options

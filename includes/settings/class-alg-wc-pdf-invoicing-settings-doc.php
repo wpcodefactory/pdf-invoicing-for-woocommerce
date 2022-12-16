@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Document Settings
  *
- * @version 1.6.0
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -33,7 +33,7 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.6.0
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [now] [!!!] (desc) `order_bulk_actions`: better desc?
@@ -187,6 +187,16 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 				'desc'     => sprintf( __( 'Path in %s', 'pdf-invoicing-for-woocommerce' ), '<code>' . $this->get_uploads_dir() . '</code>' ),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[page_background_img]",
 				'default'  => alg_wc_pdf_invoicing_get_default( 'page_background_img' ),
+				'type'     => 'text',
+				'css'      => 'width:100%;',
+				'alg_wc_pi_sanitize' => 'textarea',
+			),
+			array(
+				'title'    => __( 'Page foreground image', 'pdf-invoicing-for-woocommerce' ),
+				'desc_tip' => __( 'You can use shortcodes here.', 'pdf-invoicing-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Path in %s', 'pdf-invoicing-for-woocommerce' ), '<code>' . $this->get_uploads_dir() . '</code>' ),
+				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[page_foreground_img]",
+				'default'  => alg_wc_pdf_invoicing_get_default( 'page_foreground_img' ),
 				'type'     => 'text',
 				'css'      => 'width:100%;',
 				'alg_wc_pi_sanitize' => 'textarea',

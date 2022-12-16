@@ -318,6 +318,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @version 1.7.1
 	 * @since   1.0.0
 	 *
+	 * @todo    [now] (dev) Math: `multiply` and `divide`: apply `floatval()`?
 	 * @todo    [now] (feature) `multiple_find`, `multiple_replace`
 	 * @todo    [dev] (maybe) `on_empty`; `lang` && `not_lang`; `order_billing_country` && `not_order_billing_country` etc. OR maybe all that can be done via `[if]`?
 	 */

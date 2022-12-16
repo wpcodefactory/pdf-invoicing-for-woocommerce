@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Doc Class
  *
- * @version 1.7.0
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -178,7 +178,7 @@ class Alg_WC_PDF_Invoicing_Doc {
 	/**
 	 * get_pdf.
 	 *
-	 * @version 1.7.0
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
 	 * @see     https://tcpdf.org/
@@ -200,13 +200,31 @@ class Alg_WC_PDF_Invoicing_Doc {
 	 * @todo    [maybe] (dev) `$pdf->setFontSubsetting( true );` (before `$pdf->SetFont()`)
 	 */
 	function get_pdf( $dest = 'I', $path = '' ) {
-		$uploads_dir = wp_upload_dir();
-		defined( 'K_PATH_IMAGES' ) || define( 'K_PATH_IMAGES', $uploads_dir['basedir'] . '/' );
-		defined( 'K_TCPDF_CALLS_IN_HTML' ) || define( 'K_TCPDF_CALLS_IN_HTML', true );
-		if ( ! class_exists( 'TCPDF' ) ) {
-			require_once( alg_wc_pdf_invoicing()->plugin_path() . '/assets/lib/tcpdf/tcpdf.php' );
+
+		// `K_PATH_IMAGES` constant
+		if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_tcpdf_path_images', 'yes' ) ) {
+			$uploads_dir = wp_upload_dir();
+			defined( 'K_PATH_IMAGES' ) || define( 'K_PATH_IMAGES', $uploads_dir['basedir'] . '/' );
 		}
+
+		// TCPDF
+		if ( ! class_exists( 'TCPDF' ) ) {
+
+			// Config
+			if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_custom_tcpdf_config', 'yes' ) ) {
+				defined( 'K_TCPDF_EXTERNAL_CONFIG' ) || define( 'K_TCPDF_EXTERNAL_CONFIG', true );
+				require_once( alg_wc_pdf_invoicing()->plugin_path() . '/includes/config/tcpdf_config.php' );
+			}
+
+			// Lib
+			require_once( alg_wc_pdf_invoicing()->plugin_path() . '/assets/lib/tcpdf/tcpdf.php' );
+
+		}
+
+		// Child TCPDF class
 		require_once( 'class-alg-wc-pdf-invoicing-tcpdf.php' );
+
+		// Suppress errors
 		$do_suppress_errors = ( 'yes' === get_option( 'alg_wc_pdf_invoicing_suppress_errors', 'yes' ) );
 		if ( $do_suppress_errors ) {
 			if ( 0 == ( $error_level = error_reporting() ) ) {
@@ -215,6 +233,8 @@ class Alg_WC_PDF_Invoicing_Doc {
 				error_reporting( 0 );
 			}
 		}
+
+		// Page format
 		$page_format = $this->get_doc_option( 'page_format' );
 		if ( 'CUSTOM' === $page_format ) {
 			$page_format = array( $this->get_doc_option( 'page_format_custom_width' ), $this->get_doc_option( 'page_format_custom_height' ) );
@@ -222,6 +242,8 @@ class Alg_WC_PDF_Invoicing_Doc {
 				$page_format = 'A4';
 			}
 		}
+
+		// Construct PDF object
 		$pdf = new Alg_WC_PDF_Invoicing_TCPDF(
 			$this->get_doc_option( 'page_orientation' ),
 			'mm',
@@ -232,6 +254,8 @@ class Alg_WC_PDF_Invoicing_Doc {
 		);
 		alg_wc_pdf_invoicing()->core->pdf = $pdf;
 		$pdf->alg_wc_pdf_invoicing_doc = $this;
+
+		// PDF props
 		$pdf->SetCreator( PDF_CREATOR);
 		$pdf->SetAuthor( 'PDF Invoicing for WooCommerce' );
 		$pdf->SetTitle( $this->get_number() );
@@ -249,15 +273,24 @@ class Alg_WC_PDF_Invoicing_Doc {
 		$pdf->setImageScale( PDF_IMAGE_SCALE_RATIO );
 		$pdf->SetFont( $this->get_doc_option( 'font_family' ), '', $this->get_doc_option( 'font_size' ), '', true );
 		$pdf->setRTL( 'yes' === $this->get_doc_option( 'rtl' ) );
+
+		// Content
 		$pdf->AddPage();
 		$pdf->writeHTML( $this->get_html(), true, false, true, false, '' );
+
+		// JS print
 		if ( ! empty( $_GET['alg-wc-pdf-invoicing-print'] ) ) {
 			$pdf->IncludeJS( 'print(true);' );
 		}
+
+		// Output
 		$pdf->Output( $path . $this->get_number() . '.pdf', $dest );
+
+		// Suppress errors rollback
 		if ( $do_suppress_errors ) {
 			error_reporting( $error_level );
 		}
+
 	}
 }
 

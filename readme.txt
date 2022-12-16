@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, pdf, invoice, credit note, packing list, woo commerce
 Requires at least: 4.4
-Tested up to: 6.0
-Stable tag: 1.7.1
+Tested up to: 6.1
+Stable tag: 1.8.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,6 +37,16 @@ Add PDF invoices to WooCommerce.
 3. Start by visiting plugin settings at "WooCommerce > Settings > PDF Invoicing".
 
 == Changelog ==
+
+= 1.8.0 - 16/12/2022 =
+* Fix - "Notice: Constant K_TCPDF_CALLS_IN_HTML already defined in..." fixed.
+* Dev - General - Advanced Options - "Use custom config" option added (defaults to `yes`). It uses the `K_TCPDF_EXTERNAL_CONFIG` constant to load a custom `tcpdf_config.php` file.
+* Dev - General - Advanced Options - Use custom config - "TCPDF methods in HTML" option added (defaults to `yes`). Sets the `K_TCPDF_CALLS_IN_HTML` constant.
+* Dev - General - Advanced Options - "Set default images directory" option added (defaults to `yes`). Sets the `K_PATH_IMAGES` constant.
+* Dev - Doc - Page Options - "Page foreground image" option added.
+* Dev - Developers - `alg_wc_pdf_invoicing_create_docs` filter added.
+* WC tested up to: 7.2.
+* Tested up to: 6.1.
 
 = 1.7.1 - 30/10/2022 =
 * Dev - Shortcodes - `[prop]` - `subtract` and `divide` attributes added.

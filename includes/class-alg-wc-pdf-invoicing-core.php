@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Core Class
  *
- * @version 1.7.0
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -162,7 +162,7 @@ class Alg_WC_PDF_Invoicing_Core {
 	/**
 	 * create_docs.
 	 *
-	 * @version 1.0.0
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [dev] per payment gateways
@@ -173,7 +173,7 @@ class Alg_WC_PDF_Invoicing_Core {
 			$doc_hooks = $this->get_doc_option( $doc_id, 'hooks' );
 			if ( in_array( current_filter(), $doc_hooks ) ) {
 				$doc = new Alg_WC_PDF_Invoicing_Doc( $order_id, $doc_id );
-				if ( ! $doc->is_created() ) {
+				if ( ! $doc->is_created() && apply_filters( 'alg_wc_pdf_invoicing_create_docs', true, $doc_id, $order_id ) ) {
 					$doc->create( array(
 						'author' => 0,
 						'id'     => $this->get_and_update_counter( $doc_id ),
