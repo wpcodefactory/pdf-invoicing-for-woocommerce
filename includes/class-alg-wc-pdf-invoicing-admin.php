@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Admin Class
  *
- * @version 1.5.0
+ * @version 1.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -21,27 +21,37 @@ class Alg_WC_PDF_Invoicing_Admin {
 	 * @since   1.0.0
 	 */
 	function __construct() {
+
 		// Action links
 		add_filter( 'plugin_action_links_' . plugin_basename( alg_wc_pdf_invoicing()->plugin_file() ), array( $this, 'action_links' ) );
+
 		// Settings
 		add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
+
 		// Version update
 		if ( get_option( 'alg_wc_pdf_invoicing_version', '' ) !== alg_wc_pdf_invoicing()->version ) {
 			add_action( 'admin_init', array( $this, 'version_updated' ) );
 		}
+
 		// Core
 		if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_plugin_enabled', 'yes' ) ) {
+
 			// Order list columns
 			add_filter( 'manage_edit-shop_order_columns',        array( $this, 'add_order_columns' ),    PHP_INT_MAX );
 			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'render_order_columns' ), PHP_INT_MAX, 2 );
+
 			// Order edit page meta box
 			add_action( 'add_meta_boxes', array( $this, 'add_order_meta_box' ), 10, 2 );
+
 			// Orders "Bulk action"
 			add_filter( 'bulk_actions-edit-shop_order',        array( $this, 'add_order_bulk_actions' ),    PHP_INT_MAX );
 			add_filter( 'handle_bulk_actions-edit-shop_order', array( $this, 'handle_order_bulk_actions' ), PHP_INT_MAX, 3 );
+
 			// Scripts
 			add_action( 'admin_head', array( $this, 'add_scripts' ) );
+
 		}
+
 	}
 
 	/**
@@ -133,46 +143,57 @@ class Alg_WC_PDF_Invoicing_Admin {
 	/**
 	 * get_actions.
 	 *
-	 * @version 1.5.0
+	 * @version 1.9.0
 	 * @since   1.4.0
 	 *
 	 * @todo    [maybe] (feature) customizable icons?
 	 */
 	function get_actions( $doc_id, $order_id, $order ) {
 		$actions = '';
+
 		$doc = new Alg_WC_PDF_Invoicing_Doc( $order_id, $doc_id );
 		if ( $doc->is_created() ) {
-			// URLs
+
+			// URLs (Actions: View, Download, Print, Delete)
 			$order_id_url  = add_query_arg( array( 'alg-wc-pdf-invoicing-order-id'   => $order_id ) );
 			$view_url      = add_query_arg( array( 'alg-wc-pdf-invoicing-view-doc'   => $doc_id ), $order_id_url );
 			$download_url  = add_query_arg( array( 'alg-wc-pdf-invoicing-pdf-dest'   => 'D' ),     $view_url );
 			$print_url     = add_query_arg( array( 'alg-wc-pdf-invoicing-print'      => true ),    $view_url );
 			$delete_url    = add_query_arg( array( 'alg-wc-pdf-invoicing-delete-doc' => $doc_id ), $order_id_url );
+
 			// Icons
 			$download_icon = '<span title="' . __( 'Download', 'pdf-invoicing-for-woocommerce' ) . '" class="dashicons dashicons-pdf"></span>';
 			$print_icon    = '<span title="' . __( 'Print', 'pdf-invoicing-for-woocommerce' )    . '" class="dashicons dashicons-printer"></span>';
 			$delete_icon   = '<span title="' . __( 'Delete', 'pdf-invoicing-for-woocommerce' )   . '" class="dashicons dashicons-trash"></span>';
+
 			// Misc.
+			$view_title    = __( 'View', 'pdf-invoicing-for-woocommerce' );
 			$delete_msg    = __( 'Are you sure?', 'pdf-invoicing-for-woocommerce' );
+
 			// Results
-			$view          = '<a href="' . $view_url . '" target="_blank">' . $doc->get_number() . '</a>';
+			$view          = '<a href="' . $view_url . '" target="_blank" title="' . $view_title . '">' . $doc->get_number() . '</a>';
 			$download      = '<a href="' . $download_url . '">' . $download_icon . '</a>';
 			$print         = ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_print_js', 'yes' ) ?
 				'<a href="#" onclick="printJS(\'' . $print_url . '\'); return false;">' . $print_icon . '</a>' :
 				'<a href="' . $print_url . '" target="_blank">' . $print_icon . '</a>' );
 			$delete        = '<a href="' . $delete_url . '" onclick="return confirm(\'' . $delete_msg . '\')">' . $delete_icon . '</a>';
+
 			// Final results
 			$actions       = implode( ' ', array( $view, $download, $print, $delete ) );
+
 		} else {
+
+			// Action: Create
 			$doc_hooks = alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'hooks' );
 			if ( in_array( 'manual', $doc_hooks ) || empty( $doc_hooks ) ) {
 				$create_url   = add_query_arg( array( 'alg-wc-pdf-invoicing-create-doc' => $doc_id, 'alg-wc-pdf-invoicing-order-id' => $order_id ) );
-				$create_label = __( 'Create', 'pdf-invoicing-for-woocommerce' );
+				$create_icon  = '<span title="' . __( 'Create', 'pdf-invoicing-for-woocommerce' ) . '" class="dashicons dashicons-insert"></span>';
 				$create_msg   = __( 'Are you sure?', 'pdf-invoicing-for-woocommerce' );
-				$create_style = 'color:green;';
-				$actions      = '<a href="' . $create_url . '" style="' . $create_style . '" onclick="return confirm(\'' . $create_msg . '\')">' . $create_label . '</a>';
+				$actions      = '<a href="' . $create_url . '" onclick="return confirm(\'' . $create_msg . '\')">' . $create_icon . '</a>';
 			}
+
 		}
+
 		return $actions;
 	}
 

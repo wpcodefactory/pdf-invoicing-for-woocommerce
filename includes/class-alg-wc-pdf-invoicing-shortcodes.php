@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 1.7.1
+ * @version 1.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -224,7 +224,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * shortcode_each_item.
 	 *
-	 * @version 1.7.0
+	 * @version 1.9.0
 	 * @since   1.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.2/includes/abstracts/abstract-wc-order.php#L752
@@ -249,7 +249,9 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 			return '';
 		}
 
-		foreach ( $order->get_items( $type ) as $item_id => $item ) {
+		$items = apply_filters( 'alg_wc_pdf_invoicing_shortcode_each_item_items', $order->get_items( $type ), $order, $this );
+
+		foreach ( $items as $item_id => $item ) {
 
 			// Filter products
 			if (
@@ -263,18 +265,24 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 				continue;
 			}
 
-			// Process item
+			// Set props
 			$this->order_item_nr++;
 			$this->order_item   = $item;
 			$this->item_product = ( is_a( $item, 'WC_Order_Item_Product' ) ? $item->get_product() : false );
+
+			// Process item
+			$output = apply_filters( 'alg_wc_pdf_invoicing_shortcode_each_item_before_item', $output, $item, $order, $this );
 			$output .= do_shortcode( $content );
+			$output = apply_filters( 'alg_wc_pdf_invoicing_shortcode_each_item_after_item', $output, $item, $order, $this );
 
 		}
 
+		// Unset props
 		unset( $this->order_item_nr );
 		unset( $this->order_item );
 		unset( $this->item_product );
 
+		// Result
 		return ( '' !== $output ? ( ( isset( $atts['before'] ) ? $atts['before'] : '' ) . $output . ( isset( $atts['after'] ) ? $atts['after'] : '' ) ) : '' );
 	}
 

@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Core Class
  *
- * @version 1.8.0
+ * @version 1.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -20,24 +20,31 @@ class Alg_WC_PDF_Invoicing_Core {
 	 * @version 1.7.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [dev] order meta box
-	 * @todo    [dev] (maybe) replace TCPDF lib with `tc-lib-pdf`
+	 * @todo    [next] (dev) order meta box
+	 * @todo    [maybe] (dev) replace TCPDF lib with `tc-lib-pdf`
 	 */
 	function __construct() {
+
 		$this->pdf = false;
+
 		// Action
 		do_action( 'alg_wc_pdf_invoicing_before_core_loaded', $this );
+
 		// Functions
 		require_once( 'functions/alg-wc-pdf-invoicing-functions.php' );
 		require_once( 'functions/alg-wc-pdf-invoicing-functions-default-values.php' );
+
 		// Classes
 		require_once( 'classes/class-alg-wc-pdf-invoicing-doc.php' );
+
 		// Core
 		if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_plugin_enabled', 'yes' ) ) {
+
 			// Hooks
 			add_action( 'admin_init', array( $this, 'delete_doc' ) );
 			add_action( 'init',       array( $this, 'view_doc' ) );
 			add_action( 'admin_init', array( $this, 'create_doc' ) );
+
 			// Create docs automatically
 			$all_hooks = array();
 			foreach ( apply_filters( 'alg_wc_pdf_invoicing_enabled_docs', array( '0' ) ) as $doc_id ) {
@@ -50,13 +57,18 @@ class Alg_WC_PDF_Invoicing_Core {
 					add_action( $hook, array( $this, 'create_docs' ) );
 				}
 			}
+
 			// Emails
 			add_filter( 'woocommerce_email_attachments', array( $this, 'email_attachments' ), PHP_INT_MAX, 4 );
+
 			// "My account > Orders"
 			add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'my_account_my_orders_actions' ), PHP_INT_MAX, 2 );
+
 			// Shortcodes
 			$this->shortcodes = require_once( 'class-alg-wc-pdf-invoicing-shortcodes.php' );
+
 		}
+
 	}
 
 	/**
@@ -113,7 +125,7 @@ class Alg_WC_PDF_Invoicing_Core {
 	/**
 	 * get_and_update_counter.
 	 *
-	 * @version 1.0.0
+	 * @version 1.9.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [now] (dev) re-test MySQL transaction!
@@ -121,13 +133,28 @@ class Alg_WC_PDF_Invoicing_Core {
 	 */
 	function get_and_update_counter( $doc_id ) {
 		global $wpdb;
+
+		// Vars
 		$doc_id = 'doc_' . $doc_id;
+		$option = 'alg_wc_pdf_invoicing_counters';
+
+		// Start MySQL transaction
 		$wpdb->query( 'START TRANSACTION' );
-		$counters            = get_option( 'alg_wc_pdf_invoicing_counters', array() );
+
+		// Get current counters
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", $option ) );
+
+		// Increase counter
+		$counters            = ( isset( $row->option_value ) ? maybe_unserialize( $row->option_value ) : array() );
 		$counter             = ( isset( $counters[ $doc_id ] ) ? $counters[ $doc_id ] : 1 );
 		$counters[ $doc_id ] = $counter + 1;
-		$result              = update_option( 'alg_wc_pdf_invoicing_counters', $counters );
+
+		// Update counters
+		$result = $wpdb->update( $wpdb->options, array( 'option_value' => maybe_serialize( $counters ), 'autoload' => 'yes' ), array( 'option_name' => $option ) );
+
+		// Commit/Rollback MySQL transaction
 		$wpdb->query( ( $result ? 'COMMIT' : 'ROLLBACK' ) );
+
 		return $counter;
 	}
 
@@ -187,24 +214,24 @@ class Alg_WC_PDF_Invoicing_Core {
 	/**
 	 * create_doc.
 	 *
-	 * @version 1.3.0
+	 * @version 1.9.0
 	 * @since   1.0.0
 	 *
 	 * @todo    [now] (dev) rename function?
-	 * @todo    [dev] add notice
-	 * @todo    [dev] (maybe) check if `manual` is enabled (or `hooks` option is empty)
+	 * @todo    [later] (dev) add notice
+	 * @todo    [maybe] (dev) check if `manual` is enabled (or `hooks` option is empty)
 	 */
 	function create_doc() {
 		if ( isset( $_GET['alg-wc-pdf-invoicing-create-doc'] ) ) {
 			if ( ! isset( $_GET['alg-wc-pdf-invoicing-order-id'] ) ) {
 				wp_die( sprintf( __( 'Error: %s', 'pdf-invoicing-for-woocommerce' ), __( 'Order ID not set.', 'pdf-invoicing-for-woocommerce' ) ) );
 			}
-			$doc_id   = intval( $_GET['alg-wc-pdf-invoicing-create-doc'] );
-			$order_id = intval( $_GET['alg-wc-pdf-invoicing-order-id'] );
 			if ( ! current_user_can( 'manage_woocommerce' ) ) {
 				wp_die( sprintf( __( 'Error: %s', 'pdf-invoicing-for-woocommerce' ), __( 'Insufficient user capability.', 'pdf-invoicing-for-woocommerce' ) ) );
 			}
-			$doc = new Alg_WC_PDF_Invoicing_Doc( $order_id, $doc_id );
+			$doc_id   = intval( $_GET['alg-wc-pdf-invoicing-create-doc'] );
+			$order_id = intval( $_GET['alg-wc-pdf-invoicing-order-id'] );
+			$doc      = new Alg_WC_PDF_Invoicing_Doc( $order_id, $doc_id );
 			if ( $doc->is_created() ) {
 				wp_die( sprintf( __( 'Error: %s', 'pdf-invoicing-for-woocommerce' ), __( 'Document is already created.', 'pdf-invoicing-for-woocommerce' ) ) );
 			}

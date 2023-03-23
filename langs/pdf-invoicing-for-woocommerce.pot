@@ -1,85 +1,89 @@
-#: includes/class-alg-wc-pdf-invoicing-admin.php:60
+#: includes/class-alg-wc-pdf-invoicing-admin.php:70
 msgid "View PDFs"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:61
+#: includes/class-alg-wc-pdf-invoicing-admin.php:71
 msgid "Download PDFs"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:152
+#: includes/class-alg-wc-pdf-invoicing-admin.php:165
 msgid "Download"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:153
+#: includes/class-alg-wc-pdf-invoicing-admin.php:166
 msgid "Print"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:154
+#: includes/class-alg-wc-pdf-invoicing-admin.php:167
 msgid "Delete"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:156
+#: includes/class-alg-wc-pdf-invoicing-admin.php:170
+msgid "View"
+msgstr ""
+
 #: includes/class-alg-wc-pdf-invoicing-admin.php:171
+#: includes/class-alg-wc-pdf-invoicing-admin.php:191
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:170
+#: includes/class-alg-wc-pdf-invoicing-admin.php:190
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:71
 msgid "Create"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:190
+#: includes/class-alg-wc-pdf-invoicing-admin.php:211
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:47
 #: includes/settings/class-alg-wc-pdf-invoicing-settings.php:25
 msgid "PDF Invoicing"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:257
+#: includes/class-alg-wc-pdf-invoicing-admin.php:278
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:260
+#: includes/class-alg-wc-pdf-invoicing-admin.php:281
 msgid "Go Pro"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:200
-#: includes/class-alg-wc-pdf-invoicing-core.php:205
-#: includes/class-alg-wc-pdf-invoicing-core.php:209
-#: includes/class-alg-wc-pdf-invoicing-core.php:247
-#: includes/class-alg-wc-pdf-invoicing-core.php:251
-#: includes/class-alg-wc-pdf-invoicing-core.php:275
-#: includes/class-alg-wc-pdf-invoicing-core.php:279
+#: includes/class-alg-wc-pdf-invoicing-core.php:227
+#: includes/class-alg-wc-pdf-invoicing-core.php:230
+#: includes/class-alg-wc-pdf-invoicing-core.php:236
+#: includes/class-alg-wc-pdf-invoicing-core.php:274
+#: includes/class-alg-wc-pdf-invoicing-core.php:278
+#: includes/class-alg-wc-pdf-invoicing-core.php:302
+#: includes/class-alg-wc-pdf-invoicing-core.php:306
 #, php-format
 msgid "Error: %s"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:200
+#: includes/class-alg-wc-pdf-invoicing-core.php:227
 msgid "Order ID not set."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:205
-#: includes/class-alg-wc-pdf-invoicing-core.php:247
-#: includes/class-alg-wc-pdf-invoicing-core.php:275
+#: includes/class-alg-wc-pdf-invoicing-core.php:230
+#: includes/class-alg-wc-pdf-invoicing-core.php:274
+#: includes/class-alg-wc-pdf-invoicing-core.php:302
 msgid "Insufficient user capability."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:209
+#: includes/class-alg-wc-pdf-invoicing-core.php:236
 msgid "Document is already created."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:242
-#: includes/class-alg-wc-pdf-invoicing-core.php:270
+#: includes/class-alg-wc-pdf-invoicing-core.php:269
+#: includes/class-alg-wc-pdf-invoicing-core.php:297
 #, php-format
 msgid "Error: %s."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:242
-#: includes/class-alg-wc-pdf-invoicing-core.php:270
+#: includes/class-alg-wc-pdf-invoicing-core.php:269
+#: includes/class-alg-wc-pdf-invoicing-core.php:297
 msgid "Order ID not set"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:251
-#: includes/class-alg-wc-pdf-invoicing-core.php:279
+#: includes/class-alg-wc-pdf-invoicing-core.php:278
+#: includes/class-alg-wc-pdf-invoicing-core.php:306
 msgid "Document is not created yet."
 msgstr ""
 
