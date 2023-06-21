@@ -121,7 +121,8 @@ class Alg_WC_PDF_Invoicing_Settings extends WC_Settings_Page {
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
-	 * @todo    [dev] fix notices (not showing now because of redirect)
+	 *
+	 * @todo    (fix) notices (not showing now because of redirect)
 	 */
 	function save() {
 		parent::save();

@@ -20,8 +20,8 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (feature) option to copy all settings from another doc || export/import (doc) settings options
-	 * @todo    [now] (feature) `margin_bottom` (i.e. "page break" in TCPDF)
+	 * @todo    (feature) option to copy all settings from another doc || export/import (doc) settings options
+	 * @todo    (feature) `margin_bottom` (i.e. "page break" in TCPDF)
 	 */
 	function __construct( $doc_id = 0 ) {
 		$this->doc_id = $doc_id;
@@ -36,14 +36,14 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] [!!!] (desc) `order_bulk_actions`: better desc?
-	 * @todo    [now] [!!!] (feature) customizable `unit`
-	 * @todo    [now] [!!!] (dev) `show_if_checked`
-	 * @todo    [now] (desc) `line_color`
-	 * @todo    [dev] (maybe) predefined content variants
-	 * @todo    [dev] (maybe) better descriptions
-	 * @todo    [now] (dev) HTML content: wp_editor?
-	 * @todo    [dev] (maybe) "raw" (at least optional): HTML style, HTML content etc.
+	 * @todo    (desc) [!] `order_bulk_actions`: better desc?
+	 * @todo    (feature) [!] customizable `unit`
+	 * @todo    (dev) [!] `show_if_checked`
+	 * @todo    (desc) `line_color`
+	 * @todo    (dev) predefined content variants
+	 * @todo    (dev) better descriptions
+	 * @todo    (dev) HTML content: wp_editor?
+	 * @todo    (dev) "raw" (at least optional): HTML style, HTML content etc.
 	 */
 	function get_settings() {
 		return array(

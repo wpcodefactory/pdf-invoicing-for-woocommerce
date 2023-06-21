@@ -30,7 +30,7 @@ class Alg_WC_PDF_Invoicing_Settings_Doc_Page_Formats {
 	 * @version 1.5.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [maybe] (dev) reduce number of page formats?
+	 * @todo    (dev) reduce number of page formats?
 	 */
 	static function get_page_formats() {
 		return array(

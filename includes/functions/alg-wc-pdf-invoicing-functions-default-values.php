@@ -17,10 +17,10 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (dev) `str_replace( "\t", '', ... )`?
-	 * @todo    [now] (dev) `[each_item type="fee"]`
-	 * @todo    [now] (dev) `[each_item type="shipping"]`
-	 * @todo    [dev] (maybe) better defaults, e.g. HTML style & content
+	 * @todo    (dev) `str_replace( "\t", '', ... )`?
+	 * @todo    (dev) `[each_item type="fee"]`
+	 * @todo    (dev) `[each_item type="shipping"]`
+	 * @todo    (dev) better defaults, e.g. HTML style & content
 	 */
 	function alg_wc_pdf_invoicing_get_default( $option_id, $doc_id = 0 ) {
 		switch ( $option_id ) {

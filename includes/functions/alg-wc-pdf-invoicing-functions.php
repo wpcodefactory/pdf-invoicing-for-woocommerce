@@ -50,7 +50,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_en' ) ) {
 	 *
 	 * @see     https://stackoverflow.com/questions/11500088/php-express-number-in-words
 	 *
-	 * @todo    [dev] (maybe) finish clean up: Yoda etc.
+	 * @todo    (dev) finish clean up: Yoda etc.
 	 */
 	function alg_wc_pdf_invoicing_number_to_words_en( $number ) {
 		$number        = str_replace( array( ',', ' ' ), '' , trim( $number ) );
@@ -103,7 +103,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_lt' ) ) {
 	 *
 	 * @return  string
 	 *
-	 * @todo    [dev] (maybe) finish clean up: camel-case; Yoda etc.
+	 * @todo    (dev) finish clean up: camel-case; Yoda etc.
 	 */
 	function alg_wc_pdf_invoicing_number_to_words_lt( $number ) {
 		$hyphen      = ' ';

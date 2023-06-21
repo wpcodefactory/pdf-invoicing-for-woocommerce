@@ -46,44 +46,44 @@ msgstr ""
 msgid "Go Pro"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:227
-#: includes/class-alg-wc-pdf-invoicing-core.php:230
-#: includes/class-alg-wc-pdf-invoicing-core.php:236
-#: includes/class-alg-wc-pdf-invoicing-core.php:274
-#: includes/class-alg-wc-pdf-invoicing-core.php:278
-#: includes/class-alg-wc-pdf-invoicing-core.php:302
-#: includes/class-alg-wc-pdf-invoicing-core.php:306
+#: includes/class-alg-wc-pdf-invoicing-core.php:232
+#: includes/class-alg-wc-pdf-invoicing-core.php:235
+#: includes/class-alg-wc-pdf-invoicing-core.php:241
+#: includes/class-alg-wc-pdf-invoicing-core.php:279
+#: includes/class-alg-wc-pdf-invoicing-core.php:283
+#: includes/class-alg-wc-pdf-invoicing-core.php:307
+#: includes/class-alg-wc-pdf-invoicing-core.php:311
 #, php-format
 msgid "Error: %s"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:227
+#: includes/class-alg-wc-pdf-invoicing-core.php:232
 msgid "Order ID not set."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:230
-#: includes/class-alg-wc-pdf-invoicing-core.php:274
-#: includes/class-alg-wc-pdf-invoicing-core.php:302
+#: includes/class-alg-wc-pdf-invoicing-core.php:235
+#: includes/class-alg-wc-pdf-invoicing-core.php:279
+#: includes/class-alg-wc-pdf-invoicing-core.php:307
 msgid "Insufficient user capability."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:236
+#: includes/class-alg-wc-pdf-invoicing-core.php:241
 msgid "Document is already created."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:269
-#: includes/class-alg-wc-pdf-invoicing-core.php:297
+#: includes/class-alg-wc-pdf-invoicing-core.php:274
+#: includes/class-alg-wc-pdf-invoicing-core.php:302
 #, php-format
 msgid "Error: %s."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:269
-#: includes/class-alg-wc-pdf-invoicing-core.php:297
+#: includes/class-alg-wc-pdf-invoicing-core.php:274
+#: includes/class-alg-wc-pdf-invoicing-core.php:302
 msgid "Order ID not set"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:278
-#: includes/class-alg-wc-pdf-invoicing-core.php:306
+#: includes/class-alg-wc-pdf-invoicing-core.php:283
+#: includes/class-alg-wc-pdf-invoicing-core.php:311
 msgid "Document is not created yet."
 msgstr ""
 

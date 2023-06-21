@@ -43,8 +43,8 @@ class Alg_WC_PDF_Invoicing_Doc {
 	 * @version 1.7.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [dev] (maybe) also save prefix and other data
-	 * @todo    [dev] (maybe) also save as a separate order meta, e.g. `_alg_wc_pdf_invoicing_number`, `_alg_wc_pdf_invoicing_date`
+	 * @todo    (dev) also save prefix and other data
+	 * @todo    (dev) also save as a separate order meta, e.g. `_alg_wc_pdf_invoicing_number`, `_alg_wc_pdf_invoicing_date`
 	 */
 	function create( $data ) {
 
@@ -71,7 +71,7 @@ class Alg_WC_PDF_Invoicing_Doc {
 	 * @version 1.7.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [dev] (maybe) better function name, e.g. `delete`, `destroy`, `trash`
+	 * @todo    (dev) better function name, e.g. `delete`, `destroy`, `trash`
 	 */
 	function remove() {
 
@@ -121,7 +121,7 @@ class Alg_WC_PDF_Invoicing_Doc {
 	 * @version 1.5.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (dev) `$add_days`: rethink naming
+	 * @todo    (dev) `$add_days`: rethink naming
 	 */
 	function get_formatted_date( $format = 'Y-m-d', $add_days = 0 ) {
 		return date_i18n( $format, ( $this->data['date'] + $add_days * DAY_IN_SECONDS ) );
@@ -167,7 +167,7 @@ class Alg_WC_PDF_Invoicing_Doc {
 	 * @version 1.4.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] [!!!] (dev) `curl_init()` for `img`: https://github.com/tecnickcom/TCPDF/blob/6.3.2/include/tcpdf_static.php#L1830
+	 * @todo    (dev) [!] `curl_init()` for `img`: https://github.com/tecnickcom/TCPDF/blob/6.3.2/include/tcpdf_static.php#L1830
 	 */
 	function get_html() {
 		return '<meta charset="UTF-8">' .
@@ -189,15 +189,15 @@ class Alg_WC_PDF_Invoicing_Doc {
 	 * @see     https://github.com/tecnickcom/TCPDF/blob/6.3.2/tcpdf.php#L4450 (SetFont)
 	 * @see     https://github.com/tecnickcom/TCPDF/blob/6.3.2/tcpdf.php#L7581 (Output)
 	 *
-	 * @todo    [now] [!!!] (feature) "Header height" (`PDF_MARGIN_HEADER`?)
-	 * @todo    [now] [!!!] (feature) "Margin: Bottom" (`PDF_MARGIN_BOTTOM`?)
-	 * @todo    [now] (fix) `<hr>` + RTL
-	 * @todo    [now] (dev) `IncludeJS`: `$_GET['alg-wc-pdf-invoicing-print']`?
-	 * @todo    [now] (dev) `IncludeJS`: `... && 'no' === get_option( 'alg_wc_pdf_invoicing_use_print_js', 'yes' )`?
-	 * @todo    [later] (feature) more customizable options
-	 * @todo    [later] (feature) "custom size" page format
-	 * @todo    [later] (feature) custom fonts
-	 * @todo    [maybe] (dev) `$pdf->setFontSubsetting( true );` (before `$pdf->SetFont()`)
+	 * @todo    (feature) [!] "Header height" (`PDF_MARGIN_HEADER`?)
+	 * @todo    (feature) [!] "Margin: Bottom" (`PDF_MARGIN_BOTTOM`?)
+	 * @todo    (fix) `<hr>` + RTL
+	 * @todo    (dev) `IncludeJS`: `$_GET['alg-wc-pdf-invoicing-print']`?
+	 * @todo    (dev) `IncludeJS`: `... && 'no' === get_option( 'alg_wc_pdf_invoicing_use_print_js', 'yes' )`?
+	 * @todo    (feature) more customizable options
+	 * @todo    (feature) "custom size" page format
+	 * @todo    (feature) custom fonts
+	 * @todo    (dev) `$pdf->setFontSubsetting( true );` (before `$pdf->SetFont()`)
 	 */
 	function get_pdf( $dest = 'I', $path = '' ) {
 

@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Core Class
  *
- * @version 1.9.0
+ * @version 1.9.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -20,8 +20,8 @@ class Alg_WC_PDF_Invoicing_Core {
 	 * @version 1.7.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [next] (dev) order meta box
-	 * @todo    [maybe] (dev) replace TCPDF lib with `tc-lib-pdf`
+	 * @todo    (dev) order meta box
+	 * @todo    (dev) replace TCPDF lib with `tc-lib-pdf`
 	 */
 	function __construct() {
 
@@ -125,11 +125,10 @@ class Alg_WC_PDF_Invoicing_Core {
 	/**
 	 * get_and_update_counter.
 	 *
-	 * @version 1.9.0
+	 * @version 1.9.2
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (dev) re-test MySQL transaction!
-	 * @todo    [dev] (maybe) need another solution (instead of `get_option()`): a) new table (with auto-incremental counter); b) save counter as custom post (i.e. template) option
+	 * @todo    (dev) need another solution (instead of `get_option()`): a) new table (with auto-incremental counter); b) save counter as custom post (i.e., template) option
 	 */
 	function get_and_update_counter( $doc_id ) {
 		global $wpdb;
@@ -142,15 +141,21 @@ class Alg_WC_PDF_Invoicing_Core {
 		$wpdb->query( 'START TRANSACTION' );
 
 		// Get current counters
-		$row = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", $option ) );
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM {$wpdb->options} WHERE option_name = %s LIMIT 1", $option ) );
 
-		// Increase counter
+		// Increase (and serialize) counter
 		$counters            = ( isset( $row->option_value ) ? maybe_unserialize( $row->option_value ) : array() );
 		$counter             = ( isset( $counters[ $doc_id ] ) ? $counters[ $doc_id ] : 1 );
 		$counters[ $doc_id ] = $counter + 1;
+		$counters            = maybe_serialize( $counters );
 
 		// Update counters
-		$result = $wpdb->update( $wpdb->options, array( 'option_value' => maybe_serialize( $counters ), 'autoload' => 'yes' ), array( 'option_name' => $option ) );
+		$result = $wpdb->update( $wpdb->options, array( 'option_value' => $counters, 'autoload' => 'yes' ), array( 'option_name' => $option ) );
+
+		// Try "insert" instead of "update" (i.e., no counters set yet)
+		if ( 0 === $result ) {
+			$result = $wpdb->insert( $wpdb->options, array( 'option_value' => $counters, 'autoload' => 'yes', 'option_name' => $option ) );
+		}
 
 		// Commit/Rollback MySQL transaction
 		$wpdb->query( ( $result ? 'COMMIT' : 'ROLLBACK' ) );
@@ -164,7 +169,7 @@ class Alg_WC_PDF_Invoicing_Core {
 	 * @version 1.1.1
 	 * @since   1.0.0
 	 *
-	 * @todo    [dev] per payment gateways
+	 * @todo    (dev) per payment gateways
 	 */
 	function email_attachments( $attachments, $email_id, $email_order, $email = false ) {
 		if ( is_object( $email_order ) && is_a( $email_order, 'WC_Order' ) ) {
@@ -192,8 +197,8 @@ class Alg_WC_PDF_Invoicing_Core {
 	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [dev] per payment gateways
-	 * @todo    [dev] optionally do not create when order total is zero
+	 * @todo    (dev) per payment gateways
+	 * @todo    (dev) optionally do not create when order total is zero
 	 */
 	function create_docs( $order_id ) {
 		foreach ( apply_filters( 'alg_wc_pdf_invoicing_enabled_docs', array( '0' ) ) as $doc_id ) {
@@ -217,9 +222,9 @@ class Alg_WC_PDF_Invoicing_Core {
 	 * @version 1.9.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (dev) rename function?
-	 * @todo    [later] (dev) add notice
-	 * @todo    [maybe] (dev) check if `manual` is enabled (or `hooks` option is empty)
+	 * @todo    (dev) rename function?
+	 * @todo    (dev) add notice
+	 * @todo    (dev) check if `manual` is enabled (or `hooks` option is empty)
 	 */
 	function create_doc() {
 		if ( isset( $_GET['alg-wc-pdf-invoicing-create-doc'] ) ) {
@@ -251,7 +256,7 @@ class Alg_WC_PDF_Invoicing_Core {
 	 * @version 1.3.0
 	 * @since   1.3.0
 	 *
-	 * @todo    [now] (dev) also check if `my_account_orders` option is enabled?
+	 * @todo    (dev) also check if `my_account_orders` option is enabled?
 	 */
 	function is_current_user_order( $order_id ) {
 		return ( 0 != ( $current_user_id = get_current_user_id() ) && ( $order = wc_get_order( $order_id ) ) && $order->get_customer_id() == $current_user_id );
@@ -288,8 +293,8 @@ class Alg_WC_PDF_Invoicing_Core {
 	 * @version 1.3.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [dev] add notice
-	 * @todo    [dev] make optional (e.g. visible to admin but not for shop manager etc.)
+	 * @todo    (dev) add notice
+	 * @todo    (dev) make optional (e.g. visible to admin but not for shop manager etc.)
 	 */
 	function delete_doc() {
 		if ( isset( $_GET['alg-wc-pdf-invoicing-delete-doc'] ) ) {
@@ -319,7 +324,7 @@ class Alg_WC_PDF_Invoicing_Core {
 	 *
 	 * @see     https://www.setasign.com/products/fpdi/demos/concatenate-fake/
 	 *
-	 * @todo    [now] (dev) better title and file name (i.e. not `docs.pdf`)?
+	 * @todo    (dev) better title and file name (i.e. not `docs.pdf`)?
 	 */
 	function merge_docs( $order_ids, $doc_id, $dest = 'I' ) {
 

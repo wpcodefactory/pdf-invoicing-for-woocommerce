@@ -26,14 +26,14 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 	 * @see     https://tcpdf.org/examples/example_051/ (Background image)
 	 * @see     https://github.com/tecnickcom/TCPDF/blob/6.3.2/tcpdf.php#L6855 (Image)
 	 *
-	 * @todo    [now] [!!!] (feature) HTML in header
-	 * @todo    [now] (feature) 'C' image alignment
-	 * @todo    [now] (feature) 'C' text alignment
-	 * @todo    [now] (feature) "Line color (in content)": more params, e.g. width?
-	 * @todo    [now] (feature) add "Header text width" (in percent)?
-	 * @todo    [now] (dev) rethink `0.75` and `0.25`
-	 * @todo    [now] (dev) modify "Header image width": make it in percent?
-	 * @todo    [now] (dev) "Line color (in content)": move elsewhere?
+	 * @todo    (feature) [!] HTML in header
+	 * @todo    (feature) 'C' image alignment
+	 * @todo    (feature) 'C' text alignment
+	 * @todo    (feature) "Line color (in content)": more params, e.g. width?
+	 * @todo    (feature) add "Header text width" (in percent)?
+	 * @todo    (dev) rethink `0.75` and `0.25`
+	 * @todo    (dev) modify "Header image width": make it in percent?
+	 * @todo    (dev) "Line color (in content)": move elsewhere?
 	 */
 	function Header() {
 
@@ -162,7 +162,7 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 	 * @version 1.8.0
 	 * @since   1.1.0
 	 *
-	 * @todo    [now] [!!!] (fix) "Justify" doesn't work for the `writeHTMLCell()`
+	 * @todo    (fix) [!] "Justify" doesn't work for the `writeHTMLCell()`
 	 */
 	function Footer() {
 

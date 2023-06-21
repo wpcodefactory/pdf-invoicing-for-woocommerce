@@ -32,8 +32,8 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (dev) `alg_wc_pdf_invoicing_shortcode_prefix`: better default value, e.g. `alg_wc_pdf_` or `alg_wc_pi_`?
-	 * @todo    [now] (desc) `alg_wc_pdf_invoicing_use_print_js`
+	 * @todo    (dev) `alg_wc_pdf_invoicing_shortcode_prefix`: better default value, e.g. `alg_wc_pdf_` or `alg_wc_pi_`?
+	 * @todo    (desc) `alg_wc_pdf_invoicing_use_print_js`
 	 */
 	function get_settings() {
 

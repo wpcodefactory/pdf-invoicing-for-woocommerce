@@ -20,11 +20,11 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @version 1.6.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (feature) `[order_barcode_1d]` and `[order_barcode_2d]` shortcodes
-	 * @todo    [now] (feature) `[set_rtl]` shortcode?
-	 * @todo    [now] (feature) `[reset_items]` shortcode?
-	 * @todo    [now] (feature) `[sort_items]` shortcode?
-	 * @todo    [now] (feature) `[group_items]` shortcode?
+	 * @todo    (feature) `[order_barcode_1d]` and `[order_barcode_2d]` shortcodes
+	 * @todo    (feature) `[set_rtl]` shortcode?
+	 * @todo    (feature) `[reset_items]` shortcode?
+	 * @todo    (feature) `[sort_items]` shortcode?
+	 * @todo    (feature) `[group_items]` shortcode?
 	 */
 	function __construct() {
 		$this->props            = array();
@@ -173,7 +173,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @version 1.4.0
 	 * @since   1.4.0
 	 *
-	 * @todo    [now] (feature) `checked` vs `unchecked`
+	 * @todo    (feature) `checked` vs `unchecked`
 	 */
 	function shortcode_checkbox( $atts, $content = '' ) {
 		$this->checkbox_counter++;
@@ -196,7 +196,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (dev) `$this->do_atts_shortcode()`
+	 * @todo    (dev) `$this->do_atts_shortcode()`
 	 */
 	function shortcode_if( $atts, $content = '' ) {
 		if ( ! isset( $atts['value1'], $atts['operator'], $atts['value2'] ) || '' === $content ) {
@@ -231,7 +231,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 *
 	 * @param   string $atts['type'] Type(s) of line items to get. Can be a comma separated list. Possible values: `line_item`, `tax`, `shipping`, `fee`, `coupon`. Default: `line_item`.
 	 *
-	 * @todo    [maybe] (dev) rethink naming, e.g., `[each name="items"]`
+	 * @todo    (dev) rethink naming, e.g., `[each name="items"]`
 	 */
 	function shortcode_each_item( $atts, $content = '' ) {
 		if ( '' === $content ) {
@@ -292,8 +292,8 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @version 1.6.0
 	 * @since   1.5.0
 	 *
-	 * @todo    [now] [!!!] (dev) "full refund" vs "partial refund" (there are no `items` in "full refund")
-	 * @todo    [now] (feature) "partial refund" trigger
+	 * @todo    (dev) [!] "full refund" vs "partial refund" (there are no `items` in "full refund")
+	 * @todo    (feature) "partial refund" trigger
 	 */
 	function shortcode_each_refund( $atts, $content = '' ) {
 		if ( '' === $content ) {
@@ -326,9 +326,9 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @version 1.7.1
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (dev) Math: `multiply` and `divide`: apply `floatval()`?
-	 * @todo    [now] (feature) `multiple_find`, `multiple_replace`
-	 * @todo    [dev] (maybe) `on_empty`; `lang` && `not_lang`; `order_billing_country` && `not_order_billing_country` etc. OR maybe all that can be done via `[if]`?
+	 * @todo    (dev) Math: `multiply` and `divide`: apply `floatval()`?
+	 * @todo    (feature) `multiple_find`, `multiple_replace`
+	 * @todo    (dev) `on_empty`; `lang` && `not_lang`; `order_billing_country` && `not_order_billing_country` etc. OR maybe all that can be done via `[if]`?
 	 */
 	function return_prop( $value, $atts ) {
 
@@ -392,12 +392,12 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @version 1.5.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] [!!!] (dev) `item_` props for coupons: check if it's callable
-	 * @todo    [now] [!!!] (dev) `item_` props for coupons: `get_discount()` and `get_discount_tax()`
-	 * @todo    [now] (dev) rename `item_nr` to `order_item_nr`, etc.
-	 * @todo    [dev] data from another doc (e.g. display invoice nr in packing slip)
-	 * @todo    [dev] `ucfirst()` for `order_total_in_words` (including Unicode)
-	 * @todo    [dev] (maybe) separate shortcodes (e.g. `[doc]`, `[order]`, `[item]` etc.)
+	 * @todo    (dev) [!] `item_` props for coupons: check if it's callable
+	 * @todo    (dev) [!] `item_` props for coupons: `get_discount()` and `get_discount_tax()`
+	 * @todo    (dev) rename `item_nr` to `order_item_nr`, etc.
+	 * @todo    (dev) data from another doc (e.g. display invoice nr in packing slip)
+	 * @todo    (dev) `ucfirst()` for `order_total_in_words` (including Unicode)
+	 * @todo    (dev) separate shortcodes (e.g. `[doc]`, `[order]`, `[item]` etc.)
 	 */
 	function shortcode_prop( $atts, $content = '' ) {
 		if ( ! isset( $atts['name'] ) || ( isset( $this->props[ $atts['name'] ] ) && false === $this->props[ $atts['name'] ] ) || ! isset( $this->doc_obj ) ) {

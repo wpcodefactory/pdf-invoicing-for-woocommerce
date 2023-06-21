@@ -53,7 +53,7 @@ class Alg_WC_PDF_Invoicing_Settings_Section {
 	 * @version 1.5.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (dev) sort array?
+	 * @todo    (dev) sort array?
 	 */
 	function get_emails() {
 		$emails    = array();
@@ -71,8 +71,8 @@ class Alg_WC_PDF_Invoicing_Settings_Section {
 	 * @version 1.5.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [now] (dev) sort array?
-	 * @todo    [now] (feature) custom hooks
+	 * @todo    (dev) sort array?
+	 * @todo    (feature) custom hooks
 	 */
 	function get_hooks() {
 		$hooks = array(
@@ -112,7 +112,7 @@ class Alg_WC_PDF_Invoicing_Settings_Section {
 	 * @version 1.4.0
 	 * @since   1.4.0
 	 *
-	 * @todo    [now] (desc) improve
+	 * @todo    (desc) improve
 	 */
 	function get_fonts_desc() {
 		return sprintf( __( 'If you are having issues displaying your language specific letters, select "%s" font.', 'pdf-invoicing-for-woocommerce' ),

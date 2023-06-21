@@ -61,9 +61,9 @@ class Alg_WC_PDF_Invoicing_Admin {
 	 * @since   1.5.0
 	 *
 	 *
-	 * @todo    [now] [!!!] (desc) better naming, e.g. "View" and "Download" (i.e. remove "PDFs")?
-	 * @todo    [now] (feature) new action: print (i.e. merge and print)?
-	 * @todo    [now] (feature) new action: archive (i.e. zip)
+	 * @todo    (desc) [!] better naming, e.g. "View" and "Download" (i.e. remove "PDFs")?
+	 * @todo    (feature) new action: print (i.e. merge and print)?
+	 * @todo    (feature) new action: archive (i.e. zip)
 	 */
 	function get_order_bulk_actions() {
 		return array(
@@ -130,9 +130,9 @@ class Alg_WC_PDF_Invoicing_Admin {
 	 *
 	 * @see     https://printjs.crabbly.com/
 	 *
-	 * @todo    [now] (dev) redo this
-	 * @todo    [now] (dev) local copy
-	 * @todo    [now] (dev) css?
+	 * @todo    (dev) redo this
+	 * @todo    (dev) local copy
+	 * @todo    (dev) css?
 	 */
 	function add_scripts() {
 		if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_print_js', 'yes' ) ) {
@@ -146,7 +146,7 @@ class Alg_WC_PDF_Invoicing_Admin {
 	 * @version 1.9.0
 	 * @since   1.4.0
 	 *
-	 * @todo    [maybe] (feature) customizable icons?
+	 * @todo    (feature) customizable icons?
 	 */
 	function get_actions( $doc_id, $order_id, $order ) {
 		$actions = '';
@@ -203,8 +203,8 @@ class Alg_WC_PDF_Invoicing_Admin {
 	 * @version 1.4.0
 	 * @since   1.4.0
 	 *
-	 * @todo    [now] (feature) customizable title
-	 * @todo    [now] (feature) add option to disable this
+	 * @todo    (feature) customizable title
+	 * @todo    (feature) add option to disable this
 	 */
 	function add_order_meta_box( $post_type, $post ) {
 		add_meta_box( 'alg-wc-pdf-invoicing',
@@ -220,8 +220,8 @@ class Alg_WC_PDF_Invoicing_Admin {
 	 * @version 1.4.0
 	 * @since   1.4.0
 	 *
-	 * @todo    [now] (feature) customizable template
-	 * @todo    [now] (dev) nonces everywhere
+	 * @todo    (feature) customizable template
+	 * @todo    (dev) nonces everywhere
 	 */
 	function display_order_meta_box( $post ) {
 		$order_id = $post->ID;
