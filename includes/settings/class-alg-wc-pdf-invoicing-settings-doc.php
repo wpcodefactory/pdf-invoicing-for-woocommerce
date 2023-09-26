@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Document Settings
  *
- * @version 1.8.0
+ * @version 2.0.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -21,7 +21,7 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) option to copy all settings from another doc || export/import (doc) settings options
-	 * @todo    (feature) `margin_bottom` (i.e. "page break" in TCPDF)
+	 * @todo    (feature) `margin_bottom` (i.e., "page break" in TCPDF)
 	 */
 	function __construct( $doc_id = 0 ) {
 		$this->doc_id = $doc_id;
@@ -33,7 +33,7 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.8.0
+	 * @version 2.0.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) [!] `order_bulk_actions`: better desc?
@@ -429,7 +429,7 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 			array(
 				'title'    => __( 'HTML content filters', 'pdf-invoicing-for-woocommerce' ),
 				'desc'     => __( 'Balance tags', 'pdf-invoicing-for-woocommerce' ) . ' (' . __( 'recommended', 'pdf-invoicing-for-woocommerce' ) . ')',
-				'desc_tip' => __( 'Balances tags, i.e. prevents unmatched elements.', 'pdf-invoicing-for-woocommerce' ) . '<br>' .
+				'desc_tip' => __( 'Balances tags, i.e., prevents unmatched elements.', 'pdf-invoicing-for-woocommerce' ) . '<br>' .
 					sprintf( __( 'Uses WordPress %s function.', 'pdf-invoicing-for-woocommerce' ),
 						'<a href="https://developer.wordpress.org/reference/functions/force_balance_tags/" target="_blank"><code>force_balance_tags()</code></a>' ),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[html_content_force_balance_tags]",

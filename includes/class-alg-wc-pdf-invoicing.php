@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Main Class
  *
- * @version 1.5.0
+ * @version 2.0.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -57,7 +57,7 @@ final class Alg_WC_PDF_Invoicing {
 	/**
 	 * Alg_WC_PDF_Invoicing Constructor.
 	 *
-	 * @version 1.5.0
+	 * @version 2.0.0
 	 * @since   1.0.0
 	 *
 	 * @access  public
@@ -71,6 +71,9 @@ final class Alg_WC_PDF_Invoicing {
 
 		// Set up localisation
 		add_action( 'init', array( $this, 'localize' ) );
+
+		// Declare compatibility with custom order tables for WooCommerce
+		add_action( 'before_woocommerce_init', array( $this, 'wc_declare_compatibility' ) );
 
 		// Pro
 		if ( 'pdf-invoicing-for-woocommerce-pro.php' === basename( ALG_WC_PDF_INVOICING_FILE ) ) {
@@ -95,6 +98,23 @@ final class Alg_WC_PDF_Invoicing {
 	 */
 	function localize() {
 		load_plugin_textdomain( 'pdf-invoicing-for-woocommerce', false, dirname( plugin_basename( ALG_WC_PDF_INVOICING_FILE ) ) . '/langs/' );
+	}
+
+	/**
+	 * wc_declare_compatibility.
+	 *
+	 * @version 2.0.0
+	 * @since   2.0.0
+	 *
+	 * @see     https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility
+	 */
+	function wc_declare_compatibility() {
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			$files = ( defined( 'ALG_WC_PDF_INVOICING_FILE_FREE' ) ? array( ALG_WC_PDF_INVOICING_FILE, ALG_WC_PDF_INVOICING_FILE_FREE ) : array( ALG_WC_PDF_INVOICING_FILE ) );
+			foreach ( $files as $file ) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $file, true );
+			}
+		}
 	}
 
 	/**

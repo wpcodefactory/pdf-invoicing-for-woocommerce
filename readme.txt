@@ -1,9 +1,9 @@
 === PDF Invoicing for WooCommerce ===
-Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
+Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
 Tags: woocommerce, pdf, invoice, credit note, packing list, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 1.9.3
+Stable tag: 2.0.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -11,14 +11,14 @@ Add PDF invoices to WooCommerce.
 
 == Description ==
 
-**PDF Invoicing for WooCommerce** plugin lets you add various PDF documents, e.g. invoices, packing slips, credit notes etc. to WooCommerce.
+**PDF Invoicing for WooCommerce** plugin lets you add various PDF documents, e.g., invoices, packing slips, credit notes etc. to WooCommerce.
 
 ### &#9989; Main Features ###
 
-* **Create** PDF documents **manually** or **automatically** (e.g. on new order; on order status change).
+* **Create** PDF documents **manually** or **automatically** (e.g., on new order; on order status change).
 * Add PDF documents to **email attachments**.
 * Add PDF documents to **My account > Orders**.
-* Customize PDF documents **number format** (e.g. sequential; date based etc.).
+* Customize PDF documents **number format** (e.g., sequential; date based etc.).
 * Customize PDF documents **page** orientation, format, margins.
 * Set PDF documents **header** image, title, text etc.
 * Set PDF documents **footer** text etc.
@@ -30,6 +30,10 @@ Add PDF invoices to WooCommerce.
 * We are open to your suggestions and feedback. Thank you for using or trying out one of our plugins!
 * [Visit plugin site](https://wpfactory.com/item/pdf-invoicing-for-woocommerce/).
 
+### &#8505; More ###
+
+* The plugin is **"High-Performance Order Storage (HPOS)"** compatible.
+
 == Installation ==
 
 1. Upload the entire plugin folder to the `/wp-content/plugins/` directory.
@@ -38,10 +42,15 @@ Add PDF invoices to WooCommerce.
 
 == Changelog ==
 
+= 2.0.0 - 26/09/2023 =
+* Dev – "High-Performance Order Storage (HPOS)" compatibility.
+* Dev - Admin settings descriptions updated.
+* Dev - Minor code refactoring.
+
 = 1.9.3 - 26/09/2023 =
 * WC tested up to: 8.1.
 * Tested up to: 6.3.
-* Update plugin icon, banner.
+* Plugin icon, banner updated.
 
 = 1.9.2 - 21/06/2023 =
 * Fix - Sequential counters on fresh installs issue fixed.
@@ -144,7 +153,7 @@ Add PDF invoices to WooCommerce.
 * Dev - Content Options - HTML content filters - "Balance tags" option added (defaults to `yes`).
 * Dev - Content Options - HTML content filters - "Replace line breaks" option added (defaults to `no`).
 * Dev - Content Options - "Font" option added.
-* Dev - Shortcodes - `[prop]` - Aliases added for all properties. Now it's possible to use e.g. `[order_number]` instead of `[prop name="order_number"]`, etc. `[prop]` shortcodes replaced with aliases in doc settings default values.
+* Dev - Shortcodes - `[prop]` - Aliases added for all properties. Now it's possible to use e.g., `[order_number]` instead of `[prop name="order_number"]`, etc. `[prop]` shortcodes replaced with aliases in doc settings default values.
 * Dev - Shortcodes - `[prop]` - `order_tax_totals` option added.
 * Dev - Shortcodes - `[prop]` - `order_subtotal_incl_tax` option added.
 * Dev - Shortcodes - `[prop]` - `order_total_excl_shipping` option added.
@@ -182,7 +191,7 @@ Add PDF invoices to WooCommerce.
 * Description updated in readme.txt
 
 = 1.2.0 - 03/04/2020 =
-* Fix - Shortcodes - Orders - Bulk actions (e.g. email attachments) fixed.
+* Fix - Shortcodes - Orders - Bulk actions (e.g., email attachments) fixed.
 * Dev - Shortcodes - `[prop]` - `item_total_tax_percent` - Not applying `round()` anymore.
 * Dev - Shortcodes - `[prop]` - `order_discount` option added.
 * Dev - Shortcodes - `[prop]` - `order_discount_incl_tax` option added.

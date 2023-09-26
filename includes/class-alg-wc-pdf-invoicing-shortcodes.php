@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 1.9.0
+ * @version 2.0.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -389,15 +389,15 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * shortcode_prop.
 	 *
-	 * @version 1.5.0
+	 * @version 2.0.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] `item_` props for coupons: check if it's callable
 	 * @todo    (dev) [!] `item_` props for coupons: `get_discount()` and `get_discount_tax()`
 	 * @todo    (dev) rename `item_nr` to `order_item_nr`, etc.
-	 * @todo    (dev) data from another doc (e.g. display invoice nr in packing slip)
+	 * @todo    (dev) data from another doc (e.g., display invoice nr in packing slip)
 	 * @todo    (dev) `ucfirst()` for `order_total_in_words` (including Unicode)
-	 * @todo    (dev) separate shortcodes (e.g. `[doc]`, `[order]`, `[item]` etc.)
+	 * @todo    (dev) separate shortcodes (e.g., `[doc]`, `[order]`, `[item]` etc.)
 	 */
 	function shortcode_prop( $atts, $content = '' ) {
 		if ( ! isset( $atts['name'] ) || ( isset( $this->props[ $atts['name'] ] ) && false === $this->props[ $atts['name'] ] ) || ! isset( $this->doc_obj ) ) {
@@ -507,7 +507,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 				}
 				return $this->return_prop( $result, $atts );
 			case 'order_meta':
-				return ( isset( $atts['key'] ) ? $this->return_prop( get_post_meta( $this->order->get_id(), $atts['key'], true ), $atts ) : '' );
+				return ( isset( $atts['key'] ) ? $this->return_prop( $this->order->get_meta( $atts['key'] ), $atts ) : '' );
 			case 'order_details_email':
 				ob_start();
 				wc_get_template(

@@ -61,9 +61,9 @@ class Alg_WC_PDF_Invoicing_Admin {
 	 * @since   1.5.0
 	 *
 	 *
-	 * @todo    (desc) [!] better naming, e.g. "View" and "Download" (i.e. remove "PDFs")?
-	 * @todo    (feature) new action: print (i.e. merge and print)?
-	 * @todo    (feature) new action: archive (i.e. zip)
+	 * @todo    (desc) [!] better naming, e.g., "View" and "Download" (i.e., remove "PDFs")?
+	 * @todo    (feature) new action: print (i.e., merge and print)?
+	 * @todo    (feature) new action: archive (i.e., zip)
 	 */
 	function get_order_bulk_actions() {
 		return array(

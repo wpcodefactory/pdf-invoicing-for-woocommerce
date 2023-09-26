@@ -20,7 +20,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 	 * @todo    (dev) `str_replace( "\t", '', ... )`?
 	 * @todo    (dev) `[each_item type="fee"]`
 	 * @todo    (dev) `[each_item type="shipping"]`
-	 * @todo    (dev) better defaults, e.g. HTML style & content
+	 * @todo    (dev) better defaults, e.g., HTML style & content
 	 */
 	function alg_wc_pdf_invoicing_get_default( $option_id, $doc_id = 0 ) {
 		switch ( $option_id ) {

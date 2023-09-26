@@ -29,7 +29,7 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 	 * @todo    (feature) [!] HTML in header
 	 * @todo    (feature) 'C' image alignment
 	 * @todo    (feature) 'C' text alignment
-	 * @todo    (feature) "Line color (in content)": more params, e.g. width?
+	 * @todo    (feature) "Line color (in content)": more params, e.g., width?
 	 * @todo    (feature) add "Header text width" (in percent)?
 	 * @todo    (dev) rethink `0.75` and `0.25`
 	 * @todo    (dev) modify "Header image width": make it in percent?

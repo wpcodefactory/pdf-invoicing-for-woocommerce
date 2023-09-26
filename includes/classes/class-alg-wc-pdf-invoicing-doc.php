@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Doc Class
  *
- * @version 1.8.0
+ * @version 2.0.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -15,15 +15,27 @@ if ( ! class_exists( 'Alg_WC_PDF_Invoicing_Doc' ) ) :
 class Alg_WC_PDF_Invoicing_Doc {
 
 	/**
+	 * Public properties.
+	 *
+	 * @version 2.0.0
+	 * @since   2.0.0
+	 */
+	public $order_id;
+	public $order;
+	public $doc_id;
+	public $data;
+
+	/**
 	 * Constructor.
 	 *
-	 * @version 1.0.0
+	 * @version 2.0.0
 	 * @since   1.0.0
 	 */
 	function __construct( $order_id, $doc_id ) {
 		$this->order_id = $order_id;
+		$this->order    = wc_get_order( $order_id );
 		$this->doc_id   = $doc_id;
-		$data           = get_post_meta( $this->order_id, '_alg_wc_pdf_invoicing_data', true );
+		$data           = $this->order->get_meta( '_alg_wc_pdf_invoicing_data' );
 		$this->data     = ( ! empty( $data[ $this->doc_id ] ) ? $data[ $this->doc_id ] : false );
 	}
 
@@ -40,25 +52,25 @@ class Alg_WC_PDF_Invoicing_Doc {
 	/**
 	 * create.
 	 *
-	 * @version 1.7.0
+	 * @version 2.0.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) also save prefix and other data
-	 * @todo    (dev) also save as a separate order meta, e.g. `_alg_wc_pdf_invoicing_number`, `_alg_wc_pdf_invoicing_date`
+	 * @todo    (dev) also save as a separate order meta, e.g., `_alg_wc_pdf_invoicing_number`, `_alg_wc_pdf_invoicing_date`
 	 */
 	function create( $data ) {
 
-		$data_all_docs = get_post_meta( $this->order_id, '_alg_wc_pdf_invoicing_data', true );
+		$data_all_docs = $this->order->get_meta( '_alg_wc_pdf_invoicing_data' );
 		if ( empty( $data_all_docs ) ) {
 			$data_all_docs = array();
 		}
 		$data_all_docs[ $this->doc_id ] = $data;
-		update_post_meta( $this->order_id, '_alg_wc_pdf_invoicing_data', $data_all_docs );
+		$this->order->update_meta_data( '_alg_wc_pdf_invoicing_data', $data_all_docs );
+		$this->order->save();
 		$this->data = $data;
 
 		if ( apply_filters( 'alg_wc_pdf_invoicing_add_order_notes', true ) ) {
-			$order = wc_get_order( $this->order_id );
-			$order->add_order_note( sprintf( __( '%s #%s created.', 'pdf-invoicing-for-woocommerce' ), $this->get_doc_option( 'admin_title' ), $this->get_number() ) );
+			$this->order->add_order_note( sprintf( __( '%s #%s created.', 'pdf-invoicing-for-woocommerce' ), $this->get_doc_option( 'admin_title' ), $this->get_number() ) );
 		}
 
 		do_action( 'alg_wc_pdf_invoicing_doc_created', $this->order_id, $this );
@@ -68,24 +80,24 @@ class Alg_WC_PDF_Invoicing_Doc {
 	/**
 	 * remove.
 	 *
-	 * @version 1.7.0
+	 * @version 2.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    (dev) better function name, e.g. `delete`, `destroy`, `trash`
+	 * @todo    (dev) better function name, e.g., `delete`, `destroy`, `trash`
 	 */
 	function remove() {
 
 		if ( apply_filters( 'alg_wc_pdf_invoicing_add_order_notes', true ) ) {
-			$order = wc_get_order( $this->order_id );
-			$order->add_order_note( sprintf( __( '%s #%s deleted.', 'pdf-invoicing-for-woocommerce' ), $this->get_doc_option( 'admin_title' ), $this->get_number() ) );
+			$this->order->add_order_note( sprintf( __( '%s #%s deleted.', 'pdf-invoicing-for-woocommerce' ), $this->get_doc_option( 'admin_title' ), $this->get_number() ) );
 		}
 
-		$data_all_docs = get_post_meta( $this->order_id, '_alg_wc_pdf_invoicing_data', true );
+		$data_all_docs = $this->order->get_meta( '_alg_wc_pdf_invoicing_data' );
 		if ( empty( $data_all_docs ) ) {
 			$data_all_docs = array();
 		}
 		$data_all_docs[ $this->doc_id ] = false;
-		update_post_meta( $this->order_id, '_alg_wc_pdf_invoicing_data', $data_all_docs );
+		$this->order->update_meta_data( '_alg_wc_pdf_invoicing_data', $data_all_docs );
+		$this->order->save();
 		$this->data = false;
 
 		do_action( 'alg_wc_pdf_invoicing_doc_removed', $this->order_id, $this );

@@ -87,12 +87,12 @@ msgstr ""
 msgid "Document is not created yet."
 msgstr ""
 
-#: includes/classes/class-alg-wc-pdf-invoicing-doc.php:61
+#: includes/classes/class-alg-wc-pdf-invoicing-doc.php:73
 #, php-format
 msgid "%s #%s created."
 msgstr ""
 
-#: includes/classes/class-alg-wc-pdf-invoicing-doc.php:80
+#: includes/classes/class-alg-wc-pdf-invoicing-doc.php:91
 #, php-format
 msgid "%s #%s deleted."
 msgstr ""
@@ -442,7 +442,7 @@ msgid "recommended"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:432
-msgid "Balances tags, i.e. prevents unmatched elements."
+msgid "Balances tags, i.e., prevents unmatched elements."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:433

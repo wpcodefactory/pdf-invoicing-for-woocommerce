@@ -294,7 +294,7 @@ class Alg_WC_PDF_Invoicing_Core {
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) add notice
-	 * @todo    (dev) make optional (e.g. visible to admin but not for shop manager etc.)
+	 * @todo    (dev) make optional (e.g., visible to admin but not for shop manager etc.)
 	 */
 	function delete_doc() {
 		if ( isset( $_GET['alg-wc-pdf-invoicing-delete-doc'] ) ) {
@@ -324,7 +324,7 @@ class Alg_WC_PDF_Invoicing_Core {
 	 *
 	 * @see     https://www.setasign.com/products/fpdi/demos/concatenate-fake/
 	 *
-	 * @todo    (dev) better title and file name (i.e. not `docs.pdf`)?
+	 * @todo    (dev) better title and file name (i.e., not `docs.pdf`)?
 	 */
 	function merge_docs( $order_ids, $doc_id, $dest = 'I' ) {
 
