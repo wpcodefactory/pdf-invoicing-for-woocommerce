@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Admin Class
  *
- * @version 1.9.0
+ * @version 2.0.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,7 +17,7 @@ class Alg_WC_PDF_Invoicing_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.5.0
+	 * @version 2.0.1
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -37,15 +37,19 @@ class Alg_WC_PDF_Invoicing_Admin {
 		if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_plugin_enabled', 'yes' ) ) {
 
 			// Order list columns
-			add_filter( 'manage_edit-shop_order_columns',        array( $this, 'add_order_columns' ),    PHP_INT_MAX );
-			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'render_order_columns' ), PHP_INT_MAX, 2 );
+			add_filter( 'manage_edit-shop_order_columns',            array( $this, 'add_order_columns' ), PHP_INT_MAX );
+			add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_order_columns' ), PHP_INT_MAX );
+			add_action( 'manage_shop_order_posts_custom_column',           array( $this, 'render_order_columns' ), PHP_INT_MAX, 2 );
+			add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'render_order_columns' ), PHP_INT_MAX, 2 );
 
 			// Order edit page meta box
 			add_action( 'add_meta_boxes', array( $this, 'add_order_meta_box' ), 10, 2 );
 
 			// Orders "Bulk action"
-			add_filter( 'bulk_actions-edit-shop_order',        array( $this, 'add_order_bulk_actions' ),    PHP_INT_MAX );
-			add_filter( 'handle_bulk_actions-edit-shop_order', array( $this, 'handle_order_bulk_actions' ), PHP_INT_MAX, 3 );
+			add_filter( 'bulk_actions-edit-shop_order',            array( $this, 'add_order_bulk_actions' ), PHP_INT_MAX );
+			add_filter( 'bulk_actions-woocommerce_page_wc-orders', array( $this, 'add_order_bulk_actions' ), PHP_INT_MAX );
+			add_filter( 'handle_bulk_actions-edit-shop_order',            array( $this, 'handle_order_bulk_actions' ), PHP_INT_MAX, 3 );
+			add_filter( 'handle_bulk_actions-woocommerce_page_wc-orders', array( $this, 'handle_order_bulk_actions' ), PHP_INT_MAX, 3 );
 
 			// Scripts
 			add_action( 'admin_head', array( $this, 'add_scripts' ) );
@@ -87,7 +91,8 @@ class Alg_WC_PDF_Invoicing_Admin {
 				if ( ! in_array( $id, alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'order_bulk_actions' ) ) ) {
 					continue;
 				}
-				$actions[ "alg_wc_pdf_invoicing_{$id}_{$doc_id}" ] = $title . ': ' . alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'admin_title' );
+				$actions[ "alg_wc_pdf_invoicing_{$id}_{$doc_id}" ] = $title . ': ' .
+					alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'admin_title' );
 			}
 		}
 		return $actions;
@@ -200,39 +205,53 @@ class Alg_WC_PDF_Invoicing_Admin {
 	/**
 	 * add_order_meta_box.
 	 *
-	 * @version 1.4.0
+	 * @version 2.0.1
 	 * @since   1.4.0
 	 *
 	 * @todo    (feature) customizable title
 	 * @todo    (feature) add option to disable this
 	 */
 	function add_order_meta_box( $post_type, $post ) {
+
+		$screen = (
+			class_exists( '\Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController' ) &&
+			wc_get_container()->get( \Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+		) ? wc_get_page_screen_id( 'shop-order' ) : 'shop_order';
+
 		add_meta_box( 'alg-wc-pdf-invoicing',
 			__( 'PDF Invoicing', 'pdf-invoicing-for-woocommerce' ),
 			array( $this, 'display_order_meta_box' ),
-			'shop_order',
-			'side' );
+			$screen,
+			'side'
+		);
+
 	}
 
 	/**
 	 * display_order_meta_box.
 	 *
-	 * @version 1.4.0
+	 * @version 2.0.1
 	 * @since   1.4.0
 	 *
 	 * @todo    (feature) customizable template
 	 * @todo    (dev) nonces everywhere
 	 */
-	function display_order_meta_box( $post ) {
-		$order_id = $post->ID;
-		$order    = wc_get_order( $order_id );
-		$data     = array();
+	function display_order_meta_box( $post_or_order ) {
+
+		if ( ! ( $order = wc_get_order( $post_or_order ) ) ) {
+			return;
+		}
+
+		$data = array();
 		foreach ( apply_filters( 'alg_wc_pdf_invoicing_enabled_docs', array( '0' ) ) as $doc_id ) {
-			$data[] = '<tr><td>' .
-					implode( '</td><td>', array( alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'admin_title' ), $this->get_actions( $doc_id, $order_id, $order ) ) ) .
-				'</td></tr>';
+			$row_data = array(
+				alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'admin_title' ),
+				$this->get_actions( $doc_id, $order->get_id(), $order ),
+			);
+			$data[] = '<tr><td>' . implode( '</td><td>', $row_data ) . '</td></tr>';
 		}
 		echo '<table class="widefat striped"><tbody>' . implode( '', $data ) . '</tbody></table>';
+
 	}
 
 	/**
@@ -252,16 +271,21 @@ class Alg_WC_PDF_Invoicing_Admin {
 	/**
 	 * render_order_columns.
 	 *
-	 * @version 1.4.0
+	 * @version 2.0.1
 	 * @since   1.0.0
 	 */
-	function render_order_columns( $column, $order_id ) {
+	function render_order_columns( $column, $order_id_or_order ) {
+
+		if ( ! ( $order = wc_get_order( $order_id_or_order ) ) ) {
+			return;
+		}
+
 		foreach ( apply_filters( 'alg_wc_pdf_invoicing_enabled_docs', array( '0' ) ) as $doc_id ) {
 			if ( 'alg_wc_pdf_invoicing_doc_' . $doc_id === $column ) {
-				$order = wc_get_order( $order_id );
-				echo $this->get_actions( $doc_id, $order_id, $order );
+				echo $this->get_actions( $doc_id, $order->get_id(), $order );
 			}
 		}
+
 	}
 
 	/**

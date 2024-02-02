@@ -1,48 +1,48 @@
-#: includes/class-alg-wc-pdf-invoicing-admin.php:70
+#: includes/class-alg-wc-pdf-invoicing-admin.php:74
 msgid "View PDFs"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:71
+#: includes/class-alg-wc-pdf-invoicing-admin.php:75
 msgid "Download PDFs"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:165
+#: includes/class-alg-wc-pdf-invoicing-admin.php:170
 msgid "Download"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:166
+#: includes/class-alg-wc-pdf-invoicing-admin.php:171
 msgid "Print"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:167
+#: includes/class-alg-wc-pdf-invoicing-admin.php:172
 msgid "Delete"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:170
+#: includes/class-alg-wc-pdf-invoicing-admin.php:175
 msgid "View"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:171
-#: includes/class-alg-wc-pdf-invoicing-admin.php:191
+#: includes/class-alg-wc-pdf-invoicing-admin.php:176
+#: includes/class-alg-wc-pdf-invoicing-admin.php:196
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:190
+#: includes/class-alg-wc-pdf-invoicing-admin.php:195
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:71
 msgid "Create"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:211
+#: includes/class-alg-wc-pdf-invoicing-admin.php:222
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:47
 #: includes/settings/class-alg-wc-pdf-invoicing-settings.php:25
 msgid "PDF Invoicing"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:278
+#: includes/class-alg-wc-pdf-invoicing-admin.php:302
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:281
+#: includes/class-alg-wc-pdf-invoicing-admin.php:305
 msgid "Go Pro"
 msgstr ""
 
