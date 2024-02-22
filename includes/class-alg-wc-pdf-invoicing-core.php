@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Core Class
  *
- * @version 1.9.2
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -13,6 +13,30 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Alg_WC_PDF_Invoicing_Core' ) ) :
 
 class Alg_WC_PDF_Invoicing_Core {
+
+	/**
+	 * pdf.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $pdf;
+
+	/**
+	 * shortcodes.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $shortcodes;
+
+	/**
+	 * doc_options.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $doc_options;
 
 	/**
 	 * Constructor.
@@ -111,14 +135,14 @@ class Alg_WC_PDF_Invoicing_Core {
 	/**
 	 * get_doc_option.
 	 *
-	 * @version 1.0.0
+	 * @version 2.1.0
 	 * @since   1.0.0
 	 */
 	function get_doc_option( $doc_id, $option_id, $do_shortcode = false, $doc_obj = null ) {
 		if ( ! isset( $this->doc_options[ $doc_id ] ) ) {
 			$this->doc_options[ $doc_id ] = get_option( "alg_wc_pdf_invoicing_doc_{$doc_id}", array() );
 		}
-		$value = ( isset( $this->doc_options[ $doc_id ][ $option_id ] ) ? $this->doc_options[ $doc_id ][ $option_id ] : alg_wc_pdf_invoicing_get_default( $option_id, $doc_id ) );
+		$value = ( $this->doc_options[ $doc_id ][ $option_id ] ?? alg_wc_pdf_invoicing_get_default( $option_id, $doc_id ) );
 		return ( $do_shortcode ? $this->do_shortcode( $value, $doc_obj ) : $value );
 	}
 

@@ -15,14 +15,35 @@ if ( ! class_exists( 'Alg_WC_PDF_Invoicing_Doc' ) ) :
 class Alg_WC_PDF_Invoicing_Doc {
 
 	/**
-	 * Public properties.
+	 * order_id.
 	 *
 	 * @version 2.0.0
 	 * @since   2.0.0
 	 */
 	public $order_id;
+
+	/**
+	 * order.
+	 *
+	 * @version 2.0.0
+	 * @since   2.0.0
+	 */
 	public $order;
+
+	/**
+	 * doc_id.
+	 *
+	 * @version 2.0.0
+	 * @since   2.0.0
+	 */
 	public $doc_id;
+
+	/**
+	 * data.
+	 *
+	 * @version 2.0.0
+	 * @since   2.0.0
+	 */
 	public $data;
 
 	/**

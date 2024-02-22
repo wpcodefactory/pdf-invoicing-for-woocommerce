@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - TCPDF Class
  *
- * @version 1.8.0
+ * @version 2.1.0
  * @since   1.1.0
  *
  * @author  Algoritmika Ltd
@@ -13,6 +13,14 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Alg_WC_PDF_Invoicing_TCPDF' ) ) :
 
 class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
+
+	/**
+	 * alg_wc_pdf_invoicing_doc.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $alg_wc_pdf_invoicing_doc;
 
 	/**
 	 * Header.

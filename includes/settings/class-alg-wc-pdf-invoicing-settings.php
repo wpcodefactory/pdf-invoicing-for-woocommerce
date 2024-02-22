@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Settings
  *
- * @version 1.5.0
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,23 +17,27 @@ class Alg_WC_PDF_Invoicing_Settings extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.5.0
+	 * @version 2.1.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
+
 		$this->id    = 'alg_wc_pdf_invoicing';
 		$this->label = __( 'PDF Invoicing', 'pdf-invoicing-for-woocommerce' );
 		parent::__construct();
+
+		// Sanitization
 		add_filter( 'woocommerce_admin_settings_sanitize_option', array( $this, 'sanitize' ), PHP_INT_MAX, 3 );
+
 		// Sections
 		require_once( 'class-alg-wc-pdf-invoicing-settings-section.php' );
 		require_once( 'class-alg-wc-pdf-invoicing-settings-doc-page-formats.php' );
 		require_once( 'class-alg-wc-pdf-invoicing-settings-doc.php' );
-		$this->sections = array();
-		$this->sections['general']  = require_once( 'class-alg-wc-pdf-invoicing-settings-general.php' );
-		$this->sections['doc_0']    = new Alg_WC_PDF_Invoicing_Settings_Doc();
+		require_once( 'class-alg-wc-pdf-invoicing-settings-general.php' );
+		new Alg_WC_PDF_Invoicing_Settings_Doc();
 		do_action( 'alg_wc_pdf_invoicing_admin_doc_settings_loaded', $this );
-		$this->sections['counters'] = require_once( 'class-alg-wc-pdf-invoicing-settings-counters.php' );
+		require_once( 'class-alg-wc-pdf-invoicing-settings-counters.php' );
+
 	}
 
 	/**

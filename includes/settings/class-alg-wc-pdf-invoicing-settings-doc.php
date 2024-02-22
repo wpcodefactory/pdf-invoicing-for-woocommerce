@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Document Settings
  *
- * @version 2.0.0
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -13,6 +13,14 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Alg_WC_PDF_Invoicing_Settings_Doc' ) ) :
 
 class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Section {
+
+	/**
+	 * doc_id.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $doc_id;
 
 	/**
 	 * Constructor.

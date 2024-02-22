@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Main Class
  *
- * @version 2.0.0
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,6 +29,22 @@ final class Alg_WC_PDF_Invoicing {
 	 * @since 1.0.0
 	 */
 	public $version = ALG_WC_PDF_INVOICING_VERSION;
+
+	/**
+	 * core.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $core;
+
+	/**
+	 * admin.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $admin;
 
 	/**
 	 * @var   Alg_WC_PDF_Invoicing The single instance of the class
@@ -110,7 +126,9 @@ final class Alg_WC_PDF_Invoicing {
 	 */
 	function wc_declare_compatibility() {
 		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-			$files = ( defined( 'ALG_WC_PDF_INVOICING_FILE_FREE' ) ? array( ALG_WC_PDF_INVOICING_FILE, ALG_WC_PDF_INVOICING_FILE_FREE ) : array( ALG_WC_PDF_INVOICING_FILE ) );
+			$files = ( defined( 'ALG_WC_PDF_INVOICING_FILE_FREE' ) ?
+				array( ALG_WC_PDF_INVOICING_FILE, ALG_WC_PDF_INVOICING_FILE_FREE ) :
+				array( ALG_WC_PDF_INVOICING_FILE ) );
 			foreach ( $files as $file ) {
 				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $file, true );
 			}

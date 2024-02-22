@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.0.0
+ * @version 2.1.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -13,6 +13,94 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Alg_WC_PDF_Invoicing_Shortcodes' ) ) :
 
 class Alg_WC_PDF_Invoicing_Shortcodes {
+
+	/**
+	 * props.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $props;
+
+	/**
+	 * checkbox_counter.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $checkbox_counter;
+
+	/**
+	 * shortcode_prefix.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $shortcode_prefix;
+
+	/**
+	 * doc_obj.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $doc_obj;
+
+	/**
+	 * order.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $order;
+
+	/**
+	 * order_id.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $order_id;
+
+	/**
+	 * order_item.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $order_item;
+
+	/**
+	 * order_item_nr.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $order_item_nr;
+
+	/**
+	 * item_product.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $item_product;
+
+	/**
+	 * order_refund.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $order_refund;
+
+	/**
+	 * order_refund_nr.
+	 *
+	 * @version 2.1.0
+	 * @since   2.1.0
+	 */
+	public $order_refund_nr;
 
 	/**
 	 * Constructor.
