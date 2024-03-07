@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Core Class
  *
- * @version 2.1.0
+ * @version 2.1.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -149,7 +149,7 @@ class Alg_WC_PDF_Invoicing_Core {
 	/**
 	 * get_and_update_counter.
 	 *
-	 * @version 1.9.2
+	 * @version 2.1.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) need another solution (instead of `get_option()`): a) new table (with auto-incremental counter); b) save counter as custom post (i.e., template) option
@@ -168,8 +168,8 @@ class Alg_WC_PDF_Invoicing_Core {
 		$row = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM {$wpdb->options} WHERE option_name = %s LIMIT 1", $option ) );
 
 		// Increase (and serialize) counter
-		$counters            = ( isset( $row->option_value ) ? maybe_unserialize( $row->option_value ) : array() );
-		$counter             = ( isset( $counters[ $doc_id ] ) ? $counters[ $doc_id ] : 1 );
+		$counters            = ( isset( $row->option_value ) && '' !== $row->option_value ? maybe_unserialize( $row->option_value ) : array() );
+		$counter             = ( $counters[ $doc_id ] ?? 1 );
 		$counters[ $doc_id ] = $counter + 1;
 		$counters            = maybe_serialize( $counters );
 

@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.1.0
+ * @version 2.1.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -105,7 +105,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.6.0
+	 * @version 2.1.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) `[order_barcode_1d]` and `[order_barcode_2d]` shortcodes
@@ -152,6 +152,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 			'order_shipping_total',
 			'order_shipping_method',
 			'order_payment_method_title',
+			'order_checkout_payment_url',
 			'order_formatted_billing_address',
 			'order_formatted_shipping_address',
 			'order_billing_first_name',
@@ -477,7 +478,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * shortcode_prop.
 	 *
-	 * @version 2.0.0
+	 * @version 2.1.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] `item_` props for coupons: check if it's callable
@@ -576,6 +577,8 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 				return $this->return_prop( $this->order->get_shipping_method(), $atts );
 			case 'order_payment_method_title':
 				return $this->return_prop( $this->order->get_payment_method_title(), $atts );
+			case 'order_checkout_payment_url':
+				return $this->return_prop( $this->order->get_checkout_payment_url(), $atts );
 			case 'order_formatted_billing_address':
 				return $this->return_prop( $this->order->get_formatted_billing_address(), $atts );
 			case 'order_formatted_shipping_address':
