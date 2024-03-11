@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.1.1
+ * @version 2.1.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -105,7 +105,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.1.1
+	 * @version 2.1.2
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) `[order_barcode_1d]` and `[order_barcode_2d]` shortcodes
@@ -129,68 +129,74 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 			'page_break',
 		);
 		$prop_aliases           = array(
-			'doc_counter',
-			'doc_nr',
-			'doc_formatted_date',
+
 			'doc_author_full_name',
-			'order_number',
+			'doc_counter',
+			'doc_formatted_date',
+			'doc_nr',
+
+			'order_billing_first_name',
+			'order_billing_last_name',
+			'order_checkout_payment_url',
+			'order_details_email',
+			'order_details_table',
+			'order_discount',
+			'order_discount_incl_tax',
+			'order_discount_percent',
+			'order_discount_tax',
+			'order_formatted_billing_address',
 			'order_formatted_date_created',
+			'order_formatted_shipping_address',
+			'order_func',
+			'order_meta',
+			'order_number',
+			'order_payment_method_title',
+			'order_shipping_method',
+			'order_shipping_total',
 			'order_status',
 			'order_subtotal',
 			'order_subtotal_incl_tax',
+			'order_tax_totals',
 			'order_total',
 			'order_total_excl_shipping',
-			'order_total_in_words',
-			'order_total_tax',
-			'order_tax_totals',
 			'order_total_excl_tax',
 			'order_total_excl_tax_excl_shipping',
-			'order_discount',
-			'order_discount_incl_tax',
-			'order_discount_tax',
-			'order_discount_percent',
-			'order_shipping_total',
-			'order_shipping_method',
-			'order_payment_method_title',
-			'order_checkout_payment_url',
-			'order_formatted_billing_address',
-			'order_formatted_shipping_address',
-			'order_billing_first_name',
+			'order_total_in_words',
 			'order_total_items_count',
 			'order_total_items_qty',
-			'order_meta',
-			'order_details_email',
-			'order_details_table',
-			'order_func',
 			'order_total_refunded',
-			'order_total_tax_refunded',
 			'order_total_shipping_refunded',
-			'item_nr',
+			'order_total_tax',
+			'order_total_tax_refunded',
+
+			'item_discount',
+			'item_discount_incl_tax',
+			'item_discount_percent',
+			'item_discount_tax',
+			'item_func',
+			'item_meta',
 			'item_name',
+			'item_nr',
+			'item_product_func',
+			'item_product_id',
+			'item_product_image',
+			'item_product_meta',
+			'item_product_sku',
+			'item_product_taxonomy',
 			'item_qty',
-			'item_total',
-			'item_total_tax',
-			'item_total_incl_tax',
-			'item_total_tax_percent',
 			'item_single',
 			'item_single_incl_tax',
 			'item_subtotal',
 			'item_subtotal_tax',
-			'item_discount',
-			'item_discount_incl_tax',
-			'item_discount_tax',
-			'item_discount_percent',
-			'item_meta',
-			'item_func',
-			'item_product_id',
-			'item_product_sku',
-			'item_product_image',
-			'item_product_taxonomy',
-			'item_product_meta',
-			'item_product_func',
+			'item_total',
+			'item_total_incl_tax',
+			'item_total_tax',
+			'item_total_tax_percent',
+
 			'refund_nr',
-			'refund_total',
 			'refund_reason',
+			'refund_total',
+
 		);
 		foreach ( $shortcodes as $shortcode ) {
 			add_shortcode( $this->shortcode_prefix . $shortcode, array( $this, 'shortcode_' . $shortcode ) );
@@ -478,7 +484,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * shortcode_prop.
 	 *
-	 * @version 2.1.1
+	 * @version 2.1.2
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] `item_` props for coupons: check if it's callable
@@ -585,6 +591,8 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 				return $this->return_prop( $this->order->get_formatted_shipping_address(), $atts );
 			case 'order_billing_first_name':
 				return $this->return_prop( $this->order->get_billing_first_name(), $atts );
+			case 'order_billing_last_name':
+				return $this->return_prop( $this->order->get_billing_last_name(), $atts );
 			case 'order_total_items_count':
 				$type = ( isset( $atts['type'] ) ? explode( ',', $atts['type'] ) : 'line_item' );
 				return $this->return_prop( count( $this->order->get_items( $type ) ), $atts );
