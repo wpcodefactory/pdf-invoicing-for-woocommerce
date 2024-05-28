@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
 Tags: woocommerce, pdf, invoice, credit note, packing list
 Requires at least: 4.4
-Tested up to: 6.4
-Stable tag: 2.1.2
+Tested up to: 6.5
+Stable tag: 2.1.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -41,6 +41,13 @@ Add PDF invoices to WooCommerce.
 3. Start by visiting plugin settings at "WooCommerce > Settings > PDF Invoicing".
 
 == Changelog ==
+
+= 2.1.3 - 28/05/2024 =
+* Dev - Shortcodes - `[order_shipping_total_incl_tax]` shortcode added.
+* Dev - Shortcodes - `[order_shipping_total_excl_tax]` shortcode alias (for the `[order_shipping_total]`) added.
+* WC tested up to: 8.9
+* Tested up to: 6.5.
+* WooCommerce added to the "Requires Plugins" (plugin header).
 
 = 2.1.2 - 11/03/2024 =
 * Dev - Shortcodes - `[order_billing_last_name]` shortcode added.

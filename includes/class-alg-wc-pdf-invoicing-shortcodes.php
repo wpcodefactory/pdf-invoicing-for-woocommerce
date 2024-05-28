@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.1.2
+ * @version 2.1.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -105,7 +105,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.1.2
+	 * @version 2.1.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) `[order_barcode_1d]` and `[order_barcode_2d]` shortcodes
@@ -153,6 +153,8 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 			'order_payment_method_title',
 			'order_shipping_method',
 			'order_shipping_total',
+			'order_shipping_total_excl_tax',
+			'order_shipping_total_incl_tax',
 			'order_status',
 			'order_subtotal',
 			'order_subtotal_incl_tax',
@@ -484,7 +486,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * shortcode_prop.
 	 *
-	 * @version 2.1.2
+	 * @version 2.1.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] `item_` props for coupons: check if it's callable
@@ -578,7 +580,10 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 				$subtotal = $this->order->get_subtotal();
 				return ( 0 != $subtotal ? $this->return_prop( $this->order->get_discount_total() / $subtotal * 100, $atts ) : 0 );
 			case 'order_shipping_total':
+			case 'order_shipping_total_excl_tax':
 				return $this->return_prop( $this->order->get_shipping_total(), $atts );
+			case 'order_shipping_total_incl_tax':
+				return $this->return_prop( $this->order->get_shipping_total() + $this->order->get_shipping_tax(), $atts );
 			case 'order_shipping_method':
 				return $this->return_prop( $this->order->get_shipping_method(), $atts );
 			case 'order_payment_method_title':
