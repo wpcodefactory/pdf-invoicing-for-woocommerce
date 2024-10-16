@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Doc Class
  *
- * @version 2.0.0
+ * @version 2.2.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -211,7 +211,7 @@ class Alg_WC_PDF_Invoicing_Doc {
 	/**
 	 * get_pdf.
 	 *
-	 * @version 1.8.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 *
 	 * @see     https://tcpdf.org/
@@ -234,25 +234,8 @@ class Alg_WC_PDF_Invoicing_Doc {
 	 */
 	function get_pdf( $dest = 'I', $path = '' ) {
 
-		// `K_PATH_IMAGES` constant
-		if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_tcpdf_path_images', 'yes' ) ) {
-			$uploads_dir = wp_upload_dir();
-			defined( 'K_PATH_IMAGES' ) || define( 'K_PATH_IMAGES', $uploads_dir['basedir'] . '/' );
-		}
-
-		// TCPDF
-		if ( ! class_exists( 'TCPDF' ) ) {
-
-			// Config
-			if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_custom_tcpdf_config', 'yes' ) ) {
-				defined( 'K_TCPDF_EXTERNAL_CONFIG' ) || define( 'K_TCPDF_EXTERNAL_CONFIG', true );
-				require_once( alg_wc_pdf_invoicing()->plugin_path() . '/includes/config/tcpdf_config.php' );
-			}
-
-			// Lib
-			require_once( alg_wc_pdf_invoicing()->plugin_path() . '/assets/lib/tcpdf/tcpdf.php' );
-
-		}
+		// TCPDF class
+		Alg_WC_PDF_Invoicing::load_tcpdf_lib();
 
 		// Child TCPDF class
 		require_once( 'class-alg-wc-pdf-invoicing-tcpdf.php' );

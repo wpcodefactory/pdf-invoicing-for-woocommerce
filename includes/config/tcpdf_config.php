@@ -210,7 +210,7 @@ define('K_TITLE_MAGNIFICATION', 1.3);
 define('K_SMALL_RATIO', 2/3);
 
 /**
- * Set to true to enable the special procedure used to avoid the overlappind of symbols on Thai language.
+ * Set to true to enable the special procedure used to avoid the overlapping of symbols on Thai language.
  */
 define('K_THAI_TOPCHARS', true);
 
@@ -222,7 +222,21 @@ define('K_THAI_TOPCHARS', true);
  * @version 1.8.0
  * @since   1.8.0
  */
-define('K_TCPDF_CALLS_IN_HTML', ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_calls_in_html', 'yes' ) ));
+define( 'K_TCPDF_CALLS_IN_HTML', ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_calls_in_html', 'yes' ) ) );
+
+/**
+ * List of TCPDF methods that are allowed to be called using HTML syntax.
+ * Note: each method name must end with surrounded with | (pipe) character.
+ * The constant K_TCPDF_CALLS_IN_HTML must be set to true.
+ * IMPORTANT: For security reason, disable this feature if you are allowing user HTML content.
+ *
+ * @author  WPFactory
+ * @version 2.2.0
+ * @since   2.2.0
+ */
+if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_calls_in_html', 'yes' ) ) {
+	defined( 'K_ALLOWED_TCPDF_TAGS' ) || define( 'K_ALLOWED_TCPDF_TAGS', get_option( 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_allowed_tags', '' ) );
+}
 
 /**
  * If true and PHP version is greater than 5, then the Error() method throw new exception instead of terminating the execution.

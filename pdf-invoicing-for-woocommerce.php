@@ -3,12 +3,12 @@
 Plugin Name: PDF Invoicing for WooCommerce
 Plugin URI: https://wpfactory.com/item/pdf-invoicing-for-woocommerce/
 Description: Add PDF invoices to WooCommerce.
-Version: 2.1.4
+Version: 2.2.0
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: pdf-invoicing-for-woocommerce
 Domain Path: /langs
-WC tested up to: 9.1
+WC tested up to: 9.3
 Requires Plugins: woocommerce
 */
 
@@ -31,7 +31,7 @@ if ( 'pdf-invoicing-for-woocommerce.php' === basename( __FILE__ ) ) {
 	}
 }
 
-defined( 'ALG_WC_PDF_INVOICING_VERSION' ) || define( 'ALG_WC_PDF_INVOICING_VERSION', '2.1.4' );
+defined( 'ALG_WC_PDF_INVOICING_VERSION' ) || define( 'ALG_WC_PDF_INVOICING_VERSION', '2.2.0' );
 
 defined( 'ALG_WC_PDF_INVOICING_FILE' ) || define( 'ALG_WC_PDF_INVOICING_FILE', __FILE__ );
 
@@ -50,3 +50,13 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing' ) ) {
 }
 
 add_action( 'plugins_loaded', 'alg_wc_pdf_invoicing' );
+
+/**
+ * Early TCPDF library load.
+ *
+ * @version 2.2.0
+ * @since   2.2.0
+ */
+if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_tcpdf_early_load', 'no' ) ) {
+	Alg_WC_PDF_Invoicing::load_tcpdf_lib();
+}

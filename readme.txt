@@ -1,9 +1,9 @@
 === PDF Invoicing for WooCommerce ===
-Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
+Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas
 Tags: woocommerce, pdf, invoice, credit note, packing list
 Requires at least: 4.4
 Tested up to: 6.6
-Stable tag: 2.1.4
+Stable tag: 2.2.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,14 +42,24 @@ Add PDF invoices to WooCommerce.
 
 == Changelog ==
 
+= 2.2.0 - 16/10/2024 =
+* Dev - General - Advanced Options - "Early TCPDF load" option added (defaults to `no`).
+* Dev - General - Advanced Options - "Allowed TCPDF methods" option added (defaults to an empty string).
+* Dev - Plugin settings moved to the "WPFactory" menu.
+* Dev - "Key Manager" added.
+* Dev - "Recommendations" added.
+* Dev - TCPDF - Library updated (v6.7.6).
+* Dev - Code refactoring.
+* WC tested up to: 9.3.
+
 = 2.1.4 - 31/07/2024 =
-* WC tested up to: 9.1
+* WC tested up to: 9.1.
 * Tested up to: 6.6.
 
 = 2.1.3 - 28/05/2024 =
 * Dev - Shortcodes - `[order_shipping_total_incl_tax]` shortcode added.
 * Dev - Shortcodes - `[order_shipping_total_excl_tax]` shortcode alias (for the `[order_shipping_total]`) added.
-* WC tested up to: 8.9
+* WC tested up to: 8.9.
 * Tested up to: 6.5.
 * WooCommerce added to the "Requires Plugins" (plugin header).
 

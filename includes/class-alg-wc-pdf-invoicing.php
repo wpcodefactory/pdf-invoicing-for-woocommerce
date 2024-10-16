@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Main Class
  *
- * @version 2.1.0
+ * @version 2.2.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -73,7 +73,7 @@ final class Alg_WC_PDF_Invoicing {
 	/**
 	 * Alg_WC_PDF_Invoicing Constructor.
 	 *
-	 * @version 2.0.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 *
 	 * @access  public
@@ -85,6 +85,11 @@ final class Alg_WC_PDF_Invoicing {
 			return;
 		}
 
+		// Load libs
+		if ( is_admin() ) {
+			require_once plugin_dir_path( ALG_WC_PDF_INVOICING_FILE ) . 'vendor/autoload.php';
+		}
+
 		// Set up localisation
 		add_action( 'init', array( $this, 'localize' ) );
 
@@ -93,15 +98,45 @@ final class Alg_WC_PDF_Invoicing {
 
 		// Pro
 		if ( 'pdf-invoicing-for-woocommerce-pro.php' === basename( ALG_WC_PDF_INVOICING_FILE ) ) {
-			require_once( 'pro/class-alg-wc-pdf-invoicing-pro.php' );
+			require_once plugin_dir_path( __FILE__ ) . 'pro/class-alg-wc-pdf-invoicing-pro.php';
 		}
 
 		// Core
-		$this->core = require_once( 'class-alg-wc-pdf-invoicing-core.php' );
+		$this->core = require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-pdf-invoicing-core.php';
 
 		// Admin
 		if ( is_admin() ) {
-			$this->admin = require_once( 'class-alg-wc-pdf-invoicing-admin.php' );
+			$this->admin = require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-pdf-invoicing-admin.php';
+		}
+
+	}
+
+	/**
+	 * load_tcpdf_lib.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	static function load_tcpdf_lib() {
+
+		// `K_PATH_IMAGES` constant
+		if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_tcpdf_path_images', 'yes' ) ) {
+			$uploads_dir = wp_upload_dir();
+			defined( 'K_PATH_IMAGES' ) || define( 'K_PATH_IMAGES', $uploads_dir['basedir'] . '/' );
+		}
+
+		// TCPDF
+		if ( ! class_exists( 'TCPDF' ) ) {
+
+			// Config
+			if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_custom_tcpdf_config', 'yes' ) ) {
+				defined( 'K_TCPDF_EXTERNAL_CONFIG' ) || define( 'K_TCPDF_EXTERNAL_CONFIG', true );
+				require_once plugin_dir_path( ALG_WC_PDF_INVOICING_FILE ) . 'includes/config/tcpdf_config.php';
+			}
+
+			// Lib
+			require_once plugin_dir_path( ALG_WC_PDF_INVOICING_FILE ) . 'assets/lib/tcpdf/tcpdf.php';
+
 		}
 
 	}

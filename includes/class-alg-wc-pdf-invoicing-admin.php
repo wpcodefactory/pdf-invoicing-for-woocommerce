@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Admin Class
  *
- * @version 2.0.1
+ * @version 2.2.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,13 +17,19 @@ class Alg_WC_PDF_Invoicing_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.0.1
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
 
 		// Action links
 		add_filter( 'plugin_action_links_' . plugin_basename( alg_wc_pdf_invoicing()->plugin_file() ), array( $this, 'action_links' ) );
+
+		// "Recommendations" page
+		$this->add_cross_selling_library();
+
+		// WC Settings tab as WPFactory submenu item
+		$this->move_wc_settings_tab_to_wpfactory_menu();
 
 		// Settings
 		add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
@@ -55,6 +61,50 @@ class Alg_WC_PDF_Invoicing_Admin {
 			add_action( 'admin_head', array( $this, 'add_scripts' ) );
 
 		}
+
+	}
+
+	/**
+	 * add_cross_selling_library.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function add_cross_selling_library() {
+
+		if ( ! class_exists( '\WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling' ) ) {
+			return;
+		}
+
+		$cross_selling = new \WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling();
+		$cross_selling->setup( array( 'plugin_file_path' => ALG_WC_PDF_INVOICING_FILE ) );
+		$cross_selling->init();
+
+	}
+
+	/**
+	 * move_wc_settings_tab_to_wpfactory_menu.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function move_wc_settings_tab_to_wpfactory_menu() {
+
+		if ( ! class_exists( '\WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
+			return;
+		}
+
+		$wpfactory_admin_menu = \WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu::get_instance();
+
+		if ( ! method_exists( $wpfactory_admin_menu, 'move_wc_settings_tab_to_wpfactory_menu' ) ) {
+			return;
+		}
+
+		$wpfactory_admin_menu->move_wc_settings_tab_to_wpfactory_menu( array(
+			'wc_settings_tab_id' => 'alg_wc_pdf_invoicing',
+			'menu_title'         => __( 'PDF Invoicing', 'pdf-invoicing-for-woocommerce' ),
+			'page_title'         => __( 'PDF Invoicing', 'pdf-invoicing-for-woocommerce' ),
+		) );
 
 	}
 

@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - General Section Settings
  *
- * @version 1.8.0
+ * @version 2.2.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,9 +29,10 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.8.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 *
+	 * @todo    (dev) `alg_wc_pdf_invoicing_tcpdf_early_load`: default to `yes`?
 	 * @todo    (dev) `alg_wc_pdf_invoicing_shortcode_prefix`: better default value, e.g., `alg_wc_pdf_` or `alg_wc_pi_`?
 	 * @todo    (desc) `alg_wc_pdf_invoicing_use_print_js`
 	 */
@@ -108,17 +109,23 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 				'id'       => 'alg_wc_pdf_invoicing_use_custom_tcpdf_config',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
-				'show_if_checked' => 'option',
-				'checkboxgroup'   => 'start',
 			),
 			array(
 				'desc'     => __( 'TCPDF methods in HTML', 'pdf-invoicing-for-woocommerce' ),
-				'desc_tip' => __( 'Allow calling TCPDF methods using HTML syntax.', 'pdf-invoicing-for-woocommerce' ),
+				'desc_tip' => __( 'Allow calling TCPDF methods using HTML syntax.', 'pdf-invoicing-for-woocommerce' ) . '<br>' .
+					__( '"Use custom TCPDF config file" option must be enabled.', 'pdf-invoicing-for-woocommerce' ),
 				'id'       => 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_calls_in_html',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
-				'show_if_checked' => 'yes',
-				'checkboxgroup'   => 'end',
+			),
+			array(
+				'desc'     => sprintf( __( 'Allowed TCPDF methods, e.g.: %s', 'pdf-invoicing-for-woocommerce' ), '<code>|write1DBarcode|write2DBarcode|</code>' ) . '<br>' .
+					__( '"Use custom TCPDF config file" and "TCPDF methods in HTML" options must be enabled.', 'pdf-invoicing-for-woocommerce' ),
+				'desc_tip' => __( 'The list of TCPDF methods that are allowed to be called using HTML syntax.', 'pdf-invoicing-for-woocommerce' ) . ' ' .
+					__( 'Each method name must end with surrounded with | (pipe) character.', 'pdf-invoicing-for-woocommerce' ),
+				'id'       => 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_allowed_tags',
+				'default'  => '',
+				'type'     => 'text',
 			),
 			array(
 				'title'    => __( 'Set default images directory', 'pdf-invoicing-for-woocommerce' ),
@@ -126,6 +133,14 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 				'desc_tip' => __( 'Set TCPDF default images directory to WP upload directory.', 'pdf-invoicing-for-woocommerce' ),
 				'id'       => 'alg_wc_pdf_invoicing_tcpdf_path_images',
 				'default'  => 'yes',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Early TCPDF load', 'pdf-invoicing-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'pdf-invoicing-for-woocommerce' ),
+				'desc_tip' => __( 'Load TCPDF library as early as possible.', 'pdf-invoicing-for-woocommerce' ),
+				'id'       => 'alg_wc_pdf_invoicing_tcpdf_early_load',
+				'default'  => 'no',
 				'type'     => 'checkbox',
 			),
 			array(
