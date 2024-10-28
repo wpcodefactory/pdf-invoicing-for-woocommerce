@@ -3,7 +3,7 @@
  * tcpdf_config.php
  *
  * @author  WPFactory
- * @version 1.8.0
+ * @version 2.2.1
  * @since   1.8.0
  */
 
@@ -231,11 +231,11 @@ define( 'K_TCPDF_CALLS_IN_HTML', ( 'yes' === get_option( 'alg_wc_pdf_invoicing_u
  * IMPORTANT: For security reason, disable this feature if you are allowing user HTML content.
  *
  * @author  WPFactory
- * @version 2.2.0
+ * @version 2.2.1
  * @since   2.2.0
  */
-if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_calls_in_html', 'yes' ) ) {
-	defined( 'K_ALLOWED_TCPDF_TAGS' ) || define( 'K_ALLOWED_TCPDF_TAGS', get_option( 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_allowed_tags', '' ) );
+if ( K_TCPDF_CALLS_IN_HTML ) {
+	define( 'K_ALLOWED_TCPDF_TAGS', get_option( 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_allowed_tags', '' ) );
 }
 
 /**

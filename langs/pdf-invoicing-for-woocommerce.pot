@@ -561,7 +561,7 @@ msgid ""
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:125
-msgid "Each method name must end with surrounded with | (pipe) character."
+msgid "Each method name must be surrounded with | (pipe) characters."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:131

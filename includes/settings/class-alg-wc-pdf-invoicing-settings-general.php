@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - General Section Settings
  *
- * @version 2.2.0
+ * @version 2.2.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.2.0
+	 * @version 2.2.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `alg_wc_pdf_invoicing_tcpdf_early_load`: default to `yes`?
@@ -122,7 +122,7 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 				'desc'     => sprintf( __( 'Allowed TCPDF methods, e.g.: %s', 'pdf-invoicing-for-woocommerce' ), '<code>|write1DBarcode|write2DBarcode|</code>' ) . '<br>' .
 					__( '"Use custom TCPDF config file" and "TCPDF methods in HTML" options must be enabled.', 'pdf-invoicing-for-woocommerce' ),
 				'desc_tip' => __( 'The list of TCPDF methods that are allowed to be called using HTML syntax.', 'pdf-invoicing-for-woocommerce' ) . ' ' .
-					__( 'Each method name must end with surrounded with | (pipe) character.', 'pdf-invoicing-for-woocommerce' ),
+					__( 'Each method name must be surrounded with | (pipe) characters.', 'pdf-invoicing-for-woocommerce' ),
 				'id'       => 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_allowed_tags',
 				'default'  => '',
 				'type'     => 'text',
