@@ -1,6 +1,6 @@
 #: includes/class-alg-wc-pdf-invoicing-admin.php:105
 #: includes/class-alg-wc-pdf-invoicing-admin.php:106
-#: includes/class-alg-wc-pdf-invoicing-admin.php:272
+#: includes/class-alg-wc-pdf-invoicing-admin.php:274
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:48
 #: includes/settings/class-alg-wc-pdf-invoicing-settings.php:26
 msgid "PDF Invoicing"
@@ -31,81 +31,81 @@ msgid "View"
 msgstr ""
 
 #: includes/class-alg-wc-pdf-invoicing-admin.php:226
-#: includes/class-alg-wc-pdf-invoicing-admin.php:246
+#: includes/class-alg-wc-pdf-invoicing-admin.php:248
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:245
+#: includes/class-alg-wc-pdf-invoicing-admin.php:247
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:79
 msgid "Create"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:352
+#: includes/class-alg-wc-pdf-invoicing-admin.php:355
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:355
+#: includes/class-alg-wc-pdf-invoicing-admin.php:359
 msgid "Go Pro"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:256
 #: includes/class-alg-wc-pdf-invoicing-core.php:259
-#: includes/class-alg-wc-pdf-invoicing-core.php:265
-#: includes/class-alg-wc-pdf-invoicing-core.php:303
-#: includes/class-alg-wc-pdf-invoicing-core.php:307
-#: includes/class-alg-wc-pdf-invoicing-core.php:331
-#: includes/class-alg-wc-pdf-invoicing-core.php:335
+#: includes/class-alg-wc-pdf-invoicing-core.php:268
+#: includes/class-alg-wc-pdf-invoicing-core.php:280
+#: includes/class-alg-wc-pdf-invoicing-core.php:330
+#: includes/class-alg-wc-pdf-invoicing-core.php:340
+#: includes/class-alg-wc-pdf-invoicing-core.php:376
+#: includes/class-alg-wc-pdf-invoicing-core.php:386
 #, php-format
 msgid "Error: %s"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:256
+#: includes/class-alg-wc-pdf-invoicing-core.php:260
 msgid "Order ID not set."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:259
-#: includes/class-alg-wc-pdf-invoicing-core.php:303
+#: includes/class-alg-wc-pdf-invoicing-core.php:269
 #: includes/class-alg-wc-pdf-invoicing-core.php:331
+#: includes/class-alg-wc-pdf-invoicing-core.php:377
 msgid "Insufficient user capability."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:265
+#: includes/class-alg-wc-pdf-invoicing-core.php:281
 msgid "Document is already created."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:298
-#: includes/class-alg-wc-pdf-invoicing-core.php:326
+#: includes/class-alg-wc-pdf-invoicing-core.php:319
+#: includes/class-alg-wc-pdf-invoicing-core.php:365
 #, php-format
 msgid "Error: %s."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:298
-#: includes/class-alg-wc-pdf-invoicing-core.php:326
+#: includes/class-alg-wc-pdf-invoicing-core.php:320
+#: includes/class-alg-wc-pdf-invoicing-core.php:366
 msgid "Order ID not set"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:307
-#: includes/class-alg-wc-pdf-invoicing-core.php:335
+#: includes/class-alg-wc-pdf-invoicing-core.php:341
+#: includes/class-alg-wc-pdf-invoicing-core.php:387
 msgid "Document is not created yet."
 msgstr ""
 
-#: includes/classes/class-alg-wc-pdf-invoicing-doc.php:94
+#: includes/classes/class-alg-wc-pdf-invoicing-doc.php:97
 #, php-format
-msgid "%s #%s created."
+msgid "%1$s #%2$s created."
 msgstr ""
 
-#: includes/classes/class-alg-wc-pdf-invoicing-doc.php:112
+#: includes/classes/class-alg-wc-pdf-invoicing-doc.php:122
 #, php-format
-msgid "%s #%s deleted."
+msgid "%1$s #%2$s deleted."
 msgstr ""
 
 #: includes/functions/alg-wc-pdf-invoicing-functions-default-values.php:32
 #: includes/functions/alg-wc-pdf-invoicing-functions-default-values.php:78
-#: includes/pro/class-alg-wc-pdf-invoicing-pro.php:117
+#: includes/pro/class-alg-wc-pdf-invoicing-pro.php:119
 msgid "Invoice"
 msgstr ""
 
-#: includes/pro/class-alg-wc-pdf-invoicing-pro.php:117
+#: includes/pro/class-alg-wc-pdf-invoicing-pro.php:122
 #, php-format
 msgid "Doc %s"
 msgstr ""
@@ -115,17 +115,17 @@ msgstr ""
 msgid "Counters"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:40
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:41
 msgid "This section allows you to set current counters for each document."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:41
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:42
 msgid ""
 "Counter number will be assigned to the new document and then automatically "
 "increased."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:42
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:45
 #, php-format
 msgid "You can use counter in document settings with %s shortcode."
 msgstr ""

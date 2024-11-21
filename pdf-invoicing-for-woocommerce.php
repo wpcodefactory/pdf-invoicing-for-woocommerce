@@ -1,15 +1,17 @@
 <?php
 /*
-Plugin Name: PDF Invoicing for WooCommerce
+Plugin Name: PDF Invoices & Packing Slips Generator for WooCommerce
 Plugin URI: https://wpfactory.com/item/pdf-invoicing-for-woocommerce/
 Description: Add PDF invoices to WooCommerce.
-Version: 2.2.1
+Version: 2.2.2
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: pdf-invoicing-for-woocommerce
 Domain Path: /langs
-WC tested up to: 9.3
+WC tested up to: 9.4
 Requires Plugins: woocommerce
+License: GNU General Public License v3.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
@@ -31,7 +33,7 @@ if ( 'pdf-invoicing-for-woocommerce.php' === basename( __FILE__ ) ) {
 	}
 }
 
-defined( 'ALG_WC_PDF_INVOICING_VERSION' ) || define( 'ALG_WC_PDF_INVOICING_VERSION', '2.2.1' );
+defined( 'ALG_WC_PDF_INVOICING_VERSION' ) || define( 'ALG_WC_PDF_INVOICING_VERSION', '2.2.2' );
 
 defined( 'ALG_WC_PDF_INVOICING_FILE' ) || define( 'ALG_WC_PDF_INVOICING_FILE', __FILE__ );
 

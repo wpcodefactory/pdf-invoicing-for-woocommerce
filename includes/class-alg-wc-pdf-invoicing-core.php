@@ -253,16 +253,34 @@ class Alg_WC_PDF_Invoicing_Core {
 	function create_doc() {
 		if ( isset( $_GET['alg-wc-pdf-invoicing-create-doc'] ) ) {
 			if ( ! isset( $_GET['alg-wc-pdf-invoicing-order-id'] ) ) {
-				wp_die( sprintf( __( 'Error: %s', 'pdf-invoicing-for-woocommerce' ), __( 'Order ID not set.', 'pdf-invoicing-for-woocommerce' ) ) );
+				wp_die(
+					sprintf(
+						/* Translators: %s: Error message. */
+						__( 'Error: %s', 'pdf-invoicing-for-woocommerce' ),
+						__( 'Order ID not set.', 'pdf-invoicing-for-woocommerce' )
+					)
+				);
 			}
 			if ( ! current_user_can( 'manage_woocommerce' ) ) {
-				wp_die( sprintf( __( 'Error: %s', 'pdf-invoicing-for-woocommerce' ), __( 'Insufficient user capability.', 'pdf-invoicing-for-woocommerce' ) ) );
+				wp_die(
+					sprintf(
+						/* Translators: %s: Error message. */
+						__( 'Error: %s', 'pdf-invoicing-for-woocommerce' ),
+						__( 'Insufficient user capability.', 'pdf-invoicing-for-woocommerce' )
+					)
+				);
 			}
 			$doc_id   = intval( $_GET['alg-wc-pdf-invoicing-create-doc'] );
 			$order_id = intval( $_GET['alg-wc-pdf-invoicing-order-id'] );
 			$doc      = new Alg_WC_PDF_Invoicing_Doc( $order_id, $doc_id );
 			if ( $doc->is_created() ) {
-				wp_die( sprintf( __( 'Error: %s', 'pdf-invoicing-for-woocommerce' ), __( 'Document is already created.', 'pdf-invoicing-for-woocommerce' ) ) );
+				wp_die(
+					sprintf(
+						/* Translators: %s: Error message. */
+						__( 'Error: %s', 'pdf-invoicing-for-woocommerce' ),
+						__( 'Document is already created.', 'pdf-invoicing-for-woocommerce' )
+					)
+				);
 			}
 			$doc->create( array(
 				'author' => get_current_user_id(),
@@ -295,16 +313,34 @@ class Alg_WC_PDF_Invoicing_Core {
 	function view_doc() {
 		if ( isset( $_GET['alg-wc-pdf-invoicing-view-doc'] ) ) {
 			if ( ! isset( $_GET['alg-wc-pdf-invoicing-order-id'] ) ) {
-				wp_die( sprintf( __( 'Error: %s.', 'pdf-invoicing-for-woocommerce' ), __( 'Order ID not set', 'pdf-invoicing-for-woocommerce' ) ) );
+				wp_die(
+					sprintf(
+						/* Translators: %s: Error message. */
+						__( 'Error: %s.', 'pdf-invoicing-for-woocommerce' ),
+						__( 'Order ID not set', 'pdf-invoicing-for-woocommerce' )
+					)
+				);
 			}
 			$doc_id   = intval( $_GET['alg-wc-pdf-invoicing-view-doc'] );
 			$order_id = intval( $_GET['alg-wc-pdf-invoicing-order-id'] );
 			if ( ! current_user_can( 'manage_woocommerce' ) && ! $this->is_current_user_order( $order_id ) ) {
-				wp_die( sprintf( __( 'Error: %s', 'pdf-invoicing-for-woocommerce' ), __( 'Insufficient user capability.', 'pdf-invoicing-for-woocommerce' ) ) );
+				wp_die(
+					sprintf(
+						/* Translators: %s: Error message. */
+						__( 'Error: %s', 'pdf-invoicing-for-woocommerce' ),
+						__( 'Insufficient user capability.', 'pdf-invoicing-for-woocommerce' )
+					)
+				);
 			}
 			$doc = new Alg_WC_PDF_Invoicing_Doc( $order_id, $doc_id );
 			if ( ! $doc->is_created() ) {
-				wp_die( sprintf( __( 'Error: %s', 'pdf-invoicing-for-woocommerce' ), __( 'Document is not created yet.', 'pdf-invoicing-for-woocommerce' ) ) );
+				wp_die(
+					sprintf(
+						/* Translators: %s: Error message. */
+						__( 'Error: %s', 'pdf-invoicing-for-woocommerce' ),
+						__( 'Document is not created yet.', 'pdf-invoicing-for-woocommerce' )
+					)
+				);
 			}
 			echo $doc->get_pdf( ( isset( $_GET['alg-wc-pdf-invoicing-pdf-dest'] ) ? wc_clean( $_GET['alg-wc-pdf-invoicing-pdf-dest'] ) : 'I' ) );
 			die();
@@ -323,16 +359,34 @@ class Alg_WC_PDF_Invoicing_Core {
 	function delete_doc() {
 		if ( isset( $_GET['alg-wc-pdf-invoicing-delete-doc'] ) ) {
 			if ( ! isset( $_GET['alg-wc-pdf-invoicing-order-id'] ) ) {
-				wp_die( sprintf( __( 'Error: %s.', 'pdf-invoicing-for-woocommerce' ), __( 'Order ID not set', 'pdf-invoicing-for-woocommerce' ) ) );
+				wp_die(
+					sprintf(
+						/* Translators: %s: Error message. */
+						__( 'Error: %s.', 'pdf-invoicing-for-woocommerce' ),
+						__( 'Order ID not set', 'pdf-invoicing-for-woocommerce' )
+					)
+				);
 			}
 			$doc_id   = intval( $_GET['alg-wc-pdf-invoicing-delete-doc'] );
 			$order_id = intval( $_GET['alg-wc-pdf-invoicing-order-id'] );
 			if ( ! current_user_can( 'manage_woocommerce' ) ) {
-				wp_die( sprintf( __( 'Error: %s', 'pdf-invoicing-for-woocommerce' ), __( 'Insufficient user capability.', 'pdf-invoicing-for-woocommerce' ) ) );
+				wp_die(
+					sprintf(
+						/* Translators: %s: Error message. */
+						__( 'Error: %s', 'pdf-invoicing-for-woocommerce' ),
+						__( 'Insufficient user capability.', 'pdf-invoicing-for-woocommerce' )
+					)
+				);
 			}
 			$doc = new Alg_WC_PDF_Invoicing_Doc( $order_id, $doc_id );
 			if ( ! $doc->is_created() ) {
-				wp_die( sprintf( __( 'Error: %s', 'pdf-invoicing-for-woocommerce' ), __( 'Document is not created yet.', 'pdf-invoicing-for-woocommerce' ) ) );
+				wp_die(
+					sprintf(
+						/* Translators: %s: Error message. */
+						__( 'Error: %s', 'pdf-invoicing-for-woocommerce' ),
+						__( 'Document is not created yet.', 'pdf-invoicing-for-woocommerce' )
+					)
+				);
 			}
 			$doc->remove();
 			wp_safe_redirect( remove_query_arg( array( 'alg-wc-pdf-invoicing-delete-doc', 'alg-wc-pdf-invoicing-order-id' ) ) );

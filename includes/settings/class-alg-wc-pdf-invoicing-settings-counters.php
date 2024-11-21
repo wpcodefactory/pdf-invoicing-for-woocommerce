@@ -37,10 +37,14 @@ class Alg_WC_PDF_Invoicing_Settings_Counters extends Alg_WC_PDF_Invoicing_Settin
 		$counters_settings = array(
 			array(
 				'title'    => __( 'Counters', 'pdf-invoicing-for-woocommerce' ),
-				'desc'     => __( 'This section allows you to set current counters for each document.', 'pdf-invoicing-for-woocommerce' ) . ' ' .
+				'desc'     =>
+					__( 'This section allows you to set current counters for each document.', 'pdf-invoicing-for-woocommerce' ) . ' ' .
 					__( 'Counter number will be assigned to the new document and then automatically increased.', 'pdf-invoicing-for-woocommerce' ) . ' ' .
-					sprintf( __( 'You can use counter in document settings with %s shortcode.', 'pdf-invoicing-for-woocommerce' ),
-						'<code>[prop name="doc_counter"]</code>' ),
+					sprintf(
+						/* Translators: %s: Shortcode name. */
+						__( 'You can use counter in document settings with %s shortcode.', 'pdf-invoicing-for-woocommerce' ),
+						'<code>[prop name="doc_counter"]</code>'
+					),
 				'type'     => 'title',
 				'id'       => 'alg_wc_pdf_invoicing_counters_options',
 			),

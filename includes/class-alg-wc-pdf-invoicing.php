@@ -12,14 +12,6 @@ defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_WC_PDF_Invoicing' ) ) :
 
-/**
- * Main Alg_WC_PDF_Invoicing Class
- *
- * @version 1.3.0
- * @since   1.0.0
- *
- * @class   Alg_WC_PDF_Invoicing
- */
 final class Alg_WC_PDF_Invoicing {
 
 	/**
@@ -47,13 +39,15 @@ final class Alg_WC_PDF_Invoicing {
 	public $admin;
 
 	/**
+	 * instance.
+	 *
 	 * @var   Alg_WC_PDF_Invoicing The single instance of the class
 	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
 
 	/**
-	 * Main Alg_WC_PDF_Invoicing Instance
+	 * Main Alg_WC_PDF_Invoicing Instance.
 	 *
 	 * Ensures only one instance of Alg_WC_PDF_Invoicing is loaded or can be loaded.
 	 *
@@ -148,7 +142,11 @@ final class Alg_WC_PDF_Invoicing {
 	 * @since   1.3.0
 	 */
 	function localize() {
-		load_plugin_textdomain( 'pdf-invoicing-for-woocommerce', false, dirname( plugin_basename( ALG_WC_PDF_INVOICING_FILE ) ) . '/langs/' );
+		load_plugin_textdomain(
+			'pdf-invoicing-for-woocommerce',
+			false,
+			dirname( plugin_basename( ALG_WC_PDF_INVOICING_FILE ) ) . '/langs/'
+		);
 	}
 
 	/**
@@ -161,11 +159,17 @@ final class Alg_WC_PDF_Invoicing {
 	 */
 	function wc_declare_compatibility() {
 		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-			$files = ( defined( 'ALG_WC_PDF_INVOICING_FILE_FREE' ) ?
+			$files = (
+				defined( 'ALG_WC_PDF_INVOICING_FILE_FREE' ) ?
 				array( ALG_WC_PDF_INVOICING_FILE, ALG_WC_PDF_INVOICING_FILE_FREE ) :
-				array( ALG_WC_PDF_INVOICING_FILE ) );
+				array( ALG_WC_PDF_INVOICING_FILE )
+			);
 			foreach ( $files as $file ) {
-				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $file, true );
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
+					'custom_order_tables',
+					$file,
+					true
+				);
 			}
 		}
 	}

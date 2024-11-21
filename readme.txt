@@ -1,9 +1,9 @@
-=== PDF Invoicing for WooCommerce ===
+=== PDF Invoices & Packing Slips Generator for WooCommerce ===
 Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas
 Tags: woocommerce, pdf, invoice, credit note, packing list
 Requires at least: 4.4
-Tested up to: 6.6
-Stable tag: 2.2.1
+Tested up to: 6.7
+Stable tag: 2.2.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -41,6 +41,15 @@ Add PDF invoices to WooCommerce.
 3. Start by visiting plugin settings at "WooCommerce > Settings > PDF Invoicing".
 
 == Changelog ==
+
+= 2.2.2 - 21/11/2024 =
+* Dev - Security - Output escaped.
+* Dev - Recommendations - Library updated.
+* Dev - Coding standards improved.
+* Dev - Code refactoring.
+* WC tested up to: 9.4.
+* Tested up to: 6.7.
+* Plugin name updated.
 
 = 2.2.1 - 28/10/2024 =
 * Dev - Admin settings descriptions updated.

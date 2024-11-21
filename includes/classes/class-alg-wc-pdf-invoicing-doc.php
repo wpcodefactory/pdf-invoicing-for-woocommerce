@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Doc Class
  *
- * @version 2.2.0
+ * @version 2.2.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -73,7 +73,7 @@ class Alg_WC_PDF_Invoicing_Doc {
 	/**
 	 * create.
 	 *
-	 * @version 2.0.0
+	 * @version 2.2.2
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) also save prefix and other data
@@ -91,7 +91,14 @@ class Alg_WC_PDF_Invoicing_Doc {
 		$this->data = $data;
 
 		if ( apply_filters( 'alg_wc_pdf_invoicing_add_order_notes', true ) ) {
-			$this->order->add_order_note( sprintf( __( '%s #%s created.', 'pdf-invoicing-for-woocommerce' ), $this->get_doc_option( 'admin_title' ), $this->get_number() ) );
+			$this->order->add_order_note(
+				sprintf(
+					/* Translators: %1$s: Document title, %2$s: Document number. */
+					__( '%1$s #%2$s created.', 'pdf-invoicing-for-woocommerce' ),
+					$this->get_doc_option( 'admin_title' ),
+					$this->get_number()
+				)
+			);
 		}
 
 		do_action( 'alg_wc_pdf_invoicing_doc_created', $this->order_id, $this );
@@ -101,7 +108,7 @@ class Alg_WC_PDF_Invoicing_Doc {
 	/**
 	 * remove.
 	 *
-	 * @version 2.0.0
+	 * @version 2.2.2
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) better function name, e.g., `delete`, `destroy`, `trash`
@@ -109,7 +116,14 @@ class Alg_WC_PDF_Invoicing_Doc {
 	function remove() {
 
 		if ( apply_filters( 'alg_wc_pdf_invoicing_add_order_notes', true ) ) {
-			$this->order->add_order_note( sprintf( __( '%s #%s deleted.', 'pdf-invoicing-for-woocommerce' ), $this->get_doc_option( 'admin_title' ), $this->get_number() ) );
+			$this->order->add_order_note(
+				sprintf(
+					/* Translators: %1$s: Document title, %2$s: Document number. */
+					__( '%1$s #%2$s deleted.', 'pdf-invoicing-for-woocommerce' ),
+					$this->get_doc_option( 'admin_title' ),
+					$this->get_number()
+				)
+			);
 		}
 
 		$data_all_docs = $this->order->get_meta( '_alg_wc_pdf_invoicing_data' );
