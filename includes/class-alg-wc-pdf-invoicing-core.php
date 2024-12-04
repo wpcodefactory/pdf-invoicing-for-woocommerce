@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Core Class
  *
- * @version 2.1.1
+ * @version 2.2.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -307,11 +307,13 @@ class Alg_WC_PDF_Invoicing_Core {
 	/**
 	 * view_doc.
 	 *
-	 * @version 1.3.0
+	 * @version 2.2.3
 	 * @since   1.0.0
 	 */
 	function view_doc() {
 		if ( isset( $_GET['alg-wc-pdf-invoicing-view-doc'] ) ) {
+
+			// Require order ID
 			if ( ! isset( $_GET['alg-wc-pdf-invoicing-order-id'] ) ) {
 				wp_die(
 					sprintf(
@@ -321,9 +323,16 @@ class Alg_WC_PDF_Invoicing_Core {
 					)
 				);
 			}
+
+			// Doc ID and order ID
 			$doc_id   = intval( $_GET['alg-wc-pdf-invoicing-view-doc'] );
 			$order_id = intval( $_GET['alg-wc-pdf-invoicing-order-id'] );
-			if ( ! current_user_can( 'manage_woocommerce' ) && ! $this->is_current_user_order( $order_id ) ) {
+
+			// Check user capability
+			if (
+				! current_user_can( 'manage_woocommerce' ) &&
+				! $this->is_current_user_order( $order_id )
+			) {
 				wp_die(
 					sprintf(
 						/* Translators: %s: Error message. */
@@ -332,7 +341,11 @@ class Alg_WC_PDF_Invoicing_Core {
 					)
 				);
 			}
+
+			// Doc
 			$doc = new Alg_WC_PDF_Invoicing_Doc( $order_id, $doc_id );
+
+			// Require doc to be created
 			if ( ! $doc->is_created() ) {
 				wp_die(
 					sprintf(
@@ -342,7 +355,28 @@ class Alg_WC_PDF_Invoicing_Core {
 					)
 				);
 			}
-			echo $doc->get_pdf( ( isset( $_GET['alg-wc-pdf-invoicing-pdf-dest'] ) ? wc_clean( $_GET['alg-wc-pdf-invoicing-pdf-dest'] ) : 'I' ) );
+
+			// "Min Max Step Quantity Limits Manager for WooCommerce" plugin compatibility
+			if (
+				function_exists( 'alg_wc_pq' ) &&
+				! empty( alg_wc_pq()->core ) &&
+				PHP_INT_MAX === has_filter(
+					'init',
+					array( alg_wc_pq()->core, 'float_stock_amount' )
+				)
+			) {
+				alg_wc_pq()->core->float_stock_amount();
+			}
+
+			// Output
+			echo $doc->get_pdf(
+				(
+					isset( $_GET['alg-wc-pdf-invoicing-pdf-dest'] ) ?
+					wc_clean( $_GET['alg-wc-pdf-invoicing-pdf-dest'] ) :
+					'I'
+				)
+			);
+
 			die();
 		}
 	}

@@ -51,10 +51,10 @@ msgstr ""
 #: includes/class-alg-wc-pdf-invoicing-core.php:259
 #: includes/class-alg-wc-pdf-invoicing-core.php:268
 #: includes/class-alg-wc-pdf-invoicing-core.php:280
-#: includes/class-alg-wc-pdf-invoicing-core.php:330
-#: includes/class-alg-wc-pdf-invoicing-core.php:340
-#: includes/class-alg-wc-pdf-invoicing-core.php:376
-#: includes/class-alg-wc-pdf-invoicing-core.php:386
+#: includes/class-alg-wc-pdf-invoicing-core.php:339
+#: includes/class-alg-wc-pdf-invoicing-core.php:353
+#: includes/class-alg-wc-pdf-invoicing-core.php:410
+#: includes/class-alg-wc-pdf-invoicing-core.php:420
 #, php-format
 msgid "Error: %s"
 msgstr ""
@@ -64,8 +64,8 @@ msgid "Order ID not set."
 msgstr ""
 
 #: includes/class-alg-wc-pdf-invoicing-core.php:269
-#: includes/class-alg-wc-pdf-invoicing-core.php:331
-#: includes/class-alg-wc-pdf-invoicing-core.php:377
+#: includes/class-alg-wc-pdf-invoicing-core.php:340
+#: includes/class-alg-wc-pdf-invoicing-core.php:411
 msgid "Insufficient user capability."
 msgstr ""
 
@@ -73,19 +73,19 @@ msgstr ""
 msgid "Document is already created."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:319
-#: includes/class-alg-wc-pdf-invoicing-core.php:365
+#: includes/class-alg-wc-pdf-invoicing-core.php:321
+#: includes/class-alg-wc-pdf-invoicing-core.php:399
 #, php-format
 msgid "Error: %s."
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:320
-#: includes/class-alg-wc-pdf-invoicing-core.php:366
+#: includes/class-alg-wc-pdf-invoicing-core.php:322
+#: includes/class-alg-wc-pdf-invoicing-core.php:400
 msgid "Order ID not set"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-core.php:341
-#: includes/class-alg-wc-pdf-invoicing-core.php:387
+#: includes/class-alg-wc-pdf-invoicing-core.php:354
+#: includes/class-alg-wc-pdf-invoicing-core.php:421
 msgid "Document is not created yet."
 msgstr ""
 
