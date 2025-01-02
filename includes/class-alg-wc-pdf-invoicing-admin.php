@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Admin Class
  *
- * @version 2.2.2
+ * @version 2.2.4
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,7 +17,7 @@ class Alg_WC_PDF_Invoicing_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.2.0
+	 * @version 2.2.4
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -56,11 +56,75 @@ class Alg_WC_PDF_Invoicing_Admin {
 			add_filter( 'bulk_actions-woocommerce_page_wc-orders', array( $this, 'add_order_bulk_actions' ), PHP_INT_MAX );
 			add_filter( 'handle_bulk_actions-edit-shop_order',            array( $this, 'handle_order_bulk_actions' ), PHP_INT_MAX, 3 );
 			add_filter( 'handle_bulk_actions-woocommerce_page_wc-orders', array( $this, 'handle_order_bulk_actions' ), PHP_INT_MAX, 3 );
+			add_action( 'admin_footer', array( $this, 'bulk_actions_js' ) );
 
 			// Scripts
 			add_action( 'admin_head', array( $this, 'add_scripts' ) );
 
 		}
+
+	}
+
+	/**
+	 * bulk_actions_js.
+	 *
+	 * @version 2.2.4
+	 * @since   2.2.4
+	 */
+	function bulk_actions_js() {
+
+		// Check option
+		if ( 'yes' !== get_option( 'alg_wc_pdf_invoicing_view_pdfs_new_tab', 'no' ) ) {
+			return;
+		}
+
+		// Check current screen
+		if (
+			! ( $current_screen = get_current_screen() ) ||
+			! in_array(
+				$current_screen->id,
+				array(
+					'edit-shop_order',
+					'woocommerce_page_wc-orders',
+				)
+			)
+		) {
+			return;
+		}
+
+		// Check if "View PDFs" exists
+		$do_view_pdf_exists = false;
+		if ( version_compare( PHP_VERSION, '5.3.0', '>=' ) ) {
+			foreach ( apply_filters( 'alg_wc_pdf_invoicing_enabled_docs', array( '0' ) ) as $doc_id ) {
+				if ( in_array( 'view', alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'order_bulk_actions' ) ) ) {
+					$do_view_pdf_exists = true;
+					break;
+				}
+			}
+		}
+		if ( ! $do_view_pdf_exists ) {
+			return;
+		}
+
+		// Script
+		?>
+		<script>
+			jQuery( document ).ready( function () {
+				jQuery( '#posts-filter, #wc-orders-filter' ).submit( function ( e ) {
+					e.preventDefault();
+					var value = jQuery( '#bulk-action-selector-top' ).val().substring( 0, 26 );
+					var is_view_pdf = ( 'alg_wc_pdf_invoicing_view_' === value );
+					if ( is_view_pdf ) {
+						jQuery( this ).prop( 'target', '_blank' );
+					}
+					this.submit();
+					if ( is_view_pdf ) {
+						jQuery( this ).prop( 'target', '_self' );
+					}
+				} );
+			} );
+		</script>
+		<?php
 
 	}
 

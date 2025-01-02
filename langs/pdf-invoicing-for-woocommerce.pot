@@ -1,50 +1,50 @@
-#: includes/class-alg-wc-pdf-invoicing-admin.php:105
-#: includes/class-alg-wc-pdf-invoicing-admin.php:106
-#: includes/class-alg-wc-pdf-invoicing-admin.php:274
+#: includes/class-alg-wc-pdf-invoicing-admin.php:169
+#: includes/class-alg-wc-pdf-invoicing-admin.php:170
+#: includes/class-alg-wc-pdf-invoicing-admin.php:338
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:48
 #: includes/settings/class-alg-wc-pdf-invoicing-settings.php:26
 msgid "PDF Invoicing"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:124
+#: includes/class-alg-wc-pdf-invoicing-admin.php:188
 msgid "View PDFs"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:125
+#: includes/class-alg-wc-pdf-invoicing-admin.php:189
 msgid "Download PDFs"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:220
+#: includes/class-alg-wc-pdf-invoicing-admin.php:284
 msgid "Download"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:221
+#: includes/class-alg-wc-pdf-invoicing-admin.php:285
 msgid "Print"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:222
+#: includes/class-alg-wc-pdf-invoicing-admin.php:286
 msgid "Delete"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:225
+#: includes/class-alg-wc-pdf-invoicing-admin.php:289
 msgid "View"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:226
-#: includes/class-alg-wc-pdf-invoicing-admin.php:248
+#: includes/class-alg-wc-pdf-invoicing-admin.php:290
+#: includes/class-alg-wc-pdf-invoicing-admin.php:312
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:247
+#: includes/class-alg-wc-pdf-invoicing-admin.php:311
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:79
 msgid "Create"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:355
+#: includes/class-alg-wc-pdf-invoicing-admin.php:419
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-pdf-invoicing-admin.php:359
+#: includes/class-alg-wc-pdf-invoicing-admin.php:423
 msgid "Go Pro"
 msgstr ""
 
@@ -159,6 +159,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:140
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:148
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:157
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:170
 msgid "Enable"
 msgstr ""
 
@@ -596,6 +597,14 @@ msgstr ""
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:158
 #, php-format
 msgid "Use monospace font in \"%s\" and \"%s\" admin options fields."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:169
+msgid "View PDFs in a new tab"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:171
+msgid "For the \"Bulk actions > View PDFs\" option."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:80

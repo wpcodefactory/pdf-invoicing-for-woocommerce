@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - General Section Settings
  *
- * @version 2.2.1
+ * @version 2.2.4
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.2.1
+	 * @version 2.2.4
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `alg_wc_pdf_invoicing_tcpdf_early_load`: default to `yes`?
@@ -162,6 +162,14 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 						__( 'Footer HTML content', 'pdf-invoicing-for-woocommerce' )
 					),
 				'id'       => 'alg_wc_pdf_invoicing_use_monospace_font',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'View PDFs in a new tab', 'pdf-invoicing-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'pdf-invoicing-for-woocommerce' ),
+				'desc_tip' => __( 'For the "Bulk actions > View PDFs" option.', 'pdf-invoicing-for-woocommerce' ),
+				'id'       => 'alg_wc_pdf_invoicing_view_pdfs_new_tab',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),
