@@ -3,12 +3,13 @@
 Plugin Name: PDF Invoices & Packing Slips Generator for WooCommerce
 Plugin URI: https://wpfactory.com/item/pdf-invoicing-for-woocommerce/
 Description: Add PDF invoices to WooCommerce.
-Version: 2.2.4
+Version: 2.3.0
 Author: WPFactory
 Author URI: https://wpfactory.com
+Requires at least: 4.4
 Text Domain: pdf-invoicing-for-woocommerce
 Domain Path: /langs
-WC tested up to: 9.5
+WC tested up to: 9.9
 Requires Plugins: woocommerce
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -26,18 +27,21 @@ if ( 'pdf-invoicing-for-woocommerce.php' === basename( __FILE__ ) ) {
 	$plugin = 'pdf-invoicing-for-woocommerce-pro/pdf-invoicing-for-woocommerce-pro.php';
 	if (
 		in_array( $plugin, (array) get_option( 'active_plugins', array() ), true ) ||
-		( is_multisite() && array_key_exists( $plugin, (array) get_site_option( 'active_sitewide_plugins', array() ) ) )
+		(
+			is_multisite() &&
+			array_key_exists( $plugin, (array) get_site_option( 'active_sitewide_plugins', array() ) )
+		)
 	) {
 		defined( 'ALG_WC_PDF_INVOICING_FILE_FREE' ) || define( 'ALG_WC_PDF_INVOICING_FILE_FREE', __FILE__ );
 		return;
 	}
 }
 
-defined( 'ALG_WC_PDF_INVOICING_VERSION' ) || define( 'ALG_WC_PDF_INVOICING_VERSION', '2.2.4' );
+defined( 'ALG_WC_PDF_INVOICING_VERSION' ) || define( 'ALG_WC_PDF_INVOICING_VERSION', '2.3.0' );
 
 defined( 'ALG_WC_PDF_INVOICING_FILE' ) || define( 'ALG_WC_PDF_INVOICING_FILE', __FILE__ );
 
-require_once( 'includes/class-alg-wc-pdf-invoicing.php' );
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-alg-wc-pdf-invoicing.php';
 
 if ( ! function_exists( 'alg_wc_pdf_invoicing' ) ) {
 	/**

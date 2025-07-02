@@ -34,7 +34,11 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 	function __construct( $doc_id = 0 ) {
 		$this->doc_id = $doc_id;
 		$this->id     = 'doc_' . $this->doc_id;
-		$this->desc   = sprintf( __( 'Doc: %s', 'pdf-invoicing-for-woocommerce' ), alg_wc_pdf_invoicing()->core->get_doc_option( $this->doc_id, 'admin_title' ) );
+		$this->desc   = sprintf(
+			/* Translators: %s: Document title. */
+			__( 'Doc: %s', 'pdf-invoicing-for-woocommerce' ),
+			alg_wc_pdf_invoicing()->core->get_doc_option( $this->doc_id, 'admin_title' )
+		);
 		parent::__construct();
 	}
 
@@ -56,7 +60,11 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 	function get_settings() {
 		return array(
 			array(
-				'title'    => sprintf( __( '%s Options', 'pdf-invoicing-for-woocommerce' ), $this->desc ),
+				'title'    => sprintf(
+					/* Translators: %s: Document title. */
+					__( '%s Options', 'pdf-invoicing-for-woocommerce' ),
+					$this->desc
+				),
 				'type'     => 'title',
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}_general_options",
 			),
@@ -192,7 +200,11 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 			array(
 				'title'    => __( 'Page background image', 'pdf-invoicing-for-woocommerce' ),
 				'desc_tip' => __( 'You can use shortcodes here.', 'pdf-invoicing-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Path in %s', 'pdf-invoicing-for-woocommerce' ), '<code>' . $this->get_uploads_dir() . '</code>' ),
+				'desc'     => sprintf(
+					/* Translators: %s: Directory path. */
+					__( 'Path in %s', 'pdf-invoicing-for-woocommerce' ),
+					'<code>' . $this->get_uploads_dir() . '</code>'
+				),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[page_background_img]",
 				'default'  => alg_wc_pdf_invoicing_get_default( 'page_background_img' ),
 				'type'     => 'text',
@@ -202,7 +214,11 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 			array(
 				'title'    => __( 'Page foreground image', 'pdf-invoicing-for-woocommerce' ),
 				'desc_tip' => __( 'You can use shortcodes here.', 'pdf-invoicing-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Path in %s', 'pdf-invoicing-for-woocommerce' ), '<code>' . $this->get_uploads_dir() . '</code>' ),
+				'desc'     => sprintf(
+					/* Translators: %s: Directory path. */
+					__( 'Path in %s', 'pdf-invoicing-for-woocommerce' ),
+					'<code>' . $this->get_uploads_dir() . '</code>'
+				),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[page_foreground_img]",
 				'default'  => alg_wc_pdf_invoicing_get_default( 'page_foreground_img' ),
 				'type'     => 'text',
@@ -228,7 +244,11 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 			array(
 				'title'    => __( 'Header image', 'pdf-invoicing-for-woocommerce' ),
 				'desc_tip' => __( 'You can use shortcodes here.', 'pdf-invoicing-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Path in %s', 'pdf-invoicing-for-woocommerce' ), '<code>' . $this->get_uploads_dir() . '</code>' ),
+				'desc'     => sprintf(
+					/* Translators: %s: Directory path. */
+					__( 'Path in %s', 'pdf-invoicing-for-woocommerce' ),
+					'<code>' . $this->get_uploads_dir() . '</code>'
+				),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[header_img]",
 				'default'  => alg_wc_pdf_invoicing_get_default( 'header_img' ),
 				'type'     => 'text',
@@ -330,7 +350,11 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 			array(
 				'title'    => __( 'Footer HTML content', 'pdf-invoicing-for-woocommerce' ),
 				'desc_tip' => __( 'You can use shortcodes here.', 'pdf-invoicing-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Available placeholders: %s.', 'pdf-invoicing-for-woocommerce' ), '<code>%page_num%</code>, <code>%total_pages%</code>' ),
+				'desc'     => sprintf(
+					/* Translators: %s: Placeholder list. */
+					__( 'Available placeholders: %s.', 'pdf-invoicing-for-woocommerce' ),
+					'<code>%page_num%</code>, <code>%total_pages%</code>'
+				),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[footer_text]",
 				'default'  => alg_wc_pdf_invoicing_get_default( 'footer_text' ),
 				'type'     => 'textarea',
@@ -437,9 +461,17 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 			array(
 				'title'    => __( 'HTML content filters', 'pdf-invoicing-for-woocommerce' ),
 				'desc'     => __( 'Balance tags', 'pdf-invoicing-for-woocommerce' ) . ' (' . __( 'recommended', 'pdf-invoicing-for-woocommerce' ) . ')',
-				'desc_tip' => __( 'Balances tags, i.e., prevents unmatched elements.', 'pdf-invoicing-for-woocommerce' ) . '<br>' .
-					sprintf( __( 'Uses WordPress %s function.', 'pdf-invoicing-for-woocommerce' ),
-						'<a href="https://developer.wordpress.org/reference/functions/force_balance_tags/" target="_blank"><code>force_balance_tags()</code></a>' ),
+				'desc_tip' => (
+					__( 'Balances tags, i.e., prevents unmatched elements.', 'pdf-invoicing-for-woocommerce' ) .
+					'<br>' .
+					sprintf(
+						/* Translators: %s: Function page link. */
+						__( 'Uses WordPress %s function.', 'pdf-invoicing-for-woocommerce' ),
+						'<a href="https://developer.wordpress.org/reference/functions/force_balance_tags/" target="_blank">' .
+							'<code>force_balance_tags()</code>' .
+						'</a>'
+					)
+				),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[html_content_force_balance_tags]",
 				'default'  => alg_wc_pdf_invoicing_get_default( 'html_content_force_balance_tags' ),
 				'type'     => 'checkbox',
@@ -447,10 +479,21 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 			),
 			array(
 				'desc'     => __( 'Replace line breaks', 'pdf-invoicing-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Replaces double line breaks with paragraph elements, and all remaining line breaks with %s tag.', 'pdf-invoicing-for-woocommerce' ),
-						'<code>' . esc_html( '<br>' ) . '</code>' ) . '<br>' .
-					sprintf( __( 'Uses WordPress %s function.', 'pdf-invoicing-for-woocommerce' ),
-						'<a href="https://developer.wordpress.org/reference/functions/wpautop/" target="_blank"><code>wpautop()</code></a>' ),
+				'desc_tip' => (
+					sprintf(
+						/* Translators: %s: HTML line break tag. */
+						__( 'Replaces double line breaks with paragraph elements, and all remaining line breaks with %s tag.', 'pdf-invoicing-for-woocommerce' ),
+						'<code>' . esc_html( '<br>' ) . '</code>'
+					) .
+					'<br>' .
+					sprintf(
+						/* Translators: %s: Function page link. */
+						__( 'Uses WordPress %s function.', 'pdf-invoicing-for-woocommerce' ),
+						'<a href="https://developer.wordpress.org/reference/functions/wpautop/" target="_blank">' .
+							'<code>wpautop()</code>' .
+						'</a>'
+					)
+				),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[html_content_wpautop]",
 				'default'  => alg_wc_pdf_invoicing_get_default( 'html_content_wpautop' ),
 				'type'     => 'checkbox',

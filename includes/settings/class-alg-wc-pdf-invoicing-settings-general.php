@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - General Section Settings
  *
- * @version 2.2.4
+ * @version 2.3.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,7 +29,7 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.2.4
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `alg_wc_pdf_invoicing_tcpdf_early_load`: default to `yes`?
@@ -119,8 +119,15 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 				'type'     => 'checkbox',
 			),
 			array(
-				'desc'     => sprintf( __( 'Allowed TCPDF methods, e.g.: %s', 'pdf-invoicing-for-woocommerce' ), '<code>|write1DBarcode|write2DBarcode|</code>' ) . '<br>' .
-					__( '"Use custom TCPDF config file" and "TCPDF methods in HTML" options must be enabled.', 'pdf-invoicing-for-woocommerce' ),
+				'desc'     => (
+					sprintf(
+						/* Translators: %s: Example. */
+						__( 'Allowed TCPDF methods, e.g.: %s', 'pdf-invoicing-for-woocommerce' ),
+						'<code>|write1DBarcode|write2DBarcode|</code>'
+					) .
+					'<br>' .
+					__( '"Use custom TCPDF config file" and "TCPDF methods in HTML" options must be enabled.', 'pdf-invoicing-for-woocommerce' )
+				),
 				'desc_tip' => __( 'The list of TCPDF methods that are allowed to be called using HTML syntax.', 'pdf-invoicing-for-woocommerce' ) . ' ' .
 					__( 'Each method name must be surrounded with | (pipe) characters.', 'pdf-invoicing-for-woocommerce' ),
 				'id'       => 'alg_wc_pdf_invoicing_use_custom_tcpdf_config_allowed_tags',
@@ -146,8 +153,11 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 			array(
 				'title'    => __( 'Use Print.js', 'pdf-invoicing-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'pdf-invoicing-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Use %s library for printing PDF documents.', 'pdf-invoicing-for-woocommerce' ),
-					'<a href="https://printjs.crabbly.com/" target="_blank">Print.js</a>' ),
+				'desc_tip' => sprintf(
+					/* Translators: %s: Site link. */
+					__( 'Use %s library for printing PDF documents.', 'pdf-invoicing-for-woocommerce' ),
+					'<a href="https://printjs.crabbly.com/" target="_blank">Print.js</a>'
+				),
 				'id'       => 'alg_wc_pdf_invoicing_use_print_js',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
@@ -155,12 +165,14 @@ class Alg_WC_PDF_Invoicing_Settings_General extends Alg_WC_PDF_Invoicing_Setting
 			array(
 				'title'    => __( 'Use monospace font', 'pdf-invoicing-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'pdf-invoicing-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Use monospace font in "%s" and "%s" admin options fields.', 'pdf-invoicing-for-woocommerce' ),
-						__( 'HTML style', 'pdf-invoicing-for-woocommerce' ),
-						__( 'HTML content', 'pdf-invoicing-for-woocommerce' ),
-						__( 'Header text', 'pdf-invoicing-for-woocommerce' ),
-						__( 'Footer HTML content', 'pdf-invoicing-for-woocommerce' )
-					),
+				'desc_tip' => sprintf(
+					/* Translators: %1$s: Option name, %2$s: Option name, %3$s: Option name, %4$s: Option name. */
+					__( 'Use monospace font in "%1$s", "%2$s", "%3$s" and "%4$s" admin options fields.', 'pdf-invoicing-for-woocommerce' ),
+					__( 'HTML style', 'pdf-invoicing-for-woocommerce' ),
+					__( 'HTML content', 'pdf-invoicing-for-woocommerce' ),
+					__( 'Header text', 'pdf-invoicing-for-woocommerce' ),
+					__( 'Footer HTML content', 'pdf-invoicing-for-woocommerce' )
+				),
 				'id'       => 'alg_wc_pdf_invoicing_use_monospace_font',
 				'default'  => 'no',
 				'type'     => 'checkbox',

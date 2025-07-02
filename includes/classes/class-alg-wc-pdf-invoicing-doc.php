@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Doc Class
  *
- * @version 2.2.2
+ * @version 2.3.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -225,7 +225,7 @@ class Alg_WC_PDF_Invoicing_Doc {
 	/**
 	 * get_pdf.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 *
 	 * @see     https://tcpdf.org/
@@ -252,15 +252,15 @@ class Alg_WC_PDF_Invoicing_Doc {
 		Alg_WC_PDF_Invoicing::load_tcpdf_lib();
 
 		// Child TCPDF class
-		require_once( 'class-alg-wc-pdf-invoicing-tcpdf.php' );
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-pdf-invoicing-tcpdf.php';
 
 		// Suppress errors
 		$do_suppress_errors = ( 'yes' === get_option( 'alg_wc_pdf_invoicing_suppress_errors', 'yes' ) );
 		if ( $do_suppress_errors ) {
-			if ( 0 == ( $error_level = error_reporting() ) ) {
+			if ( 0 == ( $error_level = error_reporting() ) ) { // phpcs:ignore WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting
 				$do_suppress_errors = false;
 			} else {
-				error_reporting( 0 );
+				error_reporting( 0 ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting
 			}
 		}
 
@@ -318,7 +318,7 @@ class Alg_WC_PDF_Invoicing_Doc {
 
 		// Suppress errors rollback
 		if ( $do_suppress_errors ) {
-			error_reporting( $error_level );
+			error_reporting( $error_level ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting
 		}
 
 	}

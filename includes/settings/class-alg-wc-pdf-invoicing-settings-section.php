@@ -37,8 +37,15 @@ class Alg_WC_PDF_Invoicing_Settings_Section {
 	 * @since   1.0.0
 	 */
 	function __construct() {
-		add_filter( 'woocommerce_get_sections_alg_wc_pdf_invoicing',              array( $this, 'settings_section' ) );
-		add_filter( 'woocommerce_get_settings_alg_wc_pdf_invoicing_' . $this->id, array( $this, 'get_settings' ), PHP_INT_MAX );
+		add_filter(
+			'woocommerce_get_sections_alg_wc_pdf_invoicing',
+			array( $this, 'settings_section' )
+		);
+		add_filter(
+			'woocommerce_get_settings_alg_wc_pdf_invoicing_' . $this->id,
+			array( $this, 'get_settings' ),
+			PHP_INT_MAX
+		);
 	}
 
 	/**
@@ -102,7 +109,11 @@ class Alg_WC_PDF_Invoicing_Settings_Section {
 			if ( 'wc-' === substr( $status_slug, 0, 3 ) ) {
 				$status_slug = substr( $status_slug, 3 );
 			}
-			$hooks[ 'woocommerce_order_status_' . $status_slug ] = sprintf( __( 'On order status %s', 'pdf-invoicing-for-woocommerce' ), $status_name );
+			$hooks[ 'woocommerce_order_status_' . $status_slug ] = sprintf(
+				/* Translators: %s: Order status name. */
+				__( 'On order status %s', 'pdf-invoicing-for-woocommerce' ),
+				$status_name
+			);
 		}
 		return $hooks;
 	}
@@ -131,8 +142,11 @@ class Alg_WC_PDF_Invoicing_Settings_Section {
 	 * @todo    (desc) improve
 	 */
 	function get_fonts_desc() {
-		return sprintf( __( 'If you are having issues displaying your language specific letters, select "%s" font.', 'pdf-invoicing-for-woocommerce' ),
-			'DejaVu Sans (Unicode)' );
+		return sprintf(
+			/* Translators: %s: Font name. */
+			__( 'If you are having issues displaying your language specific letters, select "%s" font.', 'pdf-invoicing-for-woocommerce' ),
+			'DejaVu Sans (Unicode)'
+		);
 	}
 
 }

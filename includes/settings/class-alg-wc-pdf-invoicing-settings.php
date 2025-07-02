@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Settings
  *
- * @version 2.1.0
+ * @version 2.3.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,7 +17,7 @@ class Alg_WC_PDF_Invoicing_Settings extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.1.0
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -30,13 +30,13 @@ class Alg_WC_PDF_Invoicing_Settings extends WC_Settings_Page {
 		add_filter( 'woocommerce_admin_settings_sanitize_option', array( $this, 'sanitize' ), PHP_INT_MAX, 3 );
 
 		// Sections
-		require_once( 'class-alg-wc-pdf-invoicing-settings-section.php' );
-		require_once( 'class-alg-wc-pdf-invoicing-settings-doc-page-formats.php' );
-		require_once( 'class-alg-wc-pdf-invoicing-settings-doc.php' );
-		require_once( 'class-alg-wc-pdf-invoicing-settings-general.php' );
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-pdf-invoicing-settings-section.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-pdf-invoicing-settings-doc-page-formats.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-pdf-invoicing-settings-doc.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-pdf-invoicing-settings-general.php';
 		new Alg_WC_PDF_Invoicing_Settings_Doc();
 		do_action( 'alg_wc_pdf_invoicing_admin_doc_settings_loaded', $this );
-		require_once( 'class-alg-wc-pdf-invoicing-settings-counters.php' );
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-pdf-invoicing-settings-counters.php';
 
 	}
 
@@ -112,12 +112,13 @@ class Alg_WC_PDF_Invoicing_Settings extends WC_Settings_Page {
 	/**
 	 * admin_notices_settings_reset_success.
 	 *
-	 * @version 1.0.0
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 */
 	function admin_notices_settings_reset_success() {
-		echo '<div class="notice notice-success is-dismissible"><p><strong>' .
-			__( 'Your settings have been reset.', 'pdf-invoicing-for-woocommerce' ) . '</strong></p></div>';
+		echo '<div class="notice notice-warning is-dismissible"><p><strong>' .
+			esc_html__( 'Your settings have been reset.', 'pdf-invoicing-for-woocommerce' ) .
+		'</strong></p></div>';
 	}
 
 	/**

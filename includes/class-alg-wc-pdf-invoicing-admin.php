@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Admin Class
  *
- * @version 2.2.4
+ * @version 2.3.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -17,19 +17,22 @@ class Alg_WC_PDF_Invoicing_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.2.4
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
 
 		// Action links
-		add_filter( 'plugin_action_links_' . plugin_basename( alg_wc_pdf_invoicing()->plugin_file() ), array( $this, 'action_links' ) );
+		add_filter(
+			'plugin_action_links_' . plugin_basename( alg_wc_pdf_invoicing()->plugin_file() ),
+			array( $this, 'action_links' )
+		);
 
 		// "Recommendations" page
-		$this->add_cross_selling_library();
+		add_action( 'init', array( $this, 'add_cross_selling_library' ) );
 
 		// WC Settings tab as WPFactory submenu item
-		$this->move_wc_settings_tab_to_wpfactory_menu();
+		add_action( 'init', array( $this, 'move_wc_settings_tab_to_wpfactory_menu' ) );
 
 		// Settings
 		add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
@@ -59,7 +62,7 @@ class Alg_WC_PDF_Invoicing_Admin {
 			add_action( 'admin_footer', array( $this, 'bulk_actions_js' ) );
 
 			// Scripts
-			add_action( 'admin_head', array( $this, 'add_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'add_scripts' ) );
 
 		}
 
@@ -149,7 +152,7 @@ class Alg_WC_PDF_Invoicing_Admin {
 	/**
 	 * move_wc_settings_tab_to_wpfactory_menu.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   2.2.0
 	 */
 	function move_wc_settings_tab_to_wpfactory_menu() {
@@ -167,7 +170,11 @@ class Alg_WC_PDF_Invoicing_Admin {
 		$wpfactory_admin_menu->move_wc_settings_tab_to_wpfactory_menu( array(
 			'wc_settings_tab_id' => 'alg_wc_pdf_invoicing',
 			'menu_title'         => __( 'PDF Invoicing', 'pdf-invoicing-for-woocommerce' ),
-			'page_title'         => __( 'PDF Invoicing', 'pdf-invoicing-for-woocommerce' ),
+			'page_title'         => __( 'PDF Invoices & Packing Slips Generator for WooCommerce', 'pdf-invoicing-for-woocommerce' ),
+			'plugin_icon'        => array(
+				'get_url_method'    => 'wporg_plugins_api',
+				'wporg_plugin_slug' => 'pdf-invoicing-for-woocommerce',
+			),
 		) );
 
 	}
@@ -199,14 +206,19 @@ class Alg_WC_PDF_Invoicing_Admin {
 	function add_order_bulk_actions( $actions ) {
 		foreach ( $this->get_order_bulk_actions() as $id => $title ) {
 			foreach ( apply_filters( 'alg_wc_pdf_invoicing_enabled_docs', array( '0' ) ) as $doc_id ) {
-				if ( in_array( $id, array( 'view', 'download' ) ) && version_compare( PHP_VERSION, '5.3.0', '<' ) ) {
+				if (
+					in_array( $id, array( 'view', 'download' ) ) &&
+					version_compare( PHP_VERSION, '5.3.0', '<' )
+				) {
 					continue;
 				}
 				if ( ! in_array( $id, alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'order_bulk_actions' ) ) ) {
 					continue;
 				}
-				$actions[ "alg_wc_pdf_invoicing_{$id}_{$doc_id}" ] = $title . ': ' .
-					alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'admin_title' );
+				$actions[ "alg_wc_pdf_invoicing_{$id}_{$doc_id}" ] = (
+					$title . ': ' .
+					alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'admin_title' )
+				);
 			}
 		}
 		return $actions;
@@ -244,18 +256,22 @@ class Alg_WC_PDF_Invoicing_Admin {
 	/**
 	 * add_scripts.
 	 *
-	 * @version 1.4.0
+	 * @version 2.3.0
 	 * @since   1.4.0
-	 *
-	 * @see     https://printjs.crabbly.com/
-	 *
-	 * @todo    (dev) redo this
-	 * @todo    (dev) local copy
-	 * @todo    (dev) css?
 	 */
 	function add_scripts() {
+		/**
+		 * @see https://printjs.crabbly.com/
+		 * @see https://printjs-4de6.kxcdn.com/print.min.js
+		 */
 		if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_print_js', 'yes' ) ) {
-			echo '<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>';
+			wp_enqueue_script(
+				'alg-wc-pdf-invoicing-print',
+				alg_wc_pdf_invoicing()->plugin_url() . '/assets/js/print.min.js',
+				array(),
+				alg_wc_pdf_invoicing()->version,
+				true
+			);
 		}
 	}
 
@@ -330,9 +346,13 @@ class Alg_WC_PDF_Invoicing_Admin {
 	function add_order_meta_box( $post_type, $post ) {
 
 		$screen = (
-			class_exists( '\Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController' ) &&
-			wc_get_container()->get( \Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
-		) ? wc_get_page_screen_id( 'shop-order' ) : 'shop_order';
+			(
+				class_exists( '\Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController' ) &&
+				wc_get_container()->get( \Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+			) ?
+			wc_get_page_screen_id( 'shop-order' ) :
+			'shop_order'
+		);
 
 		add_meta_box( 'alg-wc-pdf-invoicing',
 			__( 'PDF Invoicing', 'pdf-invoicing-for-woocommerce' ),
@@ -415,25 +435,28 @@ class Alg_WC_PDF_Invoicing_Admin {
 	 */
 	function action_links( $links ) {
 		$custom_links = array();
+
 		$custom_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_pdf_invoicing' ) . '">' .
 			__( 'Settings', 'pdf-invoicing-for-woocommerce' ) .
 		'</a>';
+
 		if ( 'pdf-invoicing-for-woocommerce.php' === basename( alg_wc_pdf_invoicing()->plugin_file() ) ) {
 			$custom_links[] = '<a target="_blank" style="font-weight: bold; color: green;" href="https://wpfactory.com/item/pdf-invoicing-for-woocommerce/">' .
 				__( 'Go Pro', 'pdf-invoicing-for-woocommerce' ) .
 			'</a>';
 		}
+
 		return array_merge( $custom_links, $links );
 	}
 
 	/**
 	 * add_woocommerce_settings_tab.
 	 *
-	 * @version 1.0.0
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 */
 	function add_woocommerce_settings_tab( $settings ) {
-		$settings[] = require_once( 'settings/class-alg-wc-pdf-invoicing-settings.php' );
+		$settings[] = require_once plugin_dir_path( __FILE__ ) . 'settings/class-alg-wc-pdf-invoicing-settings.php';
 		return $settings;
 	}
 

@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Functions
  *
- * @version 1.4.0
+ * @version 2.3.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -98,7 +98,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_lt' ) ) {
 	/**
 	 * alg_wc_pdf_invoicing_number_to_words_lt.
 	 *
-	 * @version 1.3.0
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 *
 	 * @return  string
@@ -167,11 +167,21 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_lt' ) ) {
 		}
 
 		if ( ( $number >= 0 && (int) $number < 0 ) || (int) $number < 0 - PHP_INT_MAX ) {
-			// overflow
-			trigger_error(
-				'alg_wc_pdf_invoicing_number_to_words_lt only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX,
-				E_USER_WARNING
-			);
+			// Overflow
+			if (
+				function_exists( 'wc_get_logger' ) &&
+				( $logger = wc_get_logger() )
+			) {
+				$logger->error(
+					sprintf(
+						/* Translators: %1$s: Function name, %2$d: The largest integer supported in this build of PHP. */
+						__( '%1$s only accepts numbers between -%2$d and %2$d.', 'pdf-invoicing-for-woocommerce' ),
+						'alg_wc_pdf_invoicing_number_to_words_lt()',
+						PHP_INT_MAX
+					),
+					array( 'source' => 'pdf-invoicing-for-woocommerce' )
+				);
+			}
 			return false;
 		}
 
