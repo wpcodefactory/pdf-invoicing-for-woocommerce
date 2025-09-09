@@ -2,10 +2,10 @@
 /**
  * PDF Invoicing for WooCommerce - Admin Class
  *
- * @version 2.3.0
+ * @version 2.4.0
  * @since   1.0.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,7 +17,7 @@ class Alg_WC_PDF_Invoicing_Admin {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.3.0
+	 * @version 2.4.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -41,6 +41,18 @@ class Alg_WC_PDF_Invoicing_Admin {
 		if ( get_option( 'alg_wc_pdf_invoicing_version', '' ) !== alg_wc_pdf_invoicing()->version ) {
 			add_action( 'admin_init', array( $this, 'version_updated' ) );
 		}
+
+		// Enqueue admin scripts and styles
+		add_action(
+			'admin_enqueue_scripts',
+			array( $this, 'enqueue_admin_scripts_and_styles' )
+		);
+
+		// Hooks the Rich Text Editor field into WooCommerce settings API
+		add_action(
+			'woocommerce_admin_field_alg_wc_text_editor',
+			array( $this, 'generate_text_editor_html' )
+		);
 
 		// Core
 		if ( 'yes' === get_option( 'alg_wc_pdf_invoicing_plugin_enabled', 'yes' ) ) {
@@ -468,6 +480,151 @@ class Alg_WC_PDF_Invoicing_Admin {
 	 */
 	function version_updated() {
 		update_option( 'alg_wc_pdf_invoicing_version', alg_wc_pdf_invoicing()->version );
+	}
+
+	/**
+	 * Enqueue admin scripts and styles.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 *
+	 * @todo    (v2.4.0) check `$_GET['section']` as well?
+	 * @todo    (v2.4.0) test with the "Custom Emails" plugin?
+	 */
+	function enqueue_admin_scripts_and_styles() {
+
+		if (
+			! isset( $_GET['page'], $_GET['tab'] ) ||
+			'wc-settings'          !== sanitize_text_field( wp_unslash( $_GET['page'] ) ) ||
+			'alg_wc_pdf_invoicing' !== sanitize_text_field( wp_unslash( $_GET['tab'] ) )
+		) {
+			return;
+		}
+
+		$min = ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ? '' : '.min' );
+
+		// Enqueue CSS for the admin pages
+		wp_enqueue_style(
+			'alg-wc-pdf-invoicing-admin',
+			alg_wc_pdf_invoicing()->plugin_url() . '/includes/css/alg-wc-pdf-invoicing-admin' . $min . '.css',
+			array(),
+			alg_wc_pdf_invoicing()->version
+		);
+
+		// Enqueue JS for the admin pages
+		wp_enqueue_script(
+			'alg-wc-pdf-invoicing-admin',
+			alg_wc_pdf_invoicing()->plugin_url() . '/includes/js/alg-wc-pdf-invoicing-admin' . $min . '.js',
+			array( 'jquery' ),
+			alg_wc_pdf_invoicing()->version,
+			true
+		);
+
+		// Localize the script to pass PHP data to JavaScript
+		wp_localize_script(
+			'alg-wc-pdf-invoicing-admin',
+			'alg_wc_pdf_invoicing_admin_js',
+			array(
+				'shortcodes'      => $this->generate_shortcode_list_html(),
+				'shortcodes_text' => __( 'Shortcodes', 'pdf-invoicing-for-woocommerce' )
+			)
+		);
+
+	}
+
+	/**
+	 * Generate Rich Text Editor HTML.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 */
+	function generate_text_editor_html( $value ) {
+		$option_value = $value['value'];
+
+		// Get the description and tooltip HTML for the field
+		$field_description = WC_Admin_Settings::get_field_description( $value );
+		$description       = $field_description['description'];
+		$tooltip_html      = $field_description['tooltip_html'];
+
+		$custom_attributes = array();
+
+		if ( ! empty( $value['custom_attributes'] ) && is_array( $value['custom_attributes'] ) ) {
+			foreach ( $value['custom_attributes'] as $attribute => $attribute_value ) {
+				$custom_attributes[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
+			}
+		}
+		?>
+		<tr class="<?php echo esc_attr( $value['row_class'] ); ?>">
+			<th scope="row" class="titledesc">
+				<label for="<?php echo esc_attr( $value['id'] ); ?>">
+					<?php echo esc_html( $value['title'] ); ?><?php echo $tooltip_html; ?>
+				</label>
+			</th>
+			<td
+				class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?> alg-wc-text-editor"
+			>
+				<?php echo $description; ?>
+				<div <?php echo implode( ' ', $custom_attributes ); ?>>
+					<?php
+					$editor_id  = sanitize_html_class( $value['id'] );
+					$editor_css = $value['css'];
+
+					$settings = array(
+						'textarea_name' => $value['field_name'],
+						'editor_class'  => $value['class'] . ' ' . $editor_id,
+						'editor_css'    => "<style>.{$editor_id}.wp-editor-area { {$editor_css} }</style>"
+					);
+
+					add_filter(
+						'tiny_mce_before_init',
+						function ( $init ) use ( $editor_id, $editor_css ) {
+							$init['body_class']    = $editor_id;
+							$init['content_style'] = 'body.' . $editor_id . ' {' . $editor_css . '}';
+
+							return $init;
+						}
+					);
+
+					wp_editor( htmlspecialchars_decode( $option_value, ENT_QUOTES ), $editor_id, $settings );
+					?>
+				</div>
+			</td>
+		</tr>
+		<?php
+	}
+
+	/**
+	 * Generate shortcode list.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 */
+	function generate_shortcode_list_html( $shortcodes = array() ) {
+		$default_shortcodes = alg_wc_pdf_invoicing()->core->shortcodes->shortcodes   ?? array();
+		$prop_alias         = alg_wc_pdf_invoicing()->core->shortcodes->prop_aliases ?? array();
+
+		$shortcodes = ! empty( $shortcodes ) ? $shortcodes : array_merge( $default_shortcodes, $prop_alias );
+
+		$html = '<div class="alg-wc-shortcode-list">';
+		$html .= '<input' .
+			' type="text"' .
+			' class="alg-wc-shortcode-search"' .
+			' placeholder="' . __( 'Search for a shortcode&hellip;', 'pdf-invoicing-for-woocommerce' ) . '"' .
+		'>';
+		$html .= '<ul>';
+
+		foreach ( $shortcodes as $shortcode ) {
+			$html .= sprintf(
+				'<li data-shortcode="[%1$s]">[%2$s]</li>',
+				esc_attr( alg_wc_pdf_invoicing()->core->shortcodes->shortcode_prefix . $shortcode ),
+				esc_html( alg_wc_pdf_invoicing()->core->shortcodes->shortcode_prefix . $shortcode )
+			);
+		}
+
+		$html .= '</ul>';
+		$html .= '</div>';
+
+		return $html;
 	}
 
 }

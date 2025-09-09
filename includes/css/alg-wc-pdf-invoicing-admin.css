@@ -1,0 +1,91 @@
+/**
+ * PDF Invoicing for WooCommerce - Admin CSS
+ *
+ * @version 2.4.0
+ * @since   2.4.0
+ *
+ * @author  WPFactory
+ */
+
+/* Text editor */
+.woocommerce table.form-table .alg-wc-text-editor textarea {
+	width: 100%;
+}
+
+.alg-wc-text-editor textarea {
+	font-family: inherit;
+}
+
+.alg-wc-text-editor [readonly="readonly"] textarea,
+.alg-wc-text-editor [readonly="readonly"] .mce-edit-area {
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+/* Shortcodes dropdown */
+.alg-wc-shortcode-wrap {
+	position: relative;
+}
+
+.alg-wc-shortcode-button.button-secondary {
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	vertical-align: middle;
+	display: flex;
+	align-items: center;
+	min-height: 30px;
+	flex-direction: row-reverse;
+	padding: 0 10px 0 5px;
+}
+
+.alg-wc-shortcode-button.button-secondary > span {
+	padding-right: 3px;
+}
+
+.alg-wc-shortcode-wrap.wp-editor-container .alg-wc-shortcode-button.button-secondary {
+	top: 2px;
+	right: 0;
+}
+
+.alg-rich-text-editor .wp-editor-container {
+	position: relative;
+}
+
+.alg-wc-shortcode-list {
+	z-index: 999;
+	display: none;
+	max-width: 450px;
+	border: 1px solid #b5bfc9;
+	border-radius: 6px;
+	background: #fff;
+	position: absolute;
+	top: 36px;
+	right: 0;
+	width: 80%;
+}
+
+.alg-wc-shortcode-search {
+	width: calc(100% - 10px) !important;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	margin-top: 5px;
+}
+
+.alg-wc-shortcode-list ul {
+	margin: 40px 0 0 0;
+	height: 220px;
+	overflow: auto;
+}
+
+.alg-wc-shortcode-list li {
+	margin: 0;
+	padding: 10px 10px;
+	cursor: pointer;
+	border-bottom: 1px solid #b5bfc9;
+}
+
+.alg-wc-shortcode-list li:last-child {
+	border: none;
+}

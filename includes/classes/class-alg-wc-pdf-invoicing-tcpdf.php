@@ -5,7 +5,7 @@
  * @version 2.1.0
  * @since   1.1.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -58,7 +58,7 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 					$headerfont = $this->getHeaderFont();
 					$headerdata = $this->getHeaderData();
 					$this->y = $this->header_margin;
-					// Algoritmika start
+					// WPFactory start
 					switch ( $paligns ) {
 						case 'RL':
 						case 'RR':
@@ -69,7 +69,7 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 							$this->x = ( $this->rtl ? $this->w - $this->original_rMargin : $this->original_lMargin );
 							break;
 					}
-					// Algoritmika end
+					// WPFactory end
 					if (($headerdata['logo']) AND ($headerdata['logo'] != K_BLANK_IMAGE)) {
 						$imgtype = TCPDF_IMAGES::getImageFileType(K_PATH_IMAGES.$headerdata['logo']);
 						if (($imgtype == 'eps') OR ($imgtype == 'ai')) {
@@ -85,7 +85,7 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 					}
 					$cell_height = $this->getCellHeight($headerfont[2] / $this->k);
 					// set starting margin for text data cell
-					// Algoritmika start
+					// WPFactory start
 					switch ( $paligns ) {
 						case 'RL':
 							$header_x = ( $this->getRTL() ? $this->original_rMargin : $this->original_lMargin );
@@ -104,7 +104,7 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 							$cw       = $this->w - $this->original_lMargin - $this->original_rMargin - ($headerdata['logo_width'] * 1.1);
 							break;
 					}
-					// Algoritmika end
+					// WPFactory end
 					$this->SetTextColorArray($this->header_text_color);
 					// header title
 					$this->SetFont($headerfont[0], 'B', $headerfont[2] + 1);

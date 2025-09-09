@@ -2,10 +2,10 @@
 /**
  * PDF Invoicing for WooCommerce - Document Settings
  *
- * @version 2.1.0
+ * @version 2.4.0
  * @since   1.0.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -45,7 +45,7 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.0.0
+	 * @version 2.4.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) [!] `order_bulk_actions`: better desc?
@@ -415,8 +415,10 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 				'desc_tip' => __( 'You can use shortcodes here.', 'pdf-invoicing-for-woocommerce' ),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[html_content]",
 				'default'  => alg_wc_pdf_invoicing_get_default( 'html_content' ),
-				'type'     => 'textarea',
-				'css'      => 'width:100%;height:800px;' . ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_monospace_font', 'no' ) ? 'font-family:monospace;' : '' ),
+				'type'     => 'alg_wc_text_editor',
+				'class'    => 'alg-wc-shortcode-field',
+				'css'      => 'height:800px;' . ( 'yes' === get_option( 'alg_wc_pdf_invoicing_use_monospace_font', 'no' ) ? 'font-family:monospace;' : '' ),
+				'alg_wc_pi_sanitize' => 'textarea',
 			),
 			array(
 				'title'    => __( 'Line color', 'pdf-invoicing-for-woocommerce' ),

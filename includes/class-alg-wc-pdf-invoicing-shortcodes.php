@@ -2,10 +2,10 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.1.3
+ * @version 2.4.0
  * @since   1.0.0
  *
- * @author  Algoritmika Ltd
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -37,6 +37,22 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @since   2.1.0
 	 */
 	public $shortcode_prefix;
+
+	/**
+	 * shortcodes.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 */
+	public $shortcodes;
+
+	/**
+	 * prop_aliases.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 */
+	public $prop_aliases;
 
 	/**
 	 * doc_obj.
@@ -105,7 +121,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.1.3
+	 * @version 2.4.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) `[order_barcode_1d]` and `[order_barcode_2d]` shortcodes
@@ -115,20 +131,27 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @todo    (feature) `[group_items]` shortcode?
 	 */
 	function __construct() {
-		$this->props            = array();
+
+		$this->props = array();
+
 		$this->checkbox_counter = 0;
+
 		$this->shortcode_prefix = get_option( 'alg_wc_pdf_invoicing_shortcode_prefix', '' );
-		$shortcodes             = array(
+
+		$this->shortcodes = array(
 			'prop',
 			'each_item',
 			'each_refund',
 			'if',
 			'clear',
+			'break',
+			'paragraph',
 			'current_time',
 			'checkbox',
 			'page_break',
 		);
-		$prop_aliases           = array(
+
+		$this->prop_aliases = array(
 
 			'doc_author_full_name',
 			'doc_counter',
@@ -200,12 +223,15 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 			'refund_total',
 
 		);
-		foreach ( $shortcodes as $shortcode ) {
+
+		foreach ( $this->shortcodes as $shortcode ) {
 			add_shortcode( $this->shortcode_prefix . $shortcode, array( $this, 'shortcode_' . $shortcode ) );
 		}
-		foreach ( $prop_aliases as $prop_alias ) {
+
+		foreach ( $this->prop_aliases as $prop_alias ) {
 			add_shortcode( $this->shortcode_prefix . $prop_alias, array( $this, 'shortcode_prop_alias' ) );
 		}
+
 	}
 
 	/**
@@ -285,6 +311,26 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 */
 	function shortcode_clear( $atts, $content = '' ) {
 		return '<p></p>';
+	}
+
+	/**
+	 * shortcode_break.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 */
+	function shortcode_break( $atts, $content = '' ) {
+		return '<br>';
+	}
+
+	/**
+	 * shortcode_paragraph.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 */
+	function shortcode_paragraph( $atts, $content = '' ) {
+		return '<p>' . do_shortcode( $content ) . '</p>';
 	}
 
 	/**

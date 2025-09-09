@@ -2,10 +2,10 @@
 /**
  * PDF Invoicing for WooCommerce - Functions - Default Values
  *
- * @version 1.8.0
+ * @version 2.4.0
  * @since   1.0.0
  *
- * @author  Algoritmika Ltd.
+ * @author  WPFactory
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,7 +14,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 	/**
 	 * alg_wc_pdf_invoicing_get_default.
 	 *
-	 * @version 1.8.0
+	 * @version 2.4.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `str_replace( "\t", '', ... )`?
@@ -127,6 +127,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 
 					[clear]
 
+					<!-- Order Addresses -->
 					<table>
 					    <tbody>
 					        <tr><th>Seller</th><th>Buyer</th></tr>
@@ -136,13 +137,50 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 
 					[clear]
 
+					<!-- Header table -->
 					<table class="order-items">
 					    <tbody>
-					        <tr><th style="width:5%">Nr.</th><th style="width:56%">Description</th><th style="width:12%">SKU</th><th class="qty" style="width:7%">Qty</th><th class="price" style="width:10%">Price (excl. tax)</th><th class="price" style="width:10%">Total (excl. tax)</th></tr>
-					        [each_item]<tr><td>[item_nr]</td><td>[item_name]</td><td>[item_product_sku]</td><td class="qty">[item_qty]</td><td class="price">[item_single format="price"]</td><td class="price">[item_total format="price"]</td></tr>[/each_item]
-					        [if value1="{order_shipping_total}" operator="greater" value2="0"]<tr><td>[order_total_items_count add="1"]</td><td>[order_shipping_method]</td><td></td><td class="qty">1</td><td class="price">[order_shipping_total format="price"]</td><td class="price">[order_shipping_total format="price"]</td></tr>[/if]
+					        <tr>
+					            <th style="width:5%">Nr.</th>
+					            <th style="width:56%">Description</th>
+					            <th style="width:12%">SKU</th>
+					            <th class="qty" style="width:7%">Qty</th>
+					            <th class="price" style="width:10%">Price (excl. tax)</th>
+					            <th class="price" style="width:10%">Total (excl. tax)</th>
+					        </tr>
 					    </tbody>
 					</table>
+
+					[each_item]
+					<table class="order-items">
+					    <tbody>
+					        <tr>
+					            <td style="width:5%">[item_nr]</td>
+					            <td style="width:56%">[item_name]</td>
+					            <td style="width:12%">[item_product_sku]</td>
+					            <td class="qty" style="width:7%">[item_qty]</td>
+					            <td class="price" style="width:10%">[item_single format="price"]</td>
+					            <td class="price" style="width:10%">[item_total format="price"]</td>
+					        </tr>
+					    </tbody>
+					</table>
+					[/each_item]
+
+					[if value1="{order_shipping_total}" operator="greater" value2="0"]
+					<table class="order-items">
+					    <tbody>
+					        <tr>
+					            <td style="width:5%">[order_total_items_count add="1"]</td>
+					            <td style="width:56%">[order_shipping_method]</td>
+					            <td style="width:12%"></td>
+					            <td class="qty" style="width:7%">1</td>
+					            <td class="price" style="width:10%">[order_shipping_total format="price"]</td>
+					            <td class="price" style="width:10%">[order_shipping_total format="price"]</td>
+					        </tr>
+					    </tbody>
+					</table>
+					[/if]
+
 					<table class="totals">
 					    <tbody>
 					        <tr><th>Total (excl. tax)</th><td>[order_total_excl_tax format="price"]</td></tr>
@@ -156,6 +194,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 
 					[clear]
 
+					<!-- Footer -->
 					<table style="margin-top: 30px">
 					    <tbody>
 					        <tr><th>Invoice created by:</th><td>[doc_author_full_name]</td></tr>
@@ -166,7 +205,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 
 			// Styling and Filtering Options
 			case 'html_content_wpautop':
-				return 'no';
+				return 'yes';
 			case 'html_content_force_balance_tags':
 				return 'yes';
 			case 'html_style':
