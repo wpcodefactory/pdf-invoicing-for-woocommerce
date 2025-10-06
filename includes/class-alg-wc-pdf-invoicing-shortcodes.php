@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.4.0
+ * @version 2.4.1
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -460,13 +460,21 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 		unset( $this->order_refund );
 		$this->doc_obj->order_id = $order_id;
 
-		return ( '' !== $output ? ( ( isset( $atts['before'] ) ? $atts['before'] : '' ) . $output . ( isset( $atts['after'] ) ? $atts['after'] : '' ) ) : '' );
+		return (
+			'' !== $output ?
+			(
+				( isset( $atts['before'] ) ? $atts['before'] : '' ) .
+				$output .
+				( isset( $atts['after'] ) ? $atts['after'] : '' )
+			) :
+			''
+		);
 	}
 
 	/**
 	 * return_prop.
 	 *
-	 * @version 1.7.1
+	 * @version 2.4.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) Math: `multiply` and `divide`: apply `floatval()`?
@@ -478,16 +486,33 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 		// Math
 		if ( is_numeric( $value ) ) {
 			if ( ! empty( $atts['add'] ) ) {
-				$value += floatval( do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['add'] ) ) );
+				$value += floatval( do_shortcode( str_replace(
+					array( '{', '}' ),
+					array( '[', ']' ),
+					$atts['add']
+				) ) );
 			}
 			if ( ! empty( $atts['subtract'] ) ) {
-				$value -= floatval( do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['subtract'] ) ) );
+				$value -= floatval( do_shortcode( str_replace(
+					array( '{', '}' ),
+					array( '[', ']' ),
+					$atts['subtract']
+				) ) );
 			}
 			if ( ! empty( $atts['multiply'] ) ) {
-				$value *= do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['multiply'] ) );
+				$value *= do_shortcode( str_replace(
+					array( '{', '}' ),
+					array( '[', ']' ),
+					$atts['multiply']
+				) );
 			}
 			if ( ! empty( $atts['divide'] ) ) {
-				if ( 0 != ( $_value = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['divide'] ) ) ) ) {
+				$_value = do_shortcode( str_replace(
+					array( '{', '}' ),
+					array( '[', ']' ),
+					$atts['divide']
+				) );
+				if ( 0 != $_value ) {
 					$value /= $_value;
 				}
 			}
@@ -497,7 +522,14 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 		if ( isset( $atts['format'] ) ) {
 			switch ( $atts['format'] ) {
 				case 'price':
-					$value = wc_price( $value, ( isset( $this->order ) ? array( 'currency' => $this->order->get_currency() ) : array() ) );
+					$value = wc_price(
+						$value,
+						(
+							isset( $this->order ) ?
+							array( 'currency' => $this->order->get_currency() ) :
+							array()
+						)
+					);
 					break;
 				default:
 					$value = sprintf( $atts['format'], $value );
@@ -510,10 +542,18 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 		}
 
 		// Filter
-		$value = apply_filters( 'alg_wc_pdf_invoicing_return_prop', $value, $atts );
+		$value = apply_filters( 'alg_wc_pdf_invoicing_return_prop', $value, $atts, $this );
 
 		// Before/after & Final result
-		return ( '' !== $value ? ( ( isset( $atts['before'] ) ? $atts['before'] : '' ) . $value . ( isset( $atts['after'] ) ? $atts['after'] : '' ) ) : '' );
+		return (
+			'' !== $value ?
+			(
+				( isset( $atts['before'] ) ? $atts['before'] : '' ) .
+				$value .
+				( isset( $atts['after'] ) ? $atts['after'] : '' )
+			) :
+			''
+		);
 
 	}
 
@@ -543,7 +583,14 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @todo    (dev) separate shortcodes (e.g., `[doc]`, `[order]`, `[item]` etc.)
 	 */
 	function shortcode_prop( $atts, $content = '' ) {
-		if ( ! isset( $atts['name'] ) || ( isset( $this->props[ $atts['name'] ] ) && false === $this->props[ $atts['name'] ] ) || ! isset( $this->doc_obj ) ) {
+		if (
+			! isset( $atts['name'] ) ||
+			(
+				isset( $this->props[ $atts['name'] ] ) &&
+				false === $this->props[ $atts['name'] ]
+			) ||
+			! isset( $this->doc_obj )
+		) {
 			return '';
 		}
 

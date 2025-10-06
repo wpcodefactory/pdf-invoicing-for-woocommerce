@@ -572,7 +572,7 @@ class Alg_WC_PDF_Invoicing_Admin {
 					$settings = array(
 						'textarea_name' => $value['field_name'],
 						'editor_class'  => $value['class'] . ' ' . $editor_id,
-						'editor_css'    => "<style>.{$editor_id}.wp-editor-area { {$editor_css} }</style>"
+						'editor_css'    => "<style>.{$editor_id}.wp-editor-area { {$editor_css} }</style>",
 					);
 
 					add_filter(

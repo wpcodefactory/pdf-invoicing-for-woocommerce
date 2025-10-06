@@ -436,10 +436,10 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 				'options'  => $this->get_fonts(),
 			),
 			array(
-				'title'    => __( 'Font size', 'pdf-invoicing-for-woocommerce' ),
-				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[font_size]",
-				'default'  => alg_wc_pdf_invoicing_get_default( 'font_size' ),
-				'type'     => 'number',
+				'title'             => __( 'Font size', 'pdf-invoicing-for-woocommerce' ),
+				'id'                => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[font_size]",
+				'default'           => alg_wc_pdf_invoicing_get_default( 'font_size' ),
+				'type'              => 'number',
 				'custom_attributes' => array( 'min' => 1 ),
 			),
 			array(
