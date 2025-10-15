@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.4.1
+ * @version 2.4.2
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -121,7 +121,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.4.0
+	 * @version 2.4.2
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) `[order_barcode_1d]` and `[order_barcode_2d]` shortcodes
@@ -192,6 +192,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 			'order_total_refunded',
 			'order_total_shipping_refunded',
 			'order_total_tax',
+			'order_total_tax_percent',
 			'order_total_tax_refunded',
 
 			'item_discount',
@@ -572,7 +573,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * shortcode_prop.
 	 *
-	 * @version 2.1.3
+	 * @version 2.4.2
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] `item_` props for coupons: check if it's callable
@@ -619,38 +620,91 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 		// Main switch
 		switch ( $atts['name'] ) {
 
-			// Document
+			/**
+			 * Document
+			 */
 			case 'doc_counter':
 				return $this->return_prop( $this->doc_obj->get_counter(), $atts );
+
 			case 'doc_nr':
 				return $this->return_prop( $this->doc_obj->get_number(), $atts );
+
 			case 'doc_formatted_date':
-				return $this->return_prop( $this->doc_obj->get_formatted_date( ( isset( $atts['datetime_format'] ) ? $atts['datetime_format'] : 'Y-m-d' ),
-					( isset( $atts['add_days'] ) ? $atts['add_days'] : 0 ) ), $atts );
+				return $this->return_prop(
+					$this->doc_obj->get_formatted_date(
+						( $atts['datetime_format'] ?? 'Y-m-d' ),
+						( $atts['add_days'] ?? 0 )
+					),
+					$atts
+				);
+
 			case 'doc_author_full_name':
 				return $this->return_prop( $this->doc_obj->get_author_full_name(), $atts );
 
-			// Order
+			/**
+			 * Order
+			 */
 			case 'order_number':
 				return $this->return_prop( $this->order->get_order_number(), $atts );
+
 			case 'order_formatted_date_created':
-				return $this->return_prop( date_i18n( ( isset( $atts['datetime_format'] ) ? $atts['datetime_format'] : 'Y-m-d' ), strtotime( $this->order->get_date_created() ) ), $atts );
+				return $this->return_prop(
+					date_i18n(
+						( $atts['datetime_format'] ?? 'Y-m-d' ),
+						strtotime( $this->order->get_date_created() )
+					),
+					$atts
+				);
+
 			case 'order_status':
 				return $this->return_prop( $this->order->get_status(), $atts );
+
 			case 'order_subtotal':
 				return $this->return_prop( $this->order->get_subtotal(), $atts );
+
 			case 'order_subtotal_incl_tax':
-				return $this->return_prop( $this->order->get_subtotal_to_display( ( isset( $atts['compound'] ) && 'yes' === $atts['compound'] ), 'incl' ), $atts );
+				return $this->return_prop(
+					$this->order->get_subtotal_to_display(
+						( isset( $atts['compound'] ) && 'yes' === $atts['compound'] ),
+						'incl'
+					),
+					$atts
+				);
+
 			case 'order_total':
 				return $this->return_prop( $this->order->get_total(), $atts );
+
 			case 'order_total_excl_shipping':
 				return $this->return_prop( $this->order->get_total() - $this->order->get_shipping_total(), $atts );
+
 			case 'order_total_in_words':
-				$whole_part   = alg_wc_pdf_invoicing_number_to_words( intval( $this->order->get_total() ), ( isset( $atts['lang'] ) ? strtoupper( $atts['lang'] ) : 'EN' ) );
-				$decimal_part = round( ( $this->order->get_total() - intval( $this->order->get_total() ) ) * 100, 2 );
-				return $this->return_prop( $whole_part . ' ' . get_woocommerce_currency_symbol( $this->order->get_currency() ) . ' ' . $decimal_part . ' ' . '&cent;', $atts );
+				$whole_part   = alg_wc_pdf_invoicing_number_to_words(
+					intval( $this->order->get_total() ),
+					( isset( $atts['lang'] ) ? strtoupper( $atts['lang'] ) : 'EN' )
+				);
+				$decimal_part = round(
+					( $this->order->get_total() - intval( $this->order->get_total() ) ) * 100,
+					2
+				);
+				return $this->return_prop(
+					(
+						$whole_part . ' ' . get_woocommerce_currency_symbol( $this->order->get_currency() ) . ' ' .
+						$decimal_part . ' ' . '&cent;'
+					),
+					$atts
+				);
+
 			case 'order_total_tax':
 				return $this->return_prop( $this->order->get_total_tax(), $atts );
+
+			case 'order_total_tax_percent':
+				$result = (
+					0 != ( $total = $this->order->get_total() ) ?
+					( $this->order->get_total_tax() / $total * 100 ) :
+					0
+				);
+				return $this->return_prop( $result, $atts );
+
 			case 'order_tax_totals':
 				$value = array();
 				$tax_totals = $this->order->get_tax_totals();
@@ -659,41 +713,65 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 				}
 				$value = implode( '<br>', $value );
 				return $this->return_prop( $value, $atts );
+
 			case 'order_total_excl_tax':
 				return $this->return_prop( $this->order->get_total() - $this->order->get_total_tax(), $atts );
+
 			case 'order_total_excl_tax_excl_shipping':
-				return $this->return_prop( $this->order->get_total() - $this->order->get_total_tax() - $this->order->get_shipping_total(), $atts );
+				return $this->return_prop(
+					$this->order->get_total() - $this->order->get_total_tax() - $this->order->get_shipping_total(),
+					$atts
+				);
+
 			case 'order_discount':
 				return $this->return_prop( $this->order->get_total_discount(), $atts );
+
 			case 'order_discount_incl_tax':
 				return $this->return_prop( $this->order->get_total_discount( false ), $atts );
+
 			case 'order_discount_tax':
 				return $this->return_prop( $this->order->get_discount_tax(), $atts );
+
 			case 'order_discount_percent':
-				$subtotal = $this->order->get_subtotal();
-				return ( 0 != $subtotal ? $this->return_prop( $this->order->get_discount_total() / $subtotal * 100, $atts ) : 0 );
+				$result = (
+					0 != ( $subtotal = $this->order->get_subtotal() ) ?
+					( $this->order->get_discount_total() / $subtotal * 100 ) :
+					0
+				);
+				return $this->return_prop( $result, $atts );
+
 			case 'order_shipping_total':
 			case 'order_shipping_total_excl_tax':
 				return $this->return_prop( $this->order->get_shipping_total(), $atts );
+
 			case 'order_shipping_total_incl_tax':
 				return $this->return_prop( $this->order->get_shipping_total() + $this->order->get_shipping_tax(), $atts );
+
 			case 'order_shipping_method':
 				return $this->return_prop( $this->order->get_shipping_method(), $atts );
+
 			case 'order_payment_method_title':
 				return $this->return_prop( $this->order->get_payment_method_title(), $atts );
+
 			case 'order_checkout_payment_url':
 				return $this->return_prop( $this->order->get_checkout_payment_url(), $atts );
+
 			case 'order_formatted_billing_address':
 				return $this->return_prop( $this->order->get_formatted_billing_address(), $atts );
+
 			case 'order_formatted_shipping_address':
 				return $this->return_prop( $this->order->get_formatted_shipping_address(), $atts );
+
 			case 'order_billing_first_name':
 				return $this->return_prop( $this->order->get_billing_first_name(), $atts );
+
 			case 'order_billing_last_name':
 				return $this->return_prop( $this->order->get_billing_last_name(), $atts );
+
 			case 'order_total_items_count':
 				$type = ( isset( $atts['type'] ) ? explode( ',', $atts['type'] ) : 'line_item' );
 				return $this->return_prop( count( $this->order->get_items( $type ) ), $atts );
+
 			case 'order_total_items_qty':
 				$type = ( isset( $atts['type'] ) ? explode( ',', $atts['type'] ) : 'line_item' );
 				$result = 0;
@@ -703,8 +781,14 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 					}
 				}
 				return $this->return_prop( $result, $atts );
+
 			case 'order_meta':
-				return ( isset( $atts['key'] ) ? $this->return_prop( $this->order->get_meta( $atts['key'] ), $atts ) : '' );
+				return (
+					isset( $atts['key'] ) ?
+					$this->return_prop( $this->order->get_meta( $atts['key'] ), $atts ) :
+					''
+				);
+
 			case 'order_details_email':
 				ob_start();
 				wc_get_template(
@@ -717,80 +801,144 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 					)
 				);
 				return $this->return_prop( ob_get_clean(), $atts );
+
 			case 'order_details_table':
 				ob_start();
 				woocommerce_order_details_table( $this->order_id );
 				return $this->return_prop( ob_get_clean(), $atts );
+
 			case 'order_func':
 				if ( ! isset( $atts['func'] ) ) {
 					return '';
 				}
 				$func = $atts['func'];
-				return ( is_callable( array( $this->order, $func ) ) ? $this->return_prop( $this->order->{$func}(), $atts ) : '' );
+				return (
+					is_callable( array( $this->order, $func ) ) ?
+					$this->return_prop( $this->order->{$func}(), $atts ) :
+					''
+				);
+
 			case 'order_total_refunded':
 				return $this->return_prop( $this->order->get_total_refunded(), $atts );
+
 			case 'order_total_tax_refunded':
 				return $this->return_prop( $this->order->get_total_tax_refunded(), $atts );
+
 			case 'order_total_shipping_refunded':
 				return $this->return_prop( $this->order->get_total_shipping_refunded(), $atts );
 
-			// Order item
+			/**
+			 * Order item
+			 */
 			case 'item_nr':
 				return $this->return_prop( $this->order_item_nr, $atts );
+
 			case 'item_name':
 				return $this->return_prop( $this->order_item->get_name(), $atts );
+
 			case 'item_qty':
 				return $this->return_prop( $this->order_item->get_quantity(), $atts );
+
 			case 'item_total':
 				return $this->return_prop( $this->order_item->get_total(), $atts );
+
 			case 'item_total_tax':
 				return $this->return_prop( $this->order_item->get_total_tax(), $atts );
+
 			case 'item_total_incl_tax':
 				return $this->return_prop( $this->order_item->get_total() + $this->order_item->get_total_tax(), $atts );
+
 			case 'item_total_tax_percent':
-				$total  = $this->order_item->get_total();
-				$result = ( 0 != $total ? ( $this->order_item->get_total_tax() / $this->order_item->get_total() * 100 ) : 0 );
+				$result = (
+					0 != ( $total = $this->order_item->get_total() ) ?
+					( $this->order_item->get_total_tax() / $total * 100 ) :
+					0
+				);
 				return $this->return_prop( $result, $atts );
+
 			case 'item_single':
 				$qty = $this->order_item->get_quantity();
 				return ( 0 != $qty ? $this->return_prop( $this->order_item->get_total() / $qty, $atts ) : 0 );
+
 			case 'item_single_incl_tax':
 				$qty = $this->order_item->get_quantity();
-				return ( 0 != $qty ? $this->return_prop( ( $this->order_item->get_total() + $this->order_item->get_total_tax() ) / $qty, $atts ) : 0 );
+				return (
+					0 != $qty ?
+					$this->return_prop(
+						( $this->order_item->get_total() + $this->order_item->get_total_tax() ) / $qty,
+						$atts
+					) :
+					0
+				);
+
 			case 'item_subtotal':
 				return $this->return_prop( $this->order_item->get_subtotal(), $atts );
+
 			case 'item_subtotal_tax':
 				return $this->return_prop( $this->order_item->get_subtotal_tax(), $atts );
+
 			case 'item_discount':
 				return $this->return_prop( $this->order_item->get_subtotal() - $this->order_item->get_total(), $atts );
+
 			case 'item_discount_incl_tax':
-				return $this->return_prop( ( $this->order_item->get_subtotal() - $this->order_item->get_total() ) +
-					( $this->order_item->get_subtotal_tax() - $this->order_item->get_total_tax() ), $atts );
+				return $this->return_prop(
+					(
+						( $this->order_item->get_subtotal() - $this->order_item->get_total() ) +
+						( $this->order_item->get_subtotal_tax() - $this->order_item->get_total_tax() )
+					),
+					$atts
+				);
+
 			case 'item_discount_tax':
-				return $this->return_prop( $this->order_item->get_subtotal_tax() - $this->order_item->get_total_tax(), $atts );
+				return $this->return_prop(
+					$this->order_item->get_subtotal_tax() - $this->order_item->get_total_tax(),
+					$atts
+				);
+
 			case 'item_discount_percent':
-				$subtotal = $this->order_item->get_subtotal();
-				$result   = ( 0 != $subtotal ? ( ( $this->order_item->get_subtotal() - $this->order_item->get_total() ) / $subtotal * 100 ) : 0 );
+				$result = (
+					0 != ( $subtotal = $this->order_item->get_subtotal() ) ?
+					( ( $this->order_item->get_subtotal() - $this->order_item->get_total() ) / $subtotal * 100 ) :
+					0
+				);
 				return $this->return_prop( $result, $atts );
+
 			case 'item_meta':
-				return ( isset( $atts['key'] ) ? $this->return_prop( $this->order_item->get_meta( $atts['key'], true ), $atts ) : '' );
+				return (
+					isset( $atts['key'] ) ?
+					$this->return_prop( $this->order_item->get_meta( $atts['key'], true ), $atts ) :
+					''
+				);
+
 			case 'item_func':
 				if ( ! isset( $atts['func'] ) ) {
 					return '';
 				}
 				$func = $atts['func'];
-				return ( is_callable( array( $this->order_item, $func ) ) ? $this->return_prop( $this->order_item->{$func}(), $atts ) : '' );
+				return (
+					is_callable( array( $this->order_item, $func ) ) ?
+					$this->return_prop( $this->order_item->{$func}(), $atts ) :
+					''
+				);
 
-			// Order item product
+			/**
+			 * Order item product
+			 */
 			case 'item_product_id':
 				return $this->return_prop( $this->item_product->get_id(), $atts );
+
 			case 'item_product_sku':
 				return $this->return_prop( $this->item_product->get_sku(), $atts );
+
 			case 'item_product_image':
 				$size   = ( isset( $atts['size'] )   ? $atts['size']   : 'woocommerce_thumbnail' );
 				$width  = ( isset( $atts['width'] )  ? $atts['width']  : 30 );
 				$height = ( isset( $atts['height'] ) ? $atts['height'] : 30 );
-				if ( ( $img_id = $this->item_product->get_image_id() ) && ( $img_url = wp_get_attachment_image_src( $img_id, $size ) ) && isset( $img_url[0] ) ) {
+				if (
+					( $img_id = $this->item_product->get_image_id() ) &&
+					( $img_url = wp_get_attachment_image_src( $img_id, $size ) ) &&
+					isset( $img_url[0] )
+				) {
 					$img_url = $img_url[0];
 				}
 				if ( ! $img_url ) {
@@ -798,6 +946,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 				}
 				$image = '<img src="' . $img_url . '" width="' . $width . '" height="' . $height . '">';
 				return $this->return_prop( $image, $atts );
+
 			case 'item_product_taxonomy':
 				if ( ! isset( $atts['taxonomy'] ) ) {
 					return '';
@@ -808,21 +957,43 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 				}
 				$terms = implode( ', ', wp_list_pluck( $terms, 'name' ) );
 				return $this->return_prop( $terms, $atts );
+
 			case 'item_product_meta':
-				$product_id = ( isset( $atts['use_parent'] ) && 'yes' === $atts['use_parent'] && ( $parent_id = $this->item_product->get_parent_id() ) ? $parent_id : $this->item_product->get_id() );
-				return ( isset( $atts['key'] ) ? $this->return_prop( get_post_meta( $product_id, $atts['key'], true ), $atts ) : '' );
+				$product_id = (
+					(
+						isset( $atts['use_parent'] ) &&
+						'yes' === $atts['use_parent'] &&
+						( $parent_id = $this->item_product->get_parent_id() )
+					) ?
+					$parent_id :
+					$this->item_product->get_id()
+				);
+				return (
+					isset( $atts['key'] ) ?
+					$this->return_prop( get_post_meta( $product_id, $atts['key'], true ), $atts ) :
+					''
+				);
+
 			case 'item_product_func':
 				if ( ! isset( $atts['func'] ) ) {
 					return '';
 				}
 				$func = $atts['func'];
-				return ( is_callable( array( $this->item_product, $func ) ) ? $this->return_prop( $this->item_product->{$func}(), $atts ) : '' );
+				return (
+					is_callable( array( $this->item_product, $func ) ) ?
+					$this->return_prop( $this->item_product->{$func}(), $atts ) :
+					''
+				);
 
-			// Order refund
+			/**
+			 * Order refund
+			 */
 			case 'refund_nr':
 				return $this->return_prop( $this->order_refund_nr, $atts );
+
 			case 'refund_total':
 				return $this->return_prop( $this->order_refund->get_total(), $atts );
+
 			case 'refund_reason':
 				return $this->return_prop( $this->order_refund->get_reason(), $atts );
 
