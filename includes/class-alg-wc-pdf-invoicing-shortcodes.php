@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.4.2
+ * @version 2.4.3
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -121,7 +121,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.4.2
+	 * @version 2.4.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) `[order_barcode_1d]` and `[order_barcode_2d]` shortcodes
@@ -149,6 +149,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 			'current_time',
 			'checkbox',
 			'page_break',
+			'translate',
 		);
 
 		$this->prop_aliases = array(
@@ -270,6 +271,160 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	}
 
 	/**
+	 * set_order_data.
+	 *
+	 * @version 2.4.3
+	 * @since   2.4.3
+	 */
+	function set_order_data() {
+		if ( ! isset( $this->doc_obj->order_id ) ) {
+			return false;
+		}
+		if (
+			! isset( $this->order ) ||
+			$this->order_id != $this->doc_obj->order_id
+		) {
+			$order = wc_get_order( $this->doc_obj->order_id );
+			if ( ! $order ) {
+				return false;
+			} else {
+				// Success (set order data)
+				$this->order    = $order;
+				$this->order_id = $this->doc_obj->order_id;
+				return true;
+			}
+		}
+		// Success (order data already set)
+		return true;
+	}
+
+	/**
+	 * get_current_language_for_translate.
+	 *
+	 * @version 2.4.3
+	 * @since   2.4.3
+	 *
+	 * @todo    (v2.4.3) WPML and Polylang: test?
+	 * @todo    (v2.4.3) WPML: `wpml_language` or `wpml_languages`?
+	 * @todo    (v2.4.3) use `get_locale()`?
+	 * @todo    (v2.4.3) use `$_POST['language']`?
+	 *
+	 * @see     https://wpml.org/forums/topic/meta-key-when-creating-an-order-in-woocommerce/
+	 * @see     https://translatepress.com/docs/developers/
+	 */
+	function get_current_language_for_translate() {
+
+		// Order
+		if ( $this->set_order_data() ) {
+
+			// WPML (`wpml_languages` meta)
+			if (
+				( $languages = $this->order->get_meta( 'wpml_languages' ) ) &&
+				! empty( $languages ) &&
+				( $languages = maybe_unserialize( $languages ) ) &&
+				! empty( $languages[0] )
+			) {
+				return $languages[0];
+			}
+
+			// WPML (`wpml_language` meta)
+			if ( ( $lang = $this->order->get_meta( 'wpml_language' ) ) ) {
+				return $lang;
+			}
+
+			// Polylang
+			if (
+				( $terms = get_the_terms( $this->order_id, 'language' ) ) &&
+				! is_wp_error( $terms )
+			) {
+				foreach ( $terms as $term ) {
+					if ( ! empty( $term->slug ) ) {
+						return $term->slug;
+					}
+				}
+			}
+
+			// TranslatePress
+			if ( '' !== ( $meta_value = $this->order->get_meta( 'trp_language' ) ) ) {
+				return strtolower( $meta_value );
+			}
+
+		}
+
+		// WPML, Polylang
+		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+			return strtolower( ICL_LANGUAGE_CODE );
+		}
+
+		// TranslatePress
+		global $TRP_LANGUAGE;
+		if ( $TRP_LANGUAGE ) {
+			return strtolower( $TRP_LANGUAGE );
+		}
+
+		return false;
+	}
+
+	/**
+	 * shortcode_translate.
+	 *
+	 * @version 2.4.3
+	 * @since   2.4.3
+	 */
+	function shortcode_translate( $atts, $content = '' ) {
+
+		$current_language = $this->get_current_language_for_translate();
+
+		// E.g.: `[translate lang="EN,DE" lang_text="Text for EN & DE" not_lang_text="Text for other languages"]`
+		if (
+			isset( $atts['lang_text'] ) &&
+			isset( $atts['not_lang_text'] ) &&
+			! empty( $atts['lang'] )
+		) {
+			return (
+				(
+					false === $current_language ||
+					! in_array(
+						$current_language,
+						array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) )
+					)
+				) ?
+				wp_kses_post( $atts['not_lang_text'] ) :
+				wp_kses_post( $atts['lang_text'] )
+			);
+		}
+
+		// E.g.: `[translate lang="EN,DE"]Text for EN & DE[/translate][translate not_lang="EN,DE"]Text for other languages[/translate]`
+		return (
+			(
+				(
+					! empty( $atts['lang'] ) &&
+					(
+						false === $current_language ||
+						! in_array(
+							$current_language,
+							array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) )
+						)
+					)
+				) ||
+				(
+					! empty( $atts['not_lang'] ) &&
+					(
+						false !== $current_language &&
+						in_array(
+							$current_language,
+							array_map( 'trim', explode( ',', strtolower( $atts['not_lang'] ) ) )
+						)
+					)
+				)
+			) ?
+			'' :
+			wp_kses_post( do_shortcode( $content ) )
+		);
+
+	}
+
+	/**
 	 * shortcode_page_break.
 	 *
 	 * @version 1.6.0
@@ -343,11 +498,17 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 * @todo    (dev) `$this->do_atts_shortcode()`
 	 */
 	function shortcode_if( $atts, $content = '' ) {
-		if ( ! isset( $atts['value1'], $atts['operator'], $atts['value2'] ) || '' === $content ) {
+
+		if (
+			! isset( $atts['value1'], $atts['operator'], $atts['value2'] ) ||
+			'' === $content
+		) {
 			return '';
 		}
+
 		$value1 = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['value1'] ) );
 		$value2 = do_shortcode( str_replace( array( '{', '}' ), array( '[', ']' ), $atts['value2'] ) );
+
 		switch ( $atts['operator'] ) {
 			case 'equal':
 				return ( $value1 == $value2 ? do_shortcode( $content ) : '' );
@@ -362,6 +523,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 			case 'greater_or_equal':
 				return ( $value1 >= $value2 ? do_shortcode( $content ) : '' );
 		}
+
 		return '';
 	}
 
@@ -573,7 +735,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * shortcode_prop.
 	 *
-	 * @version 2.4.2
+	 * @version 2.4.3
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] `item_` props for coupons: check if it's callable
@@ -597,15 +759,8 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 
 		// Prepare & check data
 		if ( $this->is_prop_type( 'order', $atts['name'] ) ) {
-			if ( ! isset( $this->doc_obj->order_id ) ) {
+			if ( ! $this->set_order_data() ) {
 				return '';
-			} elseif ( ! isset( $this->order ) || $this->order_id != $this->doc_obj->order_id ) {
-				if ( ! ( $order = wc_get_order( $this->doc_obj->order_id ) ) ) {
-					return '';
-				} else {
-					$this->order    = $order;
-					$this->order_id = $this->doc_obj->order_id;
-				}
 			}
 		} elseif ( $this->is_prop_type( 'item_product', $atts['name'] ) ) {
 			if ( empty( $this->item_product ) ) {
