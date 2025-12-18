@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: PDF Invoices & Packing Slips Generator for WooCommerce 2.4.3\n"
+"Project-Id-Version: PDF Invoices & Packing Slips Generator for WooCommerce 2.4.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pdf-invoicing-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-15T22:39:10+00:00\n"
+"POT-Creation-Date: 2025-12-18T21:34:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: pdf-invoicing-for-woocommerce\n"
@@ -243,8 +243,8 @@ msgstr ""
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:280
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:289
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:352
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:415
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:457
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:421
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:463
 msgid "You can use shortcodes here."
 msgstr ""
 
@@ -444,76 +444,80 @@ msgid "Footer text color"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:389
+msgid "Footer line color"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:395
 msgid "Footer font"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:398
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:404
 msgid "Footer font size"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:409
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:415
 msgid "Content Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:414
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:420
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:172
 msgid "HTML content"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:424
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:430
 msgid "Line color"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:430
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:436
 msgid "Font"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:439
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:445
 msgid "Font size"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:450
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:456
 msgid "Styling and Filtering Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:451
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:457
 msgid "Applied in \"HTML content\" and \"Footer HTML content\" options."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:456
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:462
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:171
 msgid "HTML style"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:464
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:470
 msgid "HTML content filters"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:465
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:471
 msgid "Balance tags"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:465
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:471
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:99
 msgid "recommended"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:467
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:473
 msgid "Balances tags, i.e., prevents unmatched elements."
 msgstr ""
 
 #. Translators: %s: Function page link.
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:471
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:493
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:477
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:499
 msgid "Uses WordPress %s function."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:483
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:489
 msgid "Replace line breaks"
 msgstr ""
 
 #. Translators: %s: HTML line break tag.
-#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:487
+#: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:493
 msgid "Replaces double line breaks with paragraph elements, and all remaining line breaks with %s tag."
 msgstr ""
 

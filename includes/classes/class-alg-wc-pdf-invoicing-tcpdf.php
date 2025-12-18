@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - TCPDF Class
  *
- * @version 2.1.0
+ * @version 2.4.4
  * @since   1.1.0
  *
  * @author  WPFactory
@@ -167,7 +167,7 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 	 * @see     https://github.com/tecnickcom/TCPDF/blob/6.3.2/tcpdf.php#L3492 (Footer)
 	 * @see     https://github.com/tecnickcom/TCPDF/blob/6.3.2/tcpdf.php#L17157 (writeHTMLCell)
 	 *
-	 * @version 1.8.0
+	 * @version 2.4.4
 	 * @since   1.1.0
 	 *
 	 * @todo    (fix) [!] "Justify" doesn't work for the `writeHTMLCell()`
@@ -178,6 +178,17 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 		if ( 'yes' === $this->alg_wc_pdf_invoicing_doc->get_doc_option( 'enable_footer' ) ) {
 			if ( '' != ( $footer_text = $this->alg_wc_pdf_invoicing_doc->get_doc_option( 'footer_text', true ) ) ) {
 				$this->SetTextColorArray( alg_wc_pdf_invoicing_hex_to_rgb( $this->alg_wc_pdf_invoicing_doc->get_doc_option( 'footer_text_color' ) ) );
+				$this->setLineStyle( array(
+					'width' => ( 0.85 / $this->k ),
+					'cap'   => 'butt',
+					'join'  => 'miter',
+					'dash'  => 0,
+					'color' => alg_wc_pdf_invoicing_hex_to_rgb(
+						$this->alg_wc_pdf_invoicing_doc->get_doc_option(
+							'footer_line_color'
+						)
+					)
+				) );
 				$footer_text = str_replace( array( '%page_num%', '%total_pages%' ), array( $this->getAliasNumPage(), $this->getAliasNbPages() ), $footer_text );
 				$footer_text = $this->alg_wc_pdf_invoicing_doc->apply_content_filters( $footer_text );
 				$style       = '<style>' . $this->alg_wc_pdf_invoicing_doc->get_doc_option( 'html_style', true ) . '</style>';

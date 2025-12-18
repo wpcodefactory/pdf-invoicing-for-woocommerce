@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Functions - Default Values
  *
- * @version 2.4.0
+ * @version 2.4.4
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -14,7 +14,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 	/**
 	 * alg_wc_pdf_invoicing_get_default.
 	 *
-	 * @version 2.4.0
+	 * @version 2.4.4
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `str_replace( "\t", '', ... )`?
@@ -103,6 +103,8 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 			case 'footer_font_family':
 				return 'dejavusans';
 			case 'footer_text_color':
+				return '#000000';
+			case 'footer_line_color':
 				return '#000000';
 
 			// Content Options

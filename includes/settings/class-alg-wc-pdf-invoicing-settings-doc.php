@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Document Settings
  *
- * @version 2.4.0
+ * @version 2.4.4
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -45,7 +45,7 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.0
+	 * @version 2.4.4
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) [!] `order_bulk_actions`: better desc?
@@ -383,6 +383,12 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 				'title'    => __( 'Footer text color', 'pdf-invoicing-for-woocommerce' ),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[footer_text_color]",
 				'default'  => alg_wc_pdf_invoicing_get_default( 'footer_text_color' ),
+				'type'     => 'color',
+			),
+			array(
+				'title'    => __( 'Footer line color', 'pdf-invoicing-for-woocommerce' ),
+				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[footer_line_color]",
+				'default'  => alg_wc_pdf_invoicing_get_default( 'footer_line_color' ),
 				'type'     => 'color',
 			),
 			array(

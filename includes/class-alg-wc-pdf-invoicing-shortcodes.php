@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.4.3
+ * @version 2.4.4
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -637,11 +637,10 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * return_prop.
 	 *
-	 * @version 2.4.1
+	 * @version 2.4.4
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) Math: `multiply` and `divide`: apply `floatval()`?
-	 * @todo    (feature) `multiple_find`, `multiple_replace`
 	 * @todo    (dev) `on_empty`; `lang` && `not_lang`; `order_billing_country` && `not_order_billing_country` etc. OR maybe all that can be done via `[if]`?
 	 */
 	function return_prop( $value, $atts ) {
@@ -704,6 +703,15 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 			$value = str_replace( $atts['find'], $atts['replace'], $value );
 		}
 
+		// Multiple find/replace
+		if ( isset( $atts['multiple_find'], $atts['multiple_replace'] ) ) {
+			$value = str_replace(
+				explode( ',', $atts['multiple_find'] ),
+				explode( ',', $atts['multiple_replace'] ),
+				$value
+			);
+		}
+
 		// Filter
 		$value = apply_filters( 'alg_wc_pdf_invoicing_return_prop', $value, $atts, $this );
 
@@ -735,7 +743,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * shortcode_prop.
 	 *
-	 * @version 2.4.3
+	 * @version 2.4.4
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] `item_` props for coupons: check if it's callable
@@ -853,8 +861,13 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 				return $this->return_prop( $this->order->get_total_tax(), $atts );
 
 			case 'order_total_tax_percent':
+				$total = (
+					( isset( $atts['total'] ) && 'subtotal' === $atts['total'] ) ?
+					$this->order->get_subtotal() :
+					$this->order->get_total()
+				);
 				$result = (
-					0 != ( $total = $this->order->get_total() ) ?
+					0 != $total ?
 					( $this->order->get_total_tax() / $total * 100 ) :
 					0
 				);
