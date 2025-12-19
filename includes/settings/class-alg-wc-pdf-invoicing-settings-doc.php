@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Document Settings
  *
- * @version 2.4.4
+ * @version 2.4.5
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -45,13 +45,12 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.4
+	 * @version 2.4.5
 	 * @since   1.0.0
 	 *
 	 * @todo    (desc) [!] `order_bulk_actions`: better desc?
 	 * @todo    (feature) [!] customizable `unit`
 	 * @todo    (dev) [!] `show_if_checked`
-	 * @todo    (desc) `line_color`
 	 * @todo    (dev) predefined content variants
 	 * @todo    (dev) better descriptions
 	 * @todo    (dev) HTML content: wp_editor?
@@ -428,6 +427,11 @@ class Alg_WC_PDF_Invoicing_Settings_Doc extends Alg_WC_PDF_Invoicing_Settings_Se
 			),
 			array(
 				'title'    => __( 'Line color', 'pdf-invoicing-for-woocommerce' ),
+				'desc_tip' => sprintf(
+					/* Translators: %s: Shortcode name. */
+					__( 'For the %s shortcode.', 'pdf-invoicing-for-woocommerce' ),
+					'<code>[line]</code>'
+				),
 				'id'       => "alg_wc_pdf_invoicing_doc_{$this->doc_id}[line_color]",
 				'default'  => alg_wc_pdf_invoicing_get_default( 'line_color' ),
 				'type'     => 'color',

@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.4.4
+ * @version 2.4.5
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -121,7 +121,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.4.3
+	 * @version 2.4.5
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) `[order_barcode_1d]` and `[order_barcode_2d]` shortcodes
@@ -146,6 +146,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 			'clear',
 			'break',
 			'paragraph',
+			'line',
 			'current_time',
 			'checkbox',
 			'page_break',
@@ -487,6 +488,21 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	 */
 	function shortcode_paragraph( $atts, $content = '' ) {
 		return '<p>' . do_shortcode( $content ) . '</p>';
+	}
+
+	/**
+	 * shortcode_line.
+	 *
+	 * @version 2.4.5
+	 * @since   2.4.5
+	 */
+	function shortcode_line( $atts, $content = '' ) {
+		$style = (
+			! empty( $this->doc_obj ) ?
+			' style="color:' . $this->doc_obj->get_doc_option( 'line_color' ) . ';"' :
+			''
+		);
+		return "<hr{$style}><br><br>";
 	}
 
 	/**

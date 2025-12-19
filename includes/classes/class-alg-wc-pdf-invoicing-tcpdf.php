@@ -42,6 +42,7 @@ class Alg_WC_PDF_Invoicing_TCPDF extends TCPDF {
 	 * @todo    (dev) rethink `0.75` and `0.25`
 	 * @todo    (dev) modify "Header image width": make it in percent?
 	 * @todo    (dev) "Line color (in content)": move elsewhere?
+	 * @todo    (v2.4.5) "Line color (in content)": remove?
 	 */
 	function Header() {
 
