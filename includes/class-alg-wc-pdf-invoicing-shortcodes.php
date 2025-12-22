@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Shortcodes Class
  *
- * @version 2.4.5
+ * @version 2.4.6
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -759,7 +759,7 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 	/**
 	 * shortcode_prop.
 	 *
-	 * @version 2.4.4
+	 * @version 2.4.6
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) [!] `item_` props for coupons: check if it's callable
@@ -877,14 +877,23 @@ class Alg_WC_PDF_Invoicing_Shortcodes {
 				return $this->return_prop( $this->order->get_total_tax(), $atts );
 
 			case 'order_total_tax_percent':
-				$total = (
-					( isset( $atts['total'] ) && 'subtotal' === $atts['total'] ) ?
-					$this->order->get_subtotal() :
-					$this->order->get_total()
-				);
+				$total      = 0;
+				$total_tax  = 0;
+				$item_types = array( 'line_item', 'shipping', 'fee' );
+				foreach ( $item_types as $item_type ) {
+					foreach ( $this->order->get_items( $item_type ) as $item ) {
+						if ( 0 != $item->get_total_tax() ) {
+							$total      += $item->get_total();
+							$total_tax  += $item->get_total_tax();
+						}
+					}
+				}
 				$result = (
 					0 != $total ?
-					( $this->order->get_total_tax() / $total * 100 ) :
+					round(
+						( $total_tax / $total * 100 ),
+						( $atts['precision'] ?? 1 )
+					) :
 					0
 				);
 				return $this->return_prop( $result, $atts );
