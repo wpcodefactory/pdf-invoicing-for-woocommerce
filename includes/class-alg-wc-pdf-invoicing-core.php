@@ -2,7 +2,7 @@
 /**
  * PDF Invoicing for WooCommerce - Core Class
  *
- * @version 2.3.0
+ * @version 2.4.7
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -135,15 +135,28 @@ class Alg_WC_PDF_Invoicing_Core {
 	/**
 	 * get_doc_option.
 	 *
-	 * @version 2.1.0
+	 * @version 2.4.7
 	 * @since   1.0.0
 	 */
 	function get_doc_option( $doc_id, $option_id, $do_shortcode = false, $doc_obj = null ) {
+
 		if ( ! isset( $this->doc_options[ $doc_id ] ) ) {
 			$this->doc_options[ $doc_id ] = get_option( "alg_wc_pdf_invoicing_doc_{$doc_id}", array() );
 		}
+
 		$value = ( $this->doc_options[ $doc_id ][ $option_id ] ?? alg_wc_pdf_invoicing_get_default( $option_id, $doc_id ) );
-		return ( $do_shortcode ? $this->do_shortcode( $value, $doc_obj ) : $value );
+
+		if ( $do_shortcode ) {
+			$value = $this->do_shortcode( $value, $doc_obj );
+		}
+
+		return apply_filters(
+			'alg_wc_pdf_invoicing_get_doc_option',
+			$value,
+			$doc_id,
+			$option_id
+		);
+
 	}
 
 	/**
