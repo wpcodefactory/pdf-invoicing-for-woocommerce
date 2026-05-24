@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, anbinder, karzin, omardabbas, aegkr
 Tags: woocommerce, pdf, invoice, credit note, packing list
 Requires at least: 4.4
-Tested up to: 6.9
-Stable tag: 2.4.7
+Tested up to: 7.0
+Stable tag: 2.4.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -41,6 +41,10 @@ Add PDF invoices to WooCommerce.
 3. Start by visiting plugin settings at "WPFactory > PDF Invoicing".
 
 == Changelog ==
+
+= 2.4.8 - 24/05/2026 =
+* Tested up to: 7.0.
+* WC tested up to: 10.7.
 
 = 2.4.7 - 23/01/2026 =
 * Dev - Developers - `alg_wc_pdf_invoicing_get_doc_option` filter added.
