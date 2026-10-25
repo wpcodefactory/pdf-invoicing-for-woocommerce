@@ -2,34 +2,48 @@
 /**
  * PDF Invoicing for WooCommerce - Functions - Default Values
  *
- * @version 2.4.4
+ * @version 2.5.0
  * @since   1.0.0
  *
- * @author  WPFactory
+ * @author WPFactory
+ *
+ * @package WPFactory\WC_PDF_Invoicing\Functions
  */
 
 defined( 'ABSPATH' ) || exit;
 
 if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 	/**
-	 * alg_wc_pdf_invoicing_get_default.
+	 * Get default.
 	 *
-	 * @version 2.4.4
+	 * @version 2.5.0
 	 * @since   1.0.0
 	 *
-	 * @todo    (dev) `str_replace( "\t", '', ... )`?
-	 * @todo    (dev) `[each_item type="fee"]`
-	 * @todo    (dev) `[each_item type="shipping"]`
-	 * @todo    (dev) better defaults, e.g., HTML style & content
+	 * @param string $option_id Option ID.
+	 * @param int    $doc_id    Document ID.
+	 *
+	 * @return mixed Default value.
+	 *
+	 * @todo (dev) `str_replace( "\t", '', ... )`?
+	 * @todo (dev) `[each_item type="fee"]`.
+	 * @todo (dev) `[each_item type="shipping"]`.
+	 * @todo (dev) Better defaults, e.g., HTML style & content.
 	 */
 	function alg_wc_pdf_invoicing_get_default( $option_id, $doc_id = 0 ) {
 		switch ( $option_id ) {
-
-			// General Options
+			// General Options.
 			case 'enable':
 				return 'yes';
 			case 'admin_title':
-				return apply_filters( 'alg_wc_pdf_invoicing_default_doc_title', __( 'Invoice', 'pdf-invoicing-for-woocommerce' ), $doc_id );
+				return (
+					0 === (int) $doc_id ?
+					__( 'Invoice', 'pdf-invoicing-for-woocommerce' ) :
+					sprintf(
+						/* Translators: %s: Document ID. */
+						__( 'Doc %s', 'pdf-invoicing-for-woocommerce' ),
+						$doc_id
+					)
+				);
 			case 'hooks':
 				return array( 'manual' );
 			case 'emails':
@@ -41,7 +55,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 			case 'order_bulk_actions':
 				return array( 'download' );
 
-			// Page Options
+			// Page Options.
 			case 'page_orientation':
 				return 'P';
 			case 'page_format':
@@ -51,11 +65,11 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 			case 'page_format_custom_height':
 				return 0;
 			case 'margin_top':
-				return 27; // PDF_MARGIN_TOP
+				return 27; // PDF_MARGIN_TOP.
 			case 'margin_left':
-				return 15; // PDF_MARGIN_LEFT
+				return 15; // PDF_MARGIN_LEFT.
 			case 'margin_right':
-				return 15; // PDF_MARGIN_RIGHT
+				return 15; // PDF_MARGIN_RIGHT.
 			case 'rtl':
 				return 'no';
 			case 'page_background_img':
@@ -63,7 +77,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 			case 'page_foreground_img':
 				return '';
 
-			// Header Options
+			// Header Options.
 			case 'enable_header':
 				return 'yes';
 			case 'header_img':
@@ -77,9 +91,12 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 			case 'header_title':
 				return __( 'Invoice', 'pdf-invoicing-for-woocommerce' ) . ' [doc_nr]';
 			case 'header_text':
-				return str_replace( "\t", '',
+				return str_replace(
+					"\t",
+					'',
 					'Company name
-					Company address' );
+					Company address'
+				);
 			case 'header_text_color':
 				return '#000000';
 			case 'header_line_color':
@@ -89,7 +106,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 			case 'header_font_size':
 				return 7;
 
-			// Footer Options
+			// Footer Options.
 			case 'enable_footer':
 				return 'yes';
 			case 'footer_text':
@@ -99,7 +116,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 			case 'footer_font_size':
 				return 7;
 			case 'footer_height':
-				return 10; // PDF_MARGIN_FOOTER
+				return 10; // PDF_MARGIN_FOOTER.
 			case 'footer_font_family':
 				return 'dejavusans';
 			case 'footer_text_color':
@@ -107,7 +124,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 			case 'footer_line_color':
 				return '#000000';
 
-			// Content Options
+			// Content Options.
 			case 'font_family':
 				return 'dejavusans';
 			case 'line_color':
@@ -115,7 +132,9 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 			case 'font_size':
 				return 8;
 			case 'html_content':
-				return str_replace( "\t", '',
+				return str_replace(
+					"\t",
+					'',
 					'<h1>Invoice</h1>
 
 					<table>
@@ -203,15 +222,18 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 					        <tr><th>Invoice accepted by:</th><td></td></tr>
 					    </tbody>
 					</table>
-					' );
+					'
+				);
 
-			// Styling and Filtering Options
+			// Styling and Filtering Options.
 			case 'html_content_wpautop':
 				return 'yes';
 			case 'html_content_force_balance_tags':
 				return 'yes';
 			case 'html_style':
-				return str_replace( "\t", '',
+				return str_replace(
+					"\t",
+					'',
 					'table {
 					    width: 100%;
 					}
@@ -251,7 +273,8 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_get_default' ) ) {
 					    border: none;
 					    font-weight: bold;
 					}
-					' );
+					'
+				);
 
 		}
 	}

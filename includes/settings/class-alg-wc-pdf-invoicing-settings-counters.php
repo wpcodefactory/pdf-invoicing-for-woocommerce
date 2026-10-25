@@ -2,68 +2,80 @@
 /**
  * PDF Invoicing for WooCommerce - Counters Section Settings
  *
- * @version 1.0.0
+ * @version 2.5.0
  * @since   1.0.0
  *
- * @author  WPFactory
+ * @author WPFactory
+ *
+ * @package WPFactory\WC_PDF_Invoicing\Settings
  */
 
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_WC_PDF_Invoicing_Settings_Counters' ) ) :
 
-class Alg_WC_PDF_Invoicing_Settings_Counters extends Alg_WC_PDF_Invoicing_Settings_Section {
-
 	/**
-	 * Constructor.
+	 * Alg_WC_PDF_Invoicing_Settings_Counters class.
 	 *
-	 * @version 1.0.0
+	 * @version 2.5.0
 	 * @since   1.0.0
 	 */
-	function __construct() {
-		$this->id   = 'counters';
-		$this->desc = __( 'Counters', 'pdf-invoicing-for-woocommerce' );
-		parent::__construct();
-	}
+	class Alg_WC_PDF_Invoicing_Settings_Counters extends Alg_WC_PDF_Invoicing_Settings_Section {
 
-	/**
-	 * get_settings.
-	 *
-	 * @version 1.0.0
-	 * @since   1.0.0
-	 */
-	function get_settings() {
+		/**
+		 * Constructor.
+		 *
+		 * @version 1.0.0
+		 * @since   1.0.0
+		 */
+		public function __construct() {
+			$this->id   = 'counters';
+			$this->desc = __( 'Counters', 'pdf-invoicing-for-woocommerce' );
+			parent::__construct();
+		}
 
-		$counters_settings = array(
-			array(
-				'title'    => __( 'Counters', 'pdf-invoicing-for-woocommerce' ),
-				'desc'     =>
-					__( 'This section allows you to set current counters for each document.', 'pdf-invoicing-for-woocommerce' ) . ' ' .
-					__( 'Counter number will be assigned to the new document and then automatically increased.', 'pdf-invoicing-for-woocommerce' ) . ' ' .
-					sprintf(
-						/* Translators: %s: Shortcode name. */
-						__( 'You can use counter in document settings with %s shortcode.', 'pdf-invoicing-for-woocommerce' ),
-						'<code>[prop name="doc_counter"]</code>'
+		/**
+		 * Get settings.
+		 *
+		 * @version 2.5.0
+		 * @since   1.0.0
+		 */
+		public function get_settings() {
+			$counters_settings = array(
+				array(
+					'title' => __( 'Counters', 'pdf-invoicing-for-woocommerce' ),
+					'desc'  => (
+						__( 'This section allows you to set current counters for each document.', 'pdf-invoicing-for-woocommerce' ) . ' ' .
+						__( 'Counter number will be assigned to the new document and then automatically increased.', 'pdf-invoicing-for-woocommerce' ) . ' ' .
+						sprintf(
+							/* Translators: %s: Shortcode name. */
+							__( 'You can use counter in document settings with %s shortcode.', 'pdf-invoicing-for-woocommerce' ),
+							'<code>[prop name="doc_counter"]</code>'
+						)
 					),
-				'type'     => 'title',
-				'id'       => 'alg_wc_pdf_invoicing_counters_options',
-			),
-			array(
-				'title'    => alg_wc_pdf_invoicing()->core->get_doc_option( 0, 'admin_title' ),
-				'type'     => 'number',
-				'id'       => 'alg_wc_pdf_invoicing_counters[doc_0]',
-				'default'  => 1,
-			),
-			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_pdf_invoicing_counters_options',
-			),
-		);
+					'type'  => 'title',
+					'id'    => 'alg_wc_pdf_invoicing_counters_options',
+				),
+			);
 
-		return apply_filters( 'alg_wc_pdf_invoicing_counters_settings', $counters_settings );
+			$total = get_option( 'alg_wc_pdf_invoicing_total_docs', 1 );
+			for ( $doc_id = 0; $doc_id < $total; $doc_id++ ) {
+				$counters_settings[] = array(
+					'title'   => alg_wc_pdf_invoicing()->core->get_doc_option( $doc_id, 'admin_title' ),
+					'type'    => 'number',
+					'id'      => "alg_wc_pdf_invoicing_counters[doc_{$doc_id}]",
+					'default' => 1,
+				);
+			}
+
+			$counters_settings[] = array(
+				'type' => 'sectionend',
+				'id'   => 'alg_wc_pdf_invoicing_counters_options',
+			);
+
+			return apply_filters( 'alg_wc_pdf_invoicing_counters_settings', $counters_settings );
+		}
 	}
-
-}
 
 endif;
 

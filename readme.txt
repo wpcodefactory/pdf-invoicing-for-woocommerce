@@ -1,9 +1,10 @@
 === PDF Invoices & Packing Slips Generator for WooCommerce ===
 Contributors: wpcodefactory, anbinder, karzin, omardabbas, aegkr
 Tags: woocommerce, pdf, invoice, credit note, packing list
-Requires at least: 4.4
-Tested up to: 7.0
-Stable tag: 2.4.8
+Requires at least: 4.5
+Tested up to: 7.1
+Requires PHP: 7.4
+Stable tag: 2.5.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,7 +23,7 @@ Add PDF invoices to WooCommerce.
 * Customize PDF documents **page** orientation, format, margins.
 * Set PDF documents **header** image, title, text etc.
 * Set PDF documents **footer** text etc.
-* Set PDF documents **content** style and text with our [shortcodes](https://wpfactory.com/item/pdf-invoicing-for-woocommerce/#section-shortcodes).
+* Set PDF documents **content** style and text with our shortcodes.
 * And more...
 
 ### &#128472; Feedback ###
@@ -42,9 +43,24 @@ Add PDF invoices to WooCommerce.
 
 == Changelog ==
 
+= 2.5.0 - 25/10/2026 =
+* Dev - The free plugin version can now handle an unlimited number of document types.
+* Dev - Nonces added.
+* Dev - Output escaped (including shortcodes).
+* Dev - Shortcodes - `[prop]` - `order_func`, `item_func`, `item_product_func` - Only `get_` functions are now allowed.
+* Dev - Code refactoring.
+* Dev - Coding standards improved.
+* Dev - WPFactory Admin Menu - Library updated (to v1.1.4).
+* Dev - WPFactory Cross-Selling - Library updated (to v1.1.7).
+* Dev - WPFactory Key Manager - Library updated (to v1.1.1).
+* WC tested up to: 11.2.
+* Tested up to: 7.1.
+* Requires at least: 4.5.
+* Requires PHP: 7.4.
+
 = 2.4.8 - 24/05/2026 =
-* Tested up to: 7.0.
 * WC tested up to: 10.7.
+* Tested up to: 7.0.
 
 = 2.4.7 - 23/01/2026 =
 * Dev - Developers - `alg_wc_pdf_invoicing_get_doc_option` filter added.

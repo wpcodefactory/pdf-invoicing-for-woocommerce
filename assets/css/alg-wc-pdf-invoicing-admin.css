@@ -4,7 +4,7 @@
  * @version 2.4.0
  * @since   2.4.0
  *
- * @author  WPFactory
+ * @author WPFactory
  */
 
 /* Text editor */
@@ -39,7 +39,7 @@
 	padding: 0 10px 0 5px;
 }
 
-.alg-wc-shortcode-button.button-secondary > span {
+.alg-wc-shortcode-button.button-secondary>span {
 	padding-right: 3px;
 }
 

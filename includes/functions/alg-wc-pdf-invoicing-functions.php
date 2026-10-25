@@ -2,34 +2,53 @@
 /**
  * PDF Invoicing for WooCommerce - Functions
  *
- * @version 2.3.0
+ * @version 2.5.0
  * @since   1.0.0
  *
- * @author  WPFactory
+ * @author WPFactory
+ *
+ * @package WPFactory\WC_PDF_Invoicing\Functions
  */
 
 defined( 'ABSPATH' ) || exit;
 
 if ( ! function_exists( 'alg_wc_pdf_invoicing_hex_to_rgb' ) ) {
 	/**
-	 * alg_wc_pdf_invoicing_hex_to_rgb.
+	 * Hex to RGB.
 	 *
 	 * @version 1.4.0
 	 * @since   1.4.0
+	 *
+	 * @param string $hex Hex color code.
+	 *
+	 * @return array RGB values.
 	 */
 	function alg_wc_pdf_invoicing_hex_to_rgb( $hex ) {
 		$hex = str_replace( '#', '', $hex );
-		$rgb = ( 3 === strlen( $hex ) ? sscanf( $hex, '%1x%1x%1x' ) : ( 6 === strlen( $hex ) ? sscanf( $hex, '%2x%2x%2x' ) : array( 0, 0, 0 ) ) );
+		$rgb = (
+			3 === strlen( $hex ) ?
+			sscanf( $hex, '%1x%1x%1x' ) :
+			(
+				6 === strlen( $hex ) ?
+				sscanf( $hex, '%2x%2x%2x' ) :
+				array( 0, 0, 0 )
+			)
+		);
 		return $rgb;
 	}
 }
 
 if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words' ) ) {
 	/**
-	 * alg_wc_pdf_invoicing_number_to_words.
+	 * Number to words.
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
+	 *
+	 * @param string $number Number to convert.
+	 * @param string $lang   Language code.
+	 *
+	 * @return string|false Number in words or false on failure.
 	 */
 	function alg_wc_pdf_invoicing_number_to_words( $number, $lang = 'EN' ) {
 		switch ( $lang ) {
@@ -43,37 +62,82 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words' ) ) {
 
 if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_en' ) ) {
 	/**
-	 * alg_wc_pdf_invoicing_number_to_words_en.
+	 * Number to words EN.
 	 *
-	 * @version 1.0.0
+	 * @version 2.5.0
 	 * @since   1.0.0
 	 *
-	 * @see     https://stackoverflow.com/questions/11500088/php-express-number-in-words
+	 * @param string $number Number to convert.
 	 *
-	 * @todo    (dev) finish clean up: Yoda etc.
+	 * @return string|false Number in words or false on failure.
+	 *
+	 * @see https://stackoverflow.com/questions/11500088/php-express-number-in-words
+	 *
+	 * @todo (v2.5.0) Finish clean up: Yoda etc.
 	 */
 	function alg_wc_pdf_invoicing_number_to_words_en( $number ) {
-		$number        = str_replace( array( ',', ' ' ), '' , trim( $number ) );
+		$number = str_replace( array( ',', ' ' ), '', trim( $number ) );
 		if ( ! $number ) {
 			return false;
 		}
 		$number        = (int) $number;
 		$words         = array();
-		$list1         = array( '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven',
-			'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen' );
+		$list1         = array(
+			'',
+			'one',
+			'two',
+			'three',
+			'four',
+			'five',
+			'six',
+			'seven',
+			'eight',
+			'nine',
+			'ten',
+			'eleven',
+			'twelve',
+			'thirteen',
+			'fourteen',
+			'fifteen',
+			'sixteen',
+			'seventeen',
+			'eighteen',
+			'nineteen',
+		);
 		$list2         = array( '', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety', 'hundred' );
-		$list3         = array( '', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion', 'septillion',
-			'octillion', 'nonillion', 'decillion', 'undecillion', 'duodecillion', 'tredecillion', 'quattuordecillion',
-			'quindecillion', 'sexdecillion', 'septendecillion', 'octodecillion', 'novemdecillion', 'vigintillion' );
+		$list3         = array(
+			'',
+			'thousand',
+			'million',
+			'billion',
+			'trillion',
+			'quadrillion',
+			'quintillion',
+			'sextillion',
+			'septillion',
+			'octillion',
+			'nonillion',
+			'decillion',
+			'undecillion',
+			'duodecillion',
+			'tredecillion',
+			'quattuordecillion',
+			'quindecillion',
+			'sexdecillion',
+			'septendecillion',
+			'octodecillion',
+			'novemdecillion',
+			'vigintillion',
+		);
 		$number_length = strlen( $number );
 		$levels        = (int) ( ( $number_length + 2 ) / 3 );
 		$max_length    = $levels * 3;
 		$number        = substr( '00' . $number, -$max_length );
 		$number_levels = str_split( $number, 3 );
-		for ( $i = 0; $i < count( $number_levels ); $i++ ) {
-			$levels--;
+		for ( $i = 0; $i < count( $number_levels ); $i++ ) { // phpcs:ignore Squiz.PHP.DisallowSizeFunctionsInLoops.Found, Generic.CodeAnalysis.ForLoopWithTestFunctionCall.NotAllowed
+			--$levels;
 			$hundreds = (int) ( $number_levels[ $i ] / 100 );
-			$hundreds = ( $hundreds ? ' ' . $list1[ $hundreds ] . ' hundred' . ' ' : '' );
+			$hundreds = ( $hundreds ? ' ' . $list1[ $hundreds ] . ' hundred ' : '' );
 			$tens     = (int) ( $number_levels[ $i ] % 100 );
 			$singles  = '';
 			if ( $tens < 20 ) {
@@ -88,7 +152,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_en' ) ) {
 		}
 		$commas = count( $words );
 		if ( $commas > 1 ) {
-			$commas = $commas - 1;
+			--$commas;
 		}
 		return implode( ' ', $words );
 	}
@@ -96,16 +160,19 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_en' ) ) {
 
 if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_lt' ) ) {
 	/**
-	 * alg_wc_pdf_invoicing_number_to_words_lt.
+	 * Number to words LT.
 	 *
-	 * @version 2.3.0
+	 * @version 2.5.0
 	 * @since   1.0.0
 	 *
-	 * @return  string
+	 * @param string $number Number to convert.
 	 *
-	 * @todo    (dev) finish clean up: camel-case; Yoda etc.
+	 * @return string|false Number in words or false on failure.
+	 *
+	 * @todo (v2.5.0) Finish clean up: camel-case; Yoda etc.
 	 */
 	function alg_wc_pdf_invoicing_number_to_words_lt( $number ) {
+		// phpcs:disable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 		$hyphen      = ' ';
 		$conjunction = ' ';
 		$separator   = ' ';
@@ -167,10 +234,10 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_lt' ) ) {
 		}
 
 		if ( ( $number >= 0 && (int) $number < 0 ) || (int) $number < 0 - PHP_INT_MAX ) {
-			// Overflow
+			// Overflow.
 			if (
 				function_exists( 'wc_get_logger' ) &&
-				( $logger = wc_get_logger() )
+				( $logger = wc_get_logger() ) // phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition.Found, Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure
 			) {
 				$logger->error(
 					sprintf(
@@ -189,7 +256,8 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_lt' ) ) {
 			return $negative . alg_wc_pdf_invoicing_number_to_words_lt( abs( $number ) );
 		}
 
-		$string = $fraction = null;
+		$string   = null;
+		$fraction = null;
 
 		if ( strpos( $number, '.' ) !== false ) {
 			list( $number, $fraction ) = explode( '.', $number );
@@ -210,7 +278,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_lt' ) ) {
 			case $number < 200:
 				$hundreds  = $number / 100;
 				$remainder = $number % 100;
-				$string = $dictionary[ $hundreds ] . ' ' . $dictionary[100];
+				$string    = $dictionary[ $hundreds ] . ' ' . $dictionary[100];
 				if ( $remainder ) {
 					$string .= $conjunction . alg_wc_pdf_invoicing_number_to_words_lt( $remainder );
 				}
@@ -218,7 +286,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_lt' ) ) {
 			case $number < 1000:
 				$hundreds  = $number / 100;
 				$remainder = $number % 100;
-				$string = $dictionary[ $hundreds ] . ' ' . $dictionary[200];
+				$string    = $dictionary[ $hundreds ] . ' ' . $dictionary[200];
 				if ( $remainder ) {
 					$string .= $conjunction . alg_wc_pdf_invoicing_number_to_words_lt( $remainder );
 				}
@@ -227,8 +295,7 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_lt' ) ) {
 			default:
 				$baseUnit     = pow( 1000, floor( log( $number, 1000 ) ) );
 				$numBaseUnits = (int) ( $number / $baseUnit );
-				$number1      = (string) $number;
-				if ( $numBaseUnits == 1 ) {
+				if ( 1 == $numBaseUnits ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual
 					$baseUnits = $baseUnit;
 				} elseif ( $numBaseUnits < 10 ) {
 					$baseUnits = $baseUnit * 2;
@@ -248,12 +315,13 @@ if ( ! function_exists( 'alg_wc_pdf_invoicing_number_to_words_lt' ) ) {
 		if ( null !== $fraction && is_numeric( $fraction ) ) {
 			$string .= $decimal;
 			$words   = array();
-			foreach ( str_split( (string) $fraction ) as $number ) {
-				$words[] = $dictionary[ $number ];
+			foreach ( str_split( (string) $fraction ) as $num ) {
+				$words[] = $dictionary[ $num ];
 			}
 			$string .= implode( ' ', $words );
 		}
 
 		return $string;
+		// phpcs:enable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 	}
 }
