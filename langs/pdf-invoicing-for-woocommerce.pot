@@ -2,16 +2,16 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: PDF Invoices & Packing Slips Generator for WooCommerce 2.5.0\n"
+"Project-Id-Version: PDF Invoices & Packing Slips Generator for WooCommerce 2.5.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pdf-invoicing-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-25T13:35:41+00:00\n"
+"POT-Creation-Date: 2026-11-23T12:18:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: pdf-invoicing-for-woocommerce\n"
 
 #. Plugin Name of the plugin
@@ -110,6 +110,7 @@ msgstr ""
 #: includes/class-alg-wc-pdf-invoicing-core.php:574
 #: includes/class-alg-wc-pdf-invoicing-core.php:584
 #: includes/class-alg-wc-pdf-invoicing-core.php:598
+#, php-format
 msgid "Error: %s"
 msgstr ""
 
@@ -144,11 +145,13 @@ msgstr ""
 
 #. Translators: %1$s: Document title, %2$s: Document number.
 #: includes/classes/class-alg-wc-pdf-invoicing-doc.php:121
+#, php-format
 msgid "%1$s #%2$s created."
 msgstr ""
 
 #. Translators: %1$s: Document title, %2$s: Document number.
 #: includes/classes/class-alg-wc-pdf-invoicing-doc.php:144
+#, php-format
 msgid "%1$s #%2$s deleted."
 msgstr ""
 
@@ -159,11 +162,13 @@ msgstr ""
 
 #. Translators: %s: Document ID.
 #: includes/functions/alg-wc-pdf-invoicing-functions-default-values.php:43
+#, php-format
 msgid "Doc %s"
 msgstr ""
 
 #. Translators: %1$s: Function name, %2$d: The largest integer supported in this build of PHP.
 #: includes/functions/alg-wc-pdf-invoicing-functions.php:245
+#, php-format
 msgid "%1$s only accepts numbers between -%2$d and %2$d."
 msgstr ""
 
@@ -182,6 +187,7 @@ msgstr ""
 
 #. Translators: %s: Shortcode name.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-counters.php:52
+#, php-format
 msgid "You can use counter in document settings with %s shortcode."
 msgstr ""
 
@@ -191,11 +197,13 @@ msgstr ""
 
 #. Translators: %s: Document title.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:51
+#, php-format
 msgid "Doc: %s"
 msgstr ""
 
 #. Translators: %s: Document title.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:76
+#, php-format
 msgid "%s Options"
 msgstr ""
 
@@ -331,6 +339,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:222
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:236
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:266
+#, php-format
 msgid "Path in %s"
 msgstr ""
 
@@ -422,6 +431,7 @@ msgstr ""
 
 #. Translators: %s: Placeholder list.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:372
+#, php-format
 msgid "Available placeholders: %s."
 msgstr ""
 
@@ -472,6 +482,7 @@ msgstr ""
 
 #. Translators: %s: Shortcode name.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:450
+#, php-format
 msgid "For the %s shortcode."
 msgstr ""
 
@@ -516,6 +527,7 @@ msgstr ""
 #. Translators: %s: Function page link.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:499
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:521
+#, php-format
 msgid "Uses WordPress %s function."
 msgstr ""
 
@@ -525,6 +537,7 @@ msgstr ""
 
 #. Translators: %s: HTML line break tag.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-doc.php:515
+#, php-format
 msgid "Replaces double line breaks with paragraph elements, and all remaining line breaks with %s tag."
 msgstr ""
 
@@ -602,6 +615,7 @@ msgstr ""
 
 #. Translators: %s: Example.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:129
+#, php-format
 msgid "Allowed TCPDF methods, e.g.: %s"
 msgstr ""
 
@@ -639,6 +653,7 @@ msgstr ""
 
 #. Translators: %s: Site link.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:162
+#, php-format
 msgid "Use %s library for printing PDF documents."
 msgstr ""
 
@@ -648,6 +663,7 @@ msgstr ""
 
 #. Translators: %1$s: Option name, %2$s: Option name, %3$s: Option name, %4$s: Option name.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-general.php:174
+#, php-format
 msgid "Use monospace font in \"%1$s\", \"%2$s\", \"%3$s\" and \"%4$s\" admin options fields."
 msgstr ""
 
@@ -685,11 +701,13 @@ msgstr ""
 
 #. Translators: %s: Order status name.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:130
+#, php-format
 msgid "On order status %s"
 msgstr ""
 
 #. Translators: %s: Font name.
 #: includes/settings/class-alg-wc-pdf-invoicing-settings-section.php:163
+#, php-format
 msgid "If you are having issues displaying your language specific letters, select \"%s\" font."
 msgstr ""
 
